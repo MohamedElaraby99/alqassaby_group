@@ -56,13 +56,13 @@ export default function Header() {
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-3 sm:py-4">
           {/* Logo - Always on LEFT */}
-          <Link href={`/${locale}`} className="flex items-center gap-0.5 sm:gap-1 flex-shrink-0">
+          <Link href={`/${locale}`} className={`flex items-center flex-shrink-0 ${locale === 'en' ? 'gap-0' : 'gap-0.5 sm:gap-1'}`}>
             <svg 
               id="Layer_2" 
               data-name="Layer 2" 
               xmlns="http://www.w3.org/2000/svg" 
               viewBox="0 0 395.77 81.79"
-              className="h-8 sm:h-10 md:h-12 w-auto"
+              className={`h-8 sm:h-10 md:h-12 w-auto ${locale === 'en' ? '-mr-[178px]' : ''}`}
             >
               <g>
                 <path 
@@ -92,7 +92,7 @@ export default function Header() {
                 />
               </g>
             </svg>
-            <div className="text-lg sm:text-xl md:text-2xl font-bold hidden sm:block">
+            <div className={`text-lg sm:text-xl md:text-2xl font-bold hidden sm:block ${locale === 'en' ? 'm-0 p-0' : ''}`}>
               <span className="transition-colors text-white">
                 {locale === 'ar' ? 'مجموعة القصبي' : 'Elkassaby Group'}
               </span>
