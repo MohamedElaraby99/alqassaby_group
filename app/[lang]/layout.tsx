@@ -18,14 +18,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (lang === 'en') {
     return {
       title: 'Elkassaby Group | Best Poultry Feed in Egypt',
-      description: 'Elkassaby Group for Poultry Feed - We provide the finest types of poultry and poultry feed in Egypt and the Middle East for over 15 years',
+      description: 'Elkassaby Group for Poultry Feed - We provide the finest types of poultry and poultry feed in Egypt and the Middle East for over 23years',
       keywords: 'Elkassaby Group, poultry feed, Egypt poultry, poultry farms, chicks',
     }
   }
   
   return {
     title: 'مجموعة القصبي - Elkassaby Group | أفضل أعلاف دواجن في مصر',
-    description: 'مجموعة القصبي لأعلاف الدواجن - نوفر أجود أنواع الدواجن وأعلاف الدواجن في مصر والشرق الأوسط منذ أكثر من 15 عاماً',
+    description: 'مجموعة القصبي لأعلاف الدواجن - نوفر أجود أنواع الدواجن وأعلاف الدواجن في مصر والشرق الأوسط منذ أكثر من 23 عاماً',
     keywords: 'مجموعة القصبي, أعلاف دواجن, دواجن مصر, مزارع دواجن, كتاكيت, Elkassaby Group, poultry feed',
   }
 }

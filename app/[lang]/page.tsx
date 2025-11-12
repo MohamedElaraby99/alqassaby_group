@@ -266,6 +266,144 @@ export default function Home({ params }: { params: { lang: string } }) {
       </section>
 
 
+      {/* Poultry Rearing Approach Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="relative h-[500px] lg:h-[550px] rounded-3xl overflow-hidden shadow-2xl"
+          >
+            {/* Background Image */}
+            <img
+              src="/work_bg.png"
+              alt={lang === 'ar' ? 'طبيب بيطري دواجن' : 'Poultry Veterinarian'}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+
+
+            {/* Text Content - Positioned on Right */}
+            <div className={`absolute inset-0 flex items-center p-8 lg:p-16 ${lang === 'ar' ? 'justify-start text-right' : 'justify-end text-left'}`}>
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="relative z-10 w-full lg:w-[50%] max-w-2xl"
+              >
+                {/* Small Title */}
+                <div className="mb-6 flex justify-right">
+                  <span className={`text-white font-semibold text-lg tracking-wider flex items-center gap-3 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
+                    <span className="h-px w-12 bg-white rounded-full"></span>
+                    {lang === 'ar' ? 'ما نقدمه' : 'What We Do'}
+                  </span>
+                </div>
+
+                {/* Main Title */}
+                <h2 className={`text-3xl lg:text-4xl font-bold text-white mb-6 leading-tight ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
+                  {lang === 'ar' 
+                    ? 'منهجنا في تربية الدواجن'
+                    : 'Our Poultry Rearing For Approach That'}
+                </h2>
+
+                {/* Description */}
+                <p className={`text-white/90 text-lg leading-relaxed mb-8 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
+                  {lang === 'ar'
+                    ? 'نلتزم بتطبيق تدابير صارمة للأمن الحيوي لحماية قطيعنا من الأمراض، من خلال تنفيذ بروتوكولات لتقليل مخاطر انتقال العدوى وضمان سلامة كل شيء.'
+                    : 'We adhere to strict biosecurity measures to safeguard our flotech conte from diseases implementing protocols to minimize the risk that like for of transmission and ensuring every thig is ok.'}
+                </p>
+
+                {/* Statistics */}
+                <div className="grid grid-cols-2 gap-6">
+                  {/* Stat 1 */}
+                  <div className="flex items-center gap-4">
+                    <div className="relative w-20 h-20 flex-shrink-0">
+                      {/* Circular Progress */}
+                      <svg className="w-full h-full transform -rotate-90">
+                        <circle
+                          cx="40"
+                          cy="40"
+                          r="36"
+                          stroke="rgba(255,255,255,0.2)"
+                          strokeWidth="6"
+                          fill="none"
+                        />
+                        <circle
+                          cx="40"
+                          cy="40"
+                          r="36"
+                          stroke="white"
+                          strokeWidth="6"
+                          fill="none"
+                          strokeDasharray="226"
+                          strokeDashoffset="0"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="text-xl font-bold text-white">100%</span>
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="text-white font-bold text-lg">
+                        {lang === 'ar' ? 'مزارع دواجن' : 'Poultry Farm'}
+                      </h4>
+                      <p className="text-white/80 text-sm">
+                        {lang === 'ar' ? 'عالمية' : 'World Wide'}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Stat 2 */}
+                  <div className="flex items-center gap-4">
+                    <div className="relative w-20 h-20 flex-shrink-0">
+                      {/* Circular Progress */}
+                      <svg className="w-full h-full transform -rotate-90">
+                        <circle
+                          cx="40"
+                          cy="40"
+                          r="36"
+                          stroke="rgba(255,255,255,0.2)"
+                          strokeWidth="6"
+                          fill="none"
+                        />
+                        <circle
+                          cx="40"
+                          cy="40"
+                          r="36"
+                          stroke="white"
+                          strokeWidth="6"
+                          fill="none"
+                          strokeDasharray="226"
+                          strokeDashoffset="0"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="text-xl font-bold text-white">100%</span>
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="text-white font-bold text-lg">
+                        {lang === 'ar' ? 'أفضل معدات' : 'World Best'}
+                      </h4>
+                      <p className="text-white/80 text-sm">
+                        {lang === 'ar' ? 'عالمياً' : 'Equipment'}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+
+      
+
 
        {/* About Elkassaby Group Section */}
        <section className="py-20 bg-gradient-to-br from-amber-50 via-orange-50 to-amber-100">
@@ -305,8 +443,8 @@ export default function Home({ params }: { params: { lang: string } }) {
               
               <a 
                 href={`/${lang}/about`} 
-                className="inline-block px-8 py-3 bg-amber-600 hover:bg-amber-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105"
-                style={{ backgroundColor: '#bf1e2e' }}
+                className="inline-block px-8 py-3 bg-amber-600 hover:bg-amber-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 "
+                style={{ backgroundColor: '#a01623' }}
               >
                 {lang === 'ar' ? 'اقرأ المزيد' : 'Read More'}
               </a>
@@ -340,6 +478,90 @@ export default function Home({ params }: { params: { lang: string } }) {
         </div>
       </section>
 
+
+      {/* Subsidiary Companies Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          {/* Section Title */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              {lang === 'ar' 
+                ? 'تتكون مجموعة القصبي من 3 شركات رئيسية :'
+                : 'Elkassaby Group consists of 3 main companies:'}
+            </h2>
+          </motion.div>
+
+          {/* Companies Grid */}
+          <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
+            {/* Company 1 - Hagar Poultry */}
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="flex flex-col items-center"
+            >
+              <div className="relative w-64 h-64 mb-6 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 shadow-2xl flex items-center justify-center p-8 transform transition-all duration-300 hover:scale-105 hover:shadow-3xl">
+                <img
+                  src="/included/hagar-logo.png"
+                  alt="Hagar Poultry"
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-800 text-center">
+                {lang === 'ar' ? 'هاجر للثروة الداجنة' : 'Hagar Poultry'}
+              </h3>
+            </motion.div>
+
+            {/* Company 2 - Tabarak Poultry */}
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="flex flex-col items-center"
+            >
+              <div className="relative w-64 h-64 mb-6 rounded-full bg-gradient-to-br from-yellow-100 to-yellow-200 shadow-2xl flex items-center justify-center p-8 transform transition-all duration-300 hover:scale-105 hover:shadow-3xl">
+                <img
+                  src="/included/tabark-logo.png"
+                  alt="Tabarak Poultry"
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-800 text-center">
+                {lang === 'ar' ? 'تبارك للتفريخ والدواجن' : 'Tabarak Poultry'}
+              </h3>
+            </motion.div>
+
+            {/* Company 3 - Elkassaby Investment */}
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              viewport={{ once: true }}
+              className="flex flex-col items-center"
+            >
+              <div className="relative w-64 h-64 mb-6 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 shadow-2xl flex items-center justify-center p-8 transform transition-all duration-300 hover:scale-105 hover:shadow-3xl">
+                <img
+                  src="/included/kassaby-investment-logo.png"
+                  alt="Elkassaby Investment"
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-800 text-center">
+                {lang === 'ar' ? 'القصبي للاستثمار' : 'Elkassaby Investment'}
+              </h3>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
   
 
       {/* Blog Section */}
@@ -348,7 +570,7 @@ export default function Home({ params }: { params: { lang: string } }) {
           {/* Section Header */}
           <div className="flex justify-between items-end mb-12">
             <div>
-              <p className="text-[#bf1e2e] font-semibold mb-2">
+              <p className="text-[#a01623] font-semibold mb-2">
                 {lang === 'ar' ? 'مدونتنا' : 'Our Blog'}
               </p>
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
@@ -363,7 +585,7 @@ export default function Home({ params }: { params: { lang: string } }) {
             <div className="hidden md:flex gap-3">
              
               <button 
-                className="w-12 h-12 rounded-lg border border-gray-300 flex items-center justify-center hover:bg-[#bf1e2e] hover:text-white hover:border-[#bf1e2e] transition-all duration-300 text-gray-600"
+                className="w-12 h-12 rounded-lg border border-gray-300 flex items-center justify-center hover:bg-[#a01623] hover:text-white hover:border-[#a01623] transition-all duration-300 text-gray-600"
                 aria-label={lang === 'ar' ? 'التالي' : 'Next'}
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -371,7 +593,7 @@ export default function Home({ params }: { params: { lang: string } }) {
                 </svg>
               </button>
               <button 
-                className="w-12 h-12 rounded-lg border border-gray-300 flex items-center justify-center hover:bg-[#bf1e2e] hover:text-white hover:border-[#bf1e2e] transition-all duration-300 text-gray-600"
+                className="w-12 h-12 rounded-lg border border-gray-300 flex items-center justify-center hover:bg-[#a01623] hover:text-white hover:border-[#a01623] transition-all duration-300 text-gray-600"
                 aria-label={lang === 'ar' ? 'السابق' : 'Previous'}
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -398,7 +620,7 @@ export default function Home({ params }: { params: { lang: string } }) {
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute top-4 left-4">
-                  <span className="bg-white px-3 py-1 rounded-full text-sm font-medium text-[#bf1e2e]">
+                  <span className="bg-white px-3 py-1 rounded-full text-sm font-medium text-[#a01623]">
                     {lang === 'ar' ? 'دواجن' : 'Poultry'}
                   </span>
                 </div>
@@ -425,8 +647,8 @@ export default function Home({ params }: { params: { lang: string } }) {
                 </h3>
                 <a 
                   href={`/${lang}/blog/raising-happy-chickens`}
-                  className="inline-block px-6 py-2 rounded-full border-2 font-medium transition-all duration-300 hover:bg-[#bf1e2e] hover:text-white"
-                  style={{ borderColor: '#bf1e2e', color: '#bf1e2e' }}
+                  className="inline-block px-6 py-2 rounded-full border-2 font-medium transition-all duration-300 hover:bg-[#a01623] hover:text-white"
+                  style={{ borderColor: '#a01623', color: '#a01623' }}
                 >
                   {lang === 'ar' ? 'اقرأ المزيد' : 'Read More'}
                 </a>
@@ -443,12 +665,12 @@ export default function Home({ params }: { params: { lang: string } }) {
             >
               <div className="relative h-64 overflow-hidden">
                 <img
-                  src="https://images.unsplash.com/photo-1587049352846-4a222e784532?w=600"
+                  src='https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?w=600'
                   alt="Chicken"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute top-4 left-4">
-                  <span className="bg-white px-3 py-1 rounded-full text-sm font-medium text-[#bf1e2e]">
+                  <span className="bg-white px-3 py-1 rounded-full text-sm font-medium text-[#a01623]">
                     {lang === 'ar' ? 'دجاج' : 'Chicken'}
                   </span>
                 </div>
@@ -475,8 +697,8 @@ export default function Home({ params }: { params: { lang: string } }) {
                 </h3>
                 <a 
                   href={`/${lang}/blog/farm-fresh-eggs`}
-                  className="inline-block px-6 py-2 rounded-full border-2 font-medium transition-all duration-300 hover:bg-[#bf1e2e] hover:text-white"
-                  style={{ borderColor: '#bf1e2e', color: '#bf1e2e' }}
+                  className="inline-block px-6 py-2 rounded-full border-2 font-medium transition-all duration-300 hover:bg-[#a01623] hover:text-white"
+                  style={{ borderColor: '#a01623', color: '#a01623' }}
                 >
                   {lang === 'ar' ? 'اقرأ المزيد' : 'Read More'}
                 </a>
@@ -498,7 +720,7 @@ export default function Home({ params }: { params: { lang: string } }) {
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute top-4 left-4">
-                  <span className="bg-white px-3 py-1 rounded-full text-sm font-medium text-[#bf1e2e]">
+                  <span className="bg-white px-3 py-1 rounded-full text-sm font-medium text-[#a01623]">
                     {lang === 'ar' ? 'دجاج' : 'Chicken'}
                   </span>
                 </div>
@@ -525,8 +747,8 @@ export default function Home({ params }: { params: { lang: string } }) {
                 </h3>
                 <a 
                   href={`/${lang}/blog/boost-productivity`}
-                  className="inline-block px-6 py-2 rounded-full border-2 font-medium transition-all duration-300 hover:bg-[#bf1e2e] hover:text-white"
-                  style={{ borderColor: '#bf1e2e', color: '#bf1e2e' }}
+                  className="inline-block px-6 py-2 rounded-full border-2 font-medium transition-all duration-300 hover:bg-[#a01623] hover:text-white"
+                  style={{ borderColor: '#a01623', color: '#a01623' }}
                 >
                   {lang === 'ar' ? 'اقرأ المزيد' : 'Read More'}
                 </a>
@@ -538,7 +760,7 @@ export default function Home({ params }: { params: { lang: string } }) {
 
 
       {/* Newsletter Section */}
-      <section className="py-12 relative overflow-hidden" style={{ backgroundColor: '#bf1e2e' }}>
+      <section className="py-12 relative overflow-hidden" style={{ backgroundColor: '#a01623' }}>
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{
@@ -578,7 +800,7 @@ export default function Home({ params }: { params: { lang: string } }) {
                   style={{ textAlign: lang === 'ar' ? 'right' : 'left' }}
                 />
                 <button
-                  className="px-6 py-3 bg-white text-[#bf1e2e] font-semibold rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg whitespace-nowrap"
+                  className="px-6 py-3 bg-white text-[#a01623] font-semibold rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg whitespace-nowrap"
                 >
                   {lang === 'ar' ? 'اشترك' : 'Subscribe'}
                 </button>

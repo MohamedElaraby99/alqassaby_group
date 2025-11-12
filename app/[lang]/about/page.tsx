@@ -2,25 +2,23 @@
 
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
-import SectionTitle from '../../components/SectionTitle'
 import { motion } from 'framer-motion'
-import { FaHistory, FaBullseye, FaEye, FaAward } from 'react-icons/fa'
+import { FaHistory, FaBullseye, FaEye, FaAward, FaRocket, FaLightbulb } from 'react-icons/fa'
 
 export default function AboutPage({ params }: { params: { lang: string } }) {
+  const { lang } = params
+  
   return (
     <main>
       <Header />
       
       {/* Page Header */}
       <section
-        className="pt-32 pb-20 relative"
+        className="pt-32 pb-20 relative overflow-hidden"
         style={{
-          backgroundImage: 'url(https://images.unsplash.com/photo-1587049352846-4a222e784532?w=1920)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
+          backgroundColor: '#a01623',
         }}
       >
-        <div className="absolute inset-0 hero-gradient"></div>
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -28,193 +26,186 @@ export default function AboutPage({ params }: { params: { lang: string } }) {
             transition={{ duration: 0.8 }}
             className="text-center text-white"
           >
-            <h1 className="text-5xl md:text-6xl font-bold mb-4">من نحن</h1>
-            <p className="text-xl">تعرف على مجموعة القصبي وتاريخنا العريق</p>
+            <h1 className="text-5xl md:text-6xl font-bold mb-4">
+              {lang === 'ar' ? 'من نحن' : 'About Us'}
+            </h1>
+            <p className="text-xl max-w-3xl mx-auto">
+              {lang === 'ar' 
+                ? 'رحلة 23 عاماً من التميز والابتكار في صناعة أعلاف الدواجن'
+                : '23 Years Journey of Excellence and Innovation in Poultry Feed Industry'}
+            </p>
           </motion.div>
         </div>
       </section>
 
-      {/* About Content */}
-      <section className="py-20 bg-white">
+      {/* Timeline Section with History Image */}
+      <section className="py-20 bg-gradient-to-b from-gray-50 to-white relative">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-center mb-20">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <div className="flex items-center gap-4 mb-6">
-                <div className="text-4xl text-primary">
-                  <FaHistory />
-                </div>
-                <h2 className="text-4xl font-bold text-gray-800">تاريخنا</h2>
-              </div>
-              <p className="text-lg text-gray-600 leading-relaxed mb-4">
-                تأسست مجموعة القصبي منذ أكثر من 15 عاماً بهدف تقديم أفضل أعلاف الدواجن في مصر. بدأنا رحلتنا بإيمان راسخ بأهمية الجودة والابتكار في صناعة الأعلاف.
-              </p>
-              <p className="text-lg text-gray-600 leading-relaxed">
-                على مدار السنوات، نمت المجموعة لتصبح واحدة من أكثر الشركات احتراماً في مجال أعلاف الدواجن ليس في مصر فقط ولكن في الشرق الأوسط بأكمله.
-              </p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="relative h-96 rounded-2xl overflow-hidden shadow-2xl"
-            >
-              <img
-                src="https://images.unsplash.com/photo-1563281577-a7be47e20db9?w=800"
-                alt="تاريخ مجموعة القصبي"
-                className="w-full h-full object-cover"
-              />
-            </motion.div>
-          </div>
+          {/* Main Timeline Title */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              {lang === 'ar' ? 'تاريخنا' : 'Our History'}
+            </h2>
+            <div className="w-24 h-1 mx-auto rounded-full" style={{ backgroundColor: '#a01623' }}></div>
+          </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-12 items-center mb-20">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="relative h-96 rounded-2xl overflow-hidden shadow-2xl order-2 md:order-1"
-            >
+          {/* History Timeline Image */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="mb-16 relative"
+          >
+            <div className="max-w-3xl mx-auto rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
               <img
-                src="https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?w=800"
-                alt="رؤية مجموعة القصبي"
-                className="w-full h-full object-cover"
+                src="/ourhistory.png"
+                alt={lang === 'ar' ? 'تاريخ مجموعة القصبي' : 'Elkassaby Group History'}
+                className="w-full h-auto"
               />
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="order-1 md:order-2"
-            >
-              <div className="flex items-center gap-4 mb-6">
-                <div className="text-4xl text-primary">
-                  <FaEye />
-                </div>
-                <h2 className="text-4xl font-bold text-gray-800">رؤيتنا</h2>
-              </div>
-              <p className="text-lg text-gray-600 leading-relaxed mb-4">
-                نسعى لأن نكون الخيار الأول لكل مربي الدواجن في مصر والشرق الأوسط، من خلال تقديم منتجات عالية الجودة وخدمات متميزة.
-              </p>
-              <p className="text-lg text-gray-600 leading-relaxed">
-                رؤيتنا هي المساهمة في تطوير صناعة الدواجن في المنطقة وتحقيق الاكتفاء الذاتي من خلال الابتكار المستمر والالتزام بأعلى معايير الجودة.
-              </p>
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <div className="flex items-center gap-4 mb-6">
-                <div className="text-4xl text-primary">
-                  <FaBullseye />
-                </div>
-                <h2 className="text-4xl font-bold text-gray-800">مهمتنا</h2>
-              </div>
-              <p className="text-lg text-gray-600 leading-relaxed mb-4">
-                مهمتنا هي توفير أفضل أعلاف الدواجن والكتاكيت عالية الجودة، مع تقديم برامج تغذية متطورة تدعم الأداء الأمثل للمزارع.
-              </p>
-              <p className="text-lg text-gray-600 leading-relaxed">
-                نلتزم بدعم عملائنا من خلال الخبرة الفنية والمتابعة المستمرة لضمان تحقيق أفضل النتائج في مزارعهم.
-              </p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="relative h-96 rounded-2xl overflow-hidden shadow-2xl"
-            >
-              <img
-                src="https://images.unsplash.com/photo-1613732414371-d965c9f3d51a?w=800"
-                alt="مهمة مجموعة القصبي"
-                className="w-full h-full object-cover"
-              />
-            </motion.div>
-          </div>
-        </div>
-      </section>
+          {/* History Description */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto text-center mb-20"
+          >
+            <p className="text-xl text-gray-700 leading-relaxed mb-6">
+              {lang === 'ar'
+                ? 'تأسست مجموعة القصبي منذ أكثر من 23 عاماً بهدف تقديم أفضل أعلاف الدواجن في مصر. بدأنا رحلتنا بإيمان راسخ بأهمية الجودة والابتكار في صناعة الأعلاف.'
+                : 'Elkassaby Group was founded more than 23 years ago with the aim of providing the best poultry feed in Egypt. We started our journey with a firm belief in the importance of quality and innovation in the feed industry.'}
+            </p>
+            <p className="text-lg text-gray-600 leading-relaxed">
+              {lang === 'ar'
+                ? 'على مدار السنوات، نمت المجموعة لتصبح واحدة من أكثر الشركات احتراماً في مجال أعلاف الدواجن ليس في مصر فقط ولكن في الشرق الأوسط بأكمله.'
+                : 'Over the years, the group has grown to become one of the most respected companies in the poultry feed industry not only in Egypt but throughout the entire Middle East.'}
+            </p>
+          </motion.div>
 
-      {/* Values Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <SectionTitle
-            title="قيمنا"
-            subtitle="القيم التي توجه عملنا وتحدد هويتنا"
-          />
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                icon: <FaAward />,
-                title: 'الجودة',
-                description: 'نلتزم بأعلى معايير الجودة في كل ما نقدمه',
-              },
-              {
-                icon: <FaAward />,
-                title: 'الابتكار',
-                description: 'نسعى دائماً للتطوير والابتكار في منتجاتنا',
-              },
-              {
-                icon: <FaAward />,
-                title: 'النزاهة',
-                description: 'نعمل بشفافية ونزاهة مع جميع عملائنا',
-              },
-              {
-                icon: <FaAward />,
-                title: 'التميز',
-                description: 'نسعى للتميز في كل جوانب عملنا',
-              },
-            ].map((value, index) => (
+          {/* Vertical Timeline - Vision & Mission */}
+          <div className="relative max-w-6xl mx-auto">
+            {/* Timeline Line */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full hidden md:block" style={{ backgroundColor: '#a01623' }}></div>
+
+            {/* Vision Timeline Item */}
+            <div className="relative mb-20">
               <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
-                className="card p-8 text-center"
+                className="md:flex items-center"
               >
-                <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 text-primary mb-6 text-4xl">
-                  {value.icon}
+                {/* Left Content */}
+                <div className={`md:w-1/2 mb-8 md:mb-0 ${lang === 'ar' ? 'md:pl-12' : 'md:pr-12'}`}>
+                  <div className={`bg-white rounded-2xl shadow-xl p-8 transform hover:scale-105 transition-all duration-300 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
+                    <div className={`flex items-center gap-4 mb-6 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
+                      <div className="w-16 h-16 rounded-full flex items-center justify-center text-white text-2xl shadow-lg" style={{ backgroundColor: '#a01623' }}>
+                        <FaEye />
+                      </div>
+                      <h3 className="text-3xl font-bold text-gray-900">
+                        {lang === 'ar' ? 'رؤيتنا' : 'Our Vision'}
+                      </h3>
+                    </div>
+                    <p className="text-lg text-gray-700 leading-relaxed mb-4">
+                      {lang === 'ar'
+                        ? 'نسعى لأن نكون الخيار الأول لكل مربي الدواجن في مصر والشرق الأوسط، من خلال تقديم منتجات عالية الجودة وخدمات متميزة.'
+                        : 'We strive to be the first choice for all poultry farmers in Egypt and the Middle East, by providing high-quality products and distinguished services.'}
+                    </p>
+                    <p className="text-gray-600 leading-relaxed">
+                      {lang === 'ar'
+                        ? 'رؤيتنا هي المساهمة في تطوير صناعة الدواجن في المنطقة وتحقيق الاكتفاء الذاتي من خلال الابتكار المستمر والالتزام بأعلى معايير الجودة.'
+                        : 'Our vision is to contribute to the development of the poultry industry in the region and achieve self-sufficiency through continuous innovation and commitment to the highest quality standards.'}
+                    </p>
+                  </div>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-800 mb-4">{value.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{value.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Stats Section */}
-      <section className="py-20 bg-primary text-white">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-            {[
-              { number: '15+', label: 'سنوات من الخبرة' },
-              { number: '1000+', label: 'عميل راضٍ' },
-              { number: '3', label: 'شركات متخصصة' },
-              { number: '100%', label: 'جودة مضمونة' },
-            ].map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <div className="text-6xl font-bold text-secondary mb-2">{stat.number}</div>
-                <div className="text-xl">{stat.label}</div>
+                {/* Timeline Dot */}
+                <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full border-4 border-white shadow-lg hidden md:block" style={{ backgroundColor: '#a01623' }}></div>
+
+                {/* Right Image */}
+                <div className={`md:w-1/2 ${lang === 'ar' ? 'md:pr-12' : 'md:pl-12'}`}>
+                  <motion.div
+                    initial={{ opacity: 0, x: 50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    viewport={{ once: true }}
+                    className="rounded-2xl overflow-hidden shadow-2xl transform hover:scale-105 transition-all duration-300"
+                  >
+                    <img
+                      src="/OurVision.png"
+                      alt={lang === 'ar' ? 'رؤية مجموعة القصبي' : 'Elkassaby Group Vision'}
+                      className="w-full h-auto"
+                    />
+                  </motion.div>
+                </div>
               </motion.div>
-            ))}
+            </div>
+
+            {/* Mission Timeline Item */}
+            <div className="relative">
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+                className="md:flex items-center flex-row-reverse"
+              >
+                {/* Right Content */}
+                <div className={`md:w-1/2 mb-8 md:mb-0 ${lang === 'ar' ? 'md:pr-12' : 'md:pl-12'}`}>
+                  <div className={`bg-white rounded-2xl shadow-xl p-8 transform hover:scale-105 transition-all duration-300 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
+                    <div className={`flex items-center gap-4 mb-6 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
+                      <div className="w-16 h-16 rounded-full flex items-center justify-center text-white text-2xl shadow-lg" style={{ backgroundColor: '#a01623' }}>
+                        <FaBullseye />
+                      </div>
+                      <h3 className="text-3xl font-bold text-gray-900">
+                        {lang === 'ar' ? 'مهمتنا' : 'Our Mission'}
+                      </h3>
+                    </div>
+                    <p className="text-lg text-gray-700 leading-relaxed mb-4">
+                      {lang === 'ar'
+                        ? 'مهمتنا هي توفير أفضل أعلاف الدواجن والكتاكيت عالية الجودة، مع تقديم برامج تغذية متطورة تدعم الأداء الأمثل للمزارع.'
+                        : 'Our mission is to provide the best poultry feed and high-quality chicks, along with advanced nutrition programs that support optimal farm performance.'}
+                    </p>
+                    <p className="text-gray-600 leading-relaxed">
+                      {lang === 'ar'
+                        ? 'نلتزم بدعم عملائنا من خلال الخبرة الفنية والمتابعة المستمرة لضمان تحقيق أفضل النتائج في مزارعهم.'
+                        : 'We are committed to supporting our clients through technical expertise and continuous follow-up to ensure achieving the best results on their farms.'}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Timeline Dot */}
+                <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full border-4 border-white shadow-lg hidden md:block" style={{ backgroundColor: '#a01623' }}></div>
+
+                {/* Left Image */}
+                <div className={`md:w-1/2 ${lang === 'ar' ? 'md:pl-12' : 'md:pr-12'}`}>
+                  <motion.div
+                    initial={{ opacity: 0, x: -50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    viewport={{ once: true }}
+                    className="rounded-2xl overflow-hidden shadow-2xl transform hover:scale-105 transition-all duration-300"
+                  >
+                    <img
+                      src="/OurMission.png"
+                      alt={lang === 'ar' ? 'مهمة مجموعة القصبي' : 'Elkassaby Group Mission'}
+                      className="w-full h-auto"
+                    />
+                  </motion.div>
+                </div>
+              </motion.div>
+            </div>
           </div>
         </div>
       </section>

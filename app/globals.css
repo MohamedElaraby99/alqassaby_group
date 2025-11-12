@@ -40,7 +40,7 @@ html {
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -48,12 +48,18 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--primary);
-  border-radius: 5px;
+  background: #a01623;
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-dark);
+  background: #7d111c;
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #a01623 #f1f1f1;
 }
 
 /* Animations */
@@ -91,20 +97,20 @@ html {
 @layer components {
   .btn-primary {
     @apply text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg;
-    background-color: #bf1e2e;
+    background-color: #a01623;
   }
   
   .btn-primary:hover {
-    background-color: #9a1825;
+    background-color: #7d111c;
   }
   
   .btn-secondary {
     @apply text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg;
-    background-color: #bf1e2e;
+    background-color: #a01623;
   }
   
   .btn-secondary:hover {
-    background-color: #9a1825;
+    background-color: #7d111c;
   }
   
   .btn-outline {

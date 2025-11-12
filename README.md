@@ -132,8 +132,8 @@ We specialize in:
 
 ## 📊 إنجازاتنا | Our Achievements
 
-✨ **أكثر من 15 عاماً من الخبرة**  
-   Over 15 years of experience
+✨ **أكثر من 23 عاماً من الخبرة**  
+   Over 23years of experience
 
 ✨ **أكبر مزارع كتاكيت في مصر**  
    Largest chick farms in Egypt
