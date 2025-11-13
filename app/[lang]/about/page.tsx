@@ -94,8 +94,8 @@ export default function AboutPage({ params }: { params: { lang: string } }) {
 
           {/* Vertical Timeline - Vision & Mission */}
           <div className="relative max-w-6xl mx-auto">
-            {/* Timeline Line */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full hidden md:block" style={{ backgroundColor: '#a01623' }}></div>
+            {/* Timeline Line - Now visible on all screen sizes */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full" style={{ backgroundColor: '#a01623' }}></div>
 
             {/* Vision Timeline Item */}
             <div className="relative mb-20">
@@ -107,22 +107,22 @@ export default function AboutPage({ params }: { params: { lang: string } }) {
                 className="md:flex items-center"
               >
                 {/* Left Content */}
-                <div className={`md:w-1/2 mb-8 md:mb-0 ${lang === 'ar' ? 'md:pl-12' : 'md:pr-12'}`}>
-                  <div className={`bg-white rounded-2xl shadow-xl p-8 transform hover:scale-105 transition-all duration-300 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
-                    <div className={`flex items-center gap-4 mb-6 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
-                      <div className="w-16 h-16 rounded-full flex items-center justify-center text-white text-2xl shadow-lg" style={{ backgroundColor: '#a01623' }}>
+                <div className={`md:w-1/2 mb-8 md:mb-0 ${lang === 'ar' ? 'md:pl-12' : 'md:pr-12'} px-4 md:px-0`}>
+                  <div className={`bg-white rounded-2xl shadow-xl p-6 md:p-8 transform hover:scale-105 transition-all duration-300 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
+                    <div className={`flex items-center gap-3 md:gap-4 mb-4 md:mb-6 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
+                      <div className="w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center text-white text-xl md:text-2xl shadow-lg flex-shrink-0" style={{ backgroundColor: '#a01623' }}>
                         <FaEye />
                       </div>
-                      <h3 className="text-3xl font-bold text-gray-900">
+                      <h3 className="text-2xl md:text-3xl font-bold text-gray-900">
                         {lang === 'ar' ? 'رؤيتنا' : 'Our Vision'}
                       </h3>
                     </div>
-                    <p className="text-lg text-gray-700 leading-relaxed mb-4">
+                    <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-3 md:mb-4">
                       {lang === 'ar'
                         ? 'نسعى لأن نكون الخيار الأول لكل مربي الدواجن في مصر والشرق الأوسط، من خلال تقديم منتجات عالية الجودة وخدمات متميزة.'
                         : 'We strive to be the first choice for all poultry farmers in Egypt and the Middle East, by providing high-quality products and distinguished services.'}
                     </p>
-                    <p className="text-gray-600 leading-relaxed">
+                    <p className="text-sm md:text-base text-gray-600 leading-relaxed">
                       {lang === 'ar'
                         ? 'رؤيتنا هي المساهمة في تطوير صناعة الدواجن في المنطقة وتحقيق الاكتفاء الذاتي من خلال الابتكار المستمر والالتزام بأعلى معايير الجودة.'
                         : 'Our vision is to contribute to the development of the poultry industry in the region and achieve self-sufficiency through continuous innovation and commitment to the highest quality standards.'}
@@ -130,11 +130,11 @@ export default function AboutPage({ params }: { params: { lang: string } }) {
                   </div>
                 </div>
 
-                {/* Timeline Dot */}
-                <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full border-4 border-white shadow-lg hidden md:block" style={{ backgroundColor: '#a01623' }}></div>
+                {/* Timeline Dot - Now visible on all screen sizes */}
+                <div className="absolute left-1/2 transform -translate-x-1/2 w-5 h-5 md:w-6 md:h-6 rounded-full border-4 border-white shadow-lg" style={{ backgroundColor: '#a01623' }}></div>
 
                 {/* Right Image */}
-                <div className={`md:w-1/2 ${lang === 'ar' ? 'md:pr-12' : 'md:pl-12'}`}>
+                <div className={`md:w-1/2 ${lang === 'ar' ? 'md:pr-12' : 'md:pl-12'} px-4 md:px-0`}>
                   <motion.div
                     initial={{ opacity: 0, x: 50 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -162,22 +162,22 @@ export default function AboutPage({ params }: { params: { lang: string } }) {
                 className="md:flex items-center flex-row-reverse"
               >
                 {/* Right Content */}
-                <div className={`md:w-1/2 mb-8 md:mb-0 ${lang === 'ar' ? 'md:pr-12' : 'md:pl-12'}`}>
-                  <div className={`bg-white rounded-2xl shadow-xl p-8 transform hover:scale-105 transition-all duration-300 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
-                    <div className={`flex items-center gap-4 mb-6 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
-                      <div className="w-16 h-16 rounded-full flex items-center justify-center text-white text-2xl shadow-lg" style={{ backgroundColor: '#a01623' }}>
+                <div className={`md:w-1/2 mb-8 md:mb-0 ${lang === 'ar' ? 'md:pr-12' : 'md:pl-12'} px-4 md:px-0`}>
+                  <div className={`bg-white rounded-2xl shadow-xl p-6 md:p-8 transform hover:scale-105 transition-all duration-300 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
+                    <div className={`flex items-center gap-3 md:gap-4 mb-4 md:mb-6 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
+                      <div className="w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center text-white text-xl md:text-2xl shadow-lg flex-shrink-0" style={{ backgroundColor: '#a01623' }}>
                         <FaBullseye />
                       </div>
-                      <h3 className="text-3xl font-bold text-gray-900">
+                      <h3 className="text-2xl md:text-3xl font-bold text-gray-900">
                         {lang === 'ar' ? 'مهمتنا' : 'Our Mission'}
                       </h3>
                     </div>
-                    <p className="text-lg text-gray-700 leading-relaxed mb-4">
+                    <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-3 md:mb-4">
                       {lang === 'ar'
                         ? 'مهمتنا هي توفير أفضل أعلاف الدواجن والكتاكيت عالية الجودة، مع تقديم برامج تغذية متطورة تدعم الأداء الأمثل للمزارع.'
                         : 'Our mission is to provide the best poultry feed and high-quality chicks, along with advanced nutrition programs that support optimal farm performance.'}
                     </p>
-                    <p className="text-gray-600 leading-relaxed">
+                    <p className="text-sm md:text-base text-gray-600 leading-relaxed">
                       {lang === 'ar'
                         ? 'نلتزم بدعم عملائنا من خلال الخبرة الفنية والمتابعة المستمرة لضمان تحقيق أفضل النتائج في مزارعهم.'
                         : 'We are committed to supporting our clients through technical expertise and continuous follow-up to ensure achieving the best results on their farms.'}
@@ -185,11 +185,11 @@ export default function AboutPage({ params }: { params: { lang: string } }) {
                   </div>
                 </div>
 
-                {/* Timeline Dot */}
-                <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full border-4 border-white shadow-lg hidden md:block" style={{ backgroundColor: '#a01623' }}></div>
+                {/* Timeline Dot - Now visible on all screen sizes */}
+                <div className="absolute left-1/2 transform -translate-x-1/2 w-5 h-5 md:w-6 md:h-6 rounded-full border-4 border-white shadow-lg" style={{ backgroundColor: '#a01623' }}></div>
 
                 {/* Left Image */}
-                <div className={`md:w-1/2 ${lang === 'ar' ? 'md:pl-12' : 'md:pr-12'}`}>
+                <div className={`md:w-1/2 ${lang === 'ar' ? 'md:pl-12' : 'md:pr-12'} px-4 md:px-0`}>
                   <motion.div
                     initial={{ opacity: 0, x: -50 }}
                     whileInView={{ opacity: 1, x: 0 }}
