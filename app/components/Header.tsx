@@ -365,7 +365,7 @@ export default function Header() {
                   <div className="w-7 h-7 bg-white rounded-lg flex items-center justify-center group-hover:shadow-md transition-shadow">
                     <FaPhone className="text-xs text-[#a01623]" />
                   </div>
-                  <span className="font-medium">+20 50 2100126</span>
+                  <span className="font-medium">0502100126</span>
                 </a>
                 <a
                   href="mailto:info@elkassaby.com"
