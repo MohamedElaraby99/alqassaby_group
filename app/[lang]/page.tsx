@@ -335,7 +335,7 @@ export default function Home({ params }: { params: { lang: string } }) {
       
 
       {/* High Quality Section */} 
-      <section className=" flex items-center h-[700px] ">
+      <section className=" flex items-center mt-5 md:h-[700px] ">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center">
            
@@ -404,7 +404,7 @@ export default function Home({ params }: { params: { lang: string } }) {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
       viewport={{ once: true }}
-      className="relative h-[500px] lg:h-[550px] rounded-3xl overflow-hidden shadow-2xl"
+      className="relative h-[650px] sm:h-[600px] md:h-[500px] lg:h-[550px] rounded-3xl overflow-hidden shadow-2xl"
     >
       {/* Background Image */}
       <img
@@ -413,9 +413,9 @@ export default function Home({ params }: { params: { lang: string } }) {
         className="absolute inset-0 w-full h-full object-cover"
       />
 
-      {/* Text Content - Positioned on Right */}
+      {/* Text Content */}
       <div
-        className={`absolute inset-0 flex items-center p-8 lg:p-16 ${
+        className={`absolute inset-0 flex items-center p-6 sm:p-8 lg:p-16 ${
           lang === 'ar' ? 'justify-start text-right' : 'justify-end text-left'
         }`}
       >
@@ -424,23 +424,23 @@ export default function Home({ params }: { params: { lang: string } }) {
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: true }}
-          className="relative z-10 w-full lg:w-[50%] max-w-2xl"
+          className="relative z-10 w-full md:w-[70%] lg:w-[50%] max-w-2xl"
         >
           {/* Small Title */}
-          <div className="mb-6 flex justify-right">
+          <div className="mb-4 sm:mb-6 flex justify-right">
             <span
-              className={`text-white font-semibold text-lg tracking-wider flex items-center gap-3 ${
+              className={`text-white font-semibold text-base sm:text-lg tracking-wider flex items-center gap-3 ${
                 lang === 'ar' ? 'flex-row-reverse' : ''
               }`}
             >
-              <span className="h-px w-12 bg-white rounded-full"></span>
+              <span className="h-px w-10 sm:w-12 bg-white rounded-full"></span>
               {lang === 'ar' ? 'ما نقدمه' : 'What We Do'}
             </span>
           </div>
 
           {/* Main Title */}
           <h2
-            className={`text-3xl lg:text-4xl font-bold text-white mb-6 leading-tight ${
+            className={`text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4 sm:mb-6 leading-tight ${
               lang === 'ar' ? 'text-right' : 'text-left'
             }`}
           >
@@ -451,21 +451,21 @@ export default function Home({ params }: { params: { lang: string } }) {
 
           {/* Description */}
           <p
-            className={`text-white/90 text-lg leading-relaxed mb-8 ${
+            className={`text-white/90 text-base sm:text-lg leading-relaxed mb-6 sm:mb-8 ${
               lang === 'ar' ? 'text-right' : 'text-left'
             }`}
           >
             {lang === 'ar'
-              ? 'نطبق نظامًا علميًا دقيقًا لتربية الكتاكيت يبدأ من توفير بيئة مثالية تشمل ضبط درجات الحرارة والرطوبة، وتنفيذ إجراءات وقائية تقلل من أي مخاطر صحية. نركز على التغذية المبكرة السليمة لدعم بناء جهاز مناعي قوي وتحسين معدلات النمو منذ اليوم الأول، مما يضمن إنتاجية عالية وجودة أفضل للمزارع.'
-              : 'We apply a precise scientific system for chick rearing, starting with providing an ideal environment that includes controlled temperature and humidity levels, along with preventive measures that minimize any health risks. We focus on proper early nutrition to support strong immune development and improved growth rates from day one, ensuring high productivity and superior quality for farms.'}
+              ? 'نطبق نظامًا علميًا دقيقًا لتربية الكتاكيت يبدأ من توفير بيئة مثالية تشمل ضبط درجات الحرارة والرطوبة، وتنفيذ إجراءات وقائية تقلل من أي مخاطر صحية...'
+              : 'We apply a precise scientific system for chick rearing, starting with providing an ideal environment...'}
           </p>
 
           {/* Statistics */}
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
             {/* Stat 1 */}
             <div className="flex items-center gap-4">
-              <div className="relative w-20 h-20 flex-shrink-0">
-                {/* Circular Progress */}
+              <div className="relative w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0">
                 <svg className="w-full h-full transform -rotate-90">
                   <circle
                     cx="40"
@@ -488,11 +488,12 @@ export default function Home({ params }: { params: { lang: string } }) {
                   />
                 </svg>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-xl font-bold text-white">100%</span>
+                  <span className="text-lg sm:text-xl font-bold text-white">100%</span>
                 </div>
               </div>
+
               <div>
-                <h4 className="text-white font-bold text-lg">
+                <h4 className="text-white font-bold text-base sm:text-lg">
                   {lang === 'ar' ? 'خبرة في تربية الكتاكيت' : 'Chick Rearing Expertise'}
                 </h4>
                 <p className="text-white/80 text-sm">
@@ -503,8 +504,7 @@ export default function Home({ params }: { params: { lang: string } }) {
 
             {/* Stat 2 */}
             <div className="flex items-center gap-4">
-              <div className="relative w-20 h-20 flex-shrink-0">
-                {/* Circular Progress */}
+              <div className="relative w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0">
                 <svg className="w-full h-full transform -rotate-90">
                   <circle
                     cx="40"
@@ -527,25 +527,27 @@ export default function Home({ params }: { params: { lang: string } }) {
                   />
                 </svg>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-xl font-bold text-white">100%</span>
+                  <span className="text-lg sm:text-xl font-bold text-white">100%</span>
                 </div>
               </div>
+
               <div>
-                <h4 className="text-white font-bold text-lg">
+                <h4 className="text-white font-bold text-base sm:text-lg">
                   {lang === 'ar' ? 'تقنيات حديثة' : 'Modern Techniques'}
                 </h4>
-                  <p className="text-white/80 text-sm">
+                <p className="text-white/80 text-sm">
                   {lang === 'ar' ? 'لضمان أفضل نتائج' : 'For Optimal Results'}
                 </p>
               </div>
             </div>
-          </div>
 
+          </div>
         </motion.div>
       </div>
     </motion.div>
   </div>
 </section>
+ 
 
 
 
@@ -565,7 +567,7 @@ export default function Home({ params }: { params: { lang: string } }) {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl w-[570px] mx-auto font-bold text-[#a01623] mb-4 break-words">
+            <h2 className="text-4xl md:text-5xl md:w-[570px] mx-auto font-bold text-[#a01623] mb-4 break-words">
   {lang === 'ar' 
     ? 'تتكون مجموعة القصبي من 3 شركات رئيسية'
     : 'Elkassaby Group consists of 3 main companies'}
@@ -816,56 +818,73 @@ export default function Home({ params }: { params: { lang: string } }) {
       </section>
 
 
-      {/* Newsletter Section */}
-      <section className="py-12 relative overflow-hidden" style={{ backgroundColor: '#a01623' }}>
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }}></div>
+     
+{/* Newsletter Section */}
+
+<div className='  '>
+<section className="  md:h-[320px] pt-7   bg-[#f5f5f5]">
+  <div className="container mx-auto px-4">
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      viewport={{ once: true }}
+      className="max-w-6xl mx-auto"
+    >
+      {/* OUTER BOX */}
+      <div className="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row">
+
+        {/* LEFT COLORED BOX — RED INSTEAD OF GREEN */}
+        <div
+          className="w-full md:w-1/2 p-10 flex flex-col justify-center text-white"
+          style={{
+            background: "linear-gradient(90deg, #a01623, #7f101d)"
+          }}
+        >
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 uppercase">
+            {lang === "ar" ? "اشترك في النشرة الإخبارية" : "SUBSCRIBE NEWSLETTER"}
+          </h2>
+
+          <p className="text-white/90 leading-relaxed text-base md:text-lg">
+            {lang === "ar"
+              ? "احصل على آخر الأخبار والتحديثات مباشرة في بريدك الإلكتروني"
+              : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis."}
+          </p>
         </div>
 
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="max-w-3xl mx-auto text-center"
-          >
-            {/* Title */}
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
-              {lang === 'ar'
-                ? 'اشترك في نشرتنا الإخبارية' 
-                : 'Subscribe to Our Newsletter'}
-            </h2>
+        {/* RIGHT WHITE FORM */}
+        <div className="w-full md:w-1/2 p-10 bg-white flex flex-col justify-center">
+          <div className="flex flex-col gap-4">
+            <input
+              type="email"
+              placeholder={lang === "ar" ? "البريد الإلكتروني" : "Email"}
+              className="w-full px-5 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#a01623] outline-none"
+              style={{ textAlign: lang === "ar" ? "right" : "left" }}
+            />
 
-            {/* Subtitle */}
-            <p className="text-base md:text-lg text-white/90 mb-6">
-              {lang === 'ar'
-                ? 'احصل على آخر الأخبار والتحديثات مباشرة في بريدك الإلكتروني'
-                : 'Get the latest news and updates delivered directly to your inbox'}
-            </p>
+            <input
+              type="text"
+              placeholder={lang === "ar" ? "رقم الهاتف" : "Phone Number"}
+              className="w-full px-5 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#a01623] outline-none"
+              style={{ textAlign: lang === "ar" ? "right" : "left" }}
+            />
 
-            {/* Newsletter Form */}
-            <div className="max-w-2xl mx-auto">
-              <div className="flex flex-col sm:flex-row gap-3">
-                <input
-                  type="email"
-                  placeholder={lang === 'ar' ? 'أدخل بريدك الإلكتروني' : 'Enter your email'}
-                  className="flex-1 px-5 py-3 rounded-full text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-white/30 transition-all"
-                  style={{ textAlign: lang === 'ar' ? 'right' : 'left' }}
-                />
-                <button
-                  className="px-6 py-3 bg-white text-[#a01623] font-semibold rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg whitespace-nowrap"
-                >
-                  {lang === 'ar' ? 'اشترك' : 'Subscribe'}
-                </button>
-              </div>
-            </div>
-          </motion.div>
+            <button
+              className="w-full py-3 bg-[#a01623] text-white font-semibold rounded-lg hover:bg-[#8c1320] transition-all shadow-md"
+            >
+              {lang === "ar" ? "اشترك الآن" : "Subscribe Now"}
+            </button>
+          </div>
         </div>
-      </section>
+
+      </div>
+    </motion.div>
+  </div>
+</section>
+
+</div>
+
+
       <Footer />
     </main>
   )

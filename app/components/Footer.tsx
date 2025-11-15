@@ -2,28 +2,62 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa'
-import Image from 'next/image'
+import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaArrowUp } from 'react-icons/fa'
+import { useEffect, useState } from "react"
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
   const pathname = usePathname()
   const locale = pathname.startsWith('/en') ? 'en' : 'ar'
 
+  const [showArrow, setShowArrow] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowArrow(window.scrollY > 1500)
+    }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }
+
   return (
-    <footer className="bg-gray-900 text-white">
-      {/* Main Footer */}
-      <div className="container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* About Section */}
-          <div>
-            <div className=" mb-4">
+    <>
+
+      {/* Scroll to top button */}
+      {showArrow && (
+        <button
+          onClick={scrollToTop}
+          aria-label={locale === "ar" ? "الرجوع للأعلى" : "Back to top"}
+          className={`
+            fixed bottom-6 ${locale === "ar" ? "left-6" : "right-6"}
+            bg-[#a01623] text-white p-3 rounded-full shadow-xl
+            hover:bg-[#8c1320] transition-all z-50
+          `}
+        >
+          <FaArrowUp size={15} />
+        </button>
+      )}
+
+      <footer className="bg-gray-900 text-white">
+
+        {/* Main Footer */}
+        <div className="container mx-auto px-4 py-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+            {/* About */}
+            <div>
+             
+                <Link href={`/${locale}`} className={`flex items-center mt-3 ml-8 flex-shrink-0 ${locale === 'en' ? 'gap-2' : 'gap-0.5 sm:gap-1 mr-[-115px]'}`}>
             <svg 
               id="Layer_2" 
               data-name="Layer 2" 
               xmlns="http://www.w3.org/2000/svg" 
               viewBox="0 0 395.77 81.79"
-              className="h-8 sm:h-10 md:h-12 w-auto"
+              className={`h-8 sm:h-10 md:h-12 w-auto ${locale === 'en' ? '-mr-[124px] md:-mr-[188px]' : ''}`}
             >
               <g>
                 <path 
@@ -53,127 +87,104 @@ export default function Footer() {
                 />
               </g>
             </svg>
+            <div className="text-sm sm:text-lg md:text-2xl font-bold">
+              <span className="transition-colors text-white whitespace-nowrap drop-shadow-md" style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.4)' }}>
+                {locale === 'ar' ? 'مجموعة القصبي' : 'Elkassaby Group'}
+              </span>
             </div>
-             
-            <h3 className="text-2xl font-bold text-secondary mb-4 text-center">مجموعة القصبي</h3>
-            <p className="text-gray-300 mb-4 leading-relaxed text-center">
-              نحن واحدة من أكثر الشركات احتراماً في مجال أعلاف الدواجن في مصر والشرق الأوسط منذ أكثر من 23عاماً.
-            </p>
-            <div className="flex gap-4 justify-center">
-              <a href="#" className="text-white hover:text-secondary transition text-xl">
-                <FaFacebook />
-              </a>
-              <a href="#" className="text-white hover:text-secondary transition text-xl">
-                <FaTwitter />
-              </a>
-              <a href="#" className="text-white hover:text-secondary transition text-xl">
-                <FaInstagram />
-              </a>
-              <a href="#" className="text-white hover:text-secondary transition text-xl">
-                <FaLinkedin />
-              </a>
+          </Link>
+
+              <p className="text-gray-300 mb-4 leading-relaxed text-center">
+                {locale === "ar"
+                  ? "نحن واحدة من أكثر الشركات احتراماً في مجال أعلاف الدواجن في مصر والشرق الأوسط منذ أكثر من 23 عاماً."
+                  : "We are one of the most respected poultry feed companies in Egypt and the Middle East for over 23 years."}
+              </p>
+
+              <div className="flex gap-4 justify-center">
+                <a href="#" className="text-white hover:text-secondary text-xl"><FaFacebook /></a>
+                <a href="#" className="text-white hover:text-secondary text-xl"><FaTwitter /></a>
+                <a href="#" className="text-white hover:text-secondary text-xl"><FaInstagram /></a>
+                <a href="#" className="text-white hover:text-secondary text-xl"><FaLinkedin /></a>
+              </div>
             </div>
-          </div>
 
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-xl font-bold mb-4">{locale === 'ar' ? 'روابط سريعة' : 'Quick Links'}</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link href={`/${locale}`} className="text-gray-300 hover:text-secondary transition">
-                  {locale === 'ar' ? 'الرئيسية' : 'Home'}
-                </Link>
-              </li>
-              <li>
-                <Link href={`/${locale}/about`} className="text-gray-300 hover:text-secondary transition">
-                  {locale === 'ar' ? 'من نحن' : 'About'}
-                </Link>
-              </li>
-              <li>
-                <Link href={`/${locale}/products`} className="text-gray-300 hover:text-secondary transition">
-                  {locale === 'ar' ? 'المنتجات' : 'Products'}
-                </Link>
-              </li>
-              <li>
-                <Link href={`/${locale}/services`} className="text-gray-300 hover:text-secondary transition">
-                  {locale === 'ar' ? 'الخدمات' : 'Services'}
-                </Link>
-              </li>
-              <li>
-                <Link href={`/${locale}/news`} className="text-gray-300 hover:text-secondary transition">
-                  {locale === 'ar' ? 'الأخبار' : 'News'}
-                </Link>
-              </li>
-              <li>
-                <Link href={`/${locale}/contact`} className="text-gray-300 hover:text-secondary transition">
-                  {locale === 'ar' ? 'اتصل بنا' : 'Contact'}
-                </Link>
-              </li>
-            </ul>
-          </div>
+            {/* Quick Links */}
+            <div>
+              <h3 className="text-xl font-bold mb-4">
+                {locale === 'ar' ? 'روابط سريعة' : 'Quick Links'}
+              </h3>
+              <ul className="space-y-2">
+                <li><Link href={`/${locale}`} className="text-gray-300 hover:text-secondary">{locale === 'ar' ? 'الرئيسية' : 'Home'}</Link></li>
+                <li><Link href={`/${locale}/about`} className="text-gray-300 hover:text-secondary">{locale === 'ar' ? 'من نحن' : 'About'}</Link></li>
+                <li><Link href={`/${locale}/products`} className="text-gray-300 hover:text-secondary">{locale === 'ar' ? 'المنتجات' : 'Products'}</Link></li>
+                <li><Link href={`/${locale}/services`} className="text-gray-300 hover:text-secondary">{locale === 'ar' ? 'الخدمات' : 'Services'}</Link></li>
+                <li><Link href={`/${locale}/news`} className="text-gray-300 hover:text-secondary">{locale === 'ar' ? 'الأخبار' : 'News'}</Link></li>
+                <li><Link href={`/${locale}/contact`} className="text-gray-300 hover:text-secondary">{locale === 'ar' ? 'اتصل بنا' : 'Contact'}</Link></li>
+              </ul>
+            </div>
 
-          {/* Companies */}
-          <div>
-            <h3 className="text-xl font-bold mb-4">شركاتنا</h3>
-            <ul className="space-y-2">
-              <li className="text-gray-300">
-                القصبي للاستثمار
-              </li>
-              <li className="text-gray-300">
-                تبارك للتفريخ والدواجن
-              </li>
-              <li className="text-gray-300">
-                هاجر للثروة الداجنة
-              </li>
-            </ul>
-          </div>
+            {/* Companies */}
+            <div>
+              <h3 className="text-xl font-bold mb-4">
+                {locale === "ar" ? "شركاتنا" : "Our Companies"}
+              </h3>
+              <ul className="space-y-2 text-gray-300">
+                <li>{locale === "ar" ? "القصبي للاستثمار" : "Elkassaby Investment"}</li>
+                <li>{locale === "ar" ? "تبارك للتفريخ والدواجن" : "Tabarak for Poultry"}</li>
+                <li>{locale === "ar" ? "هاجر للثروة الداجنة" : "Hager Poultry Group"}</li>
+              </ul>
+            </div>
 
-          {/* Contact Info */}
-          <div>
-            <h3 className="text-xl font-bold mb-4">معلومات التواصل</h3>
-            <ul className="space-y-3">
-              <li className="flex items-start gap-3">
-                <FaMapMarkerAlt className="text-secondary mt-1 flex-shrink-0" />
-                <span className="text-gray-300">
-                  المنصورة، توريل القديمة، شارع الشريف الراضي، عمارة القصبي
-                </span>
-              </li>
-              <li className="flex items-center gap-3">
-                <FaPhone className="text-secondary flex-shrink-0" />
-                <div className="text-gray-300">
-                  <a href="tel:+20502100126" className="block hover:text-secondary transition">
-                    +20 50 2100126
+            {/* Contact */}
+            <div>
+              <h3 className="text-xl font-bold mb-4">
+                {locale === "ar" ? "معلومات التواصل" : "Contact Information"}
+              </h3>
+              <ul className="space-y-3 text-gray-300">
+
+                <li className="flex items-start gap-3">
+                  <FaMapMarkerAlt className="text-secondary mt-1" />
+                  <span>
+                    {locale === "ar"
+                      ? "المنصورة، توريل القديمة، شارع الشريف الراضي، عمارة القصبي"
+                      : "Mansoura, Old Toreil, Elsharef Alradi Street, Elkassaby Building"}
+                  </span>
+                </li>
+
+                <li className="flex items-start gap-3">
+                  <FaPhone className="text-secondary mt-1" />
+                  <div>
+                    <a href="tel:+20502100126" className="block hover:text-secondary">+20 50 2100126</a>
+                    <a href="tel:01097770109" className="block hover:text-secondary">01097770109</a>
+                    <a href="tel:01097770117" className="block hover:text-secondary">01097770117</a>
+                  </div>
+                </li>
+
+                <li className="flex items-center gap-3">
+                  <FaEnvelope className="text-secondary" />
+                  <a href="mailto:info@elkassaby.com" className="hover:text-secondary">
+                    info@elkassaby.com
                   </a>
-                  <a href="tel:01097770109" className="block hover:text-secondary transition">
-                    01097770109
-                  </a>
-                  <a href="tel:01097770117" className="block hover:text-secondary transition">
-                    01097770117
-                  </a>
-                </div>
-              </li>
-              <li className="flex items-center gap-3">
-                <FaEnvelope className="text-secondary flex-shrink-0" />
-                <a href="mailto:info@elkassaby.com" className="text-gray-300 hover:text-secondary transition">
-                  info@elkassaby.com
-                </a>
-              </li>
-            </ul>
+                </li>
+
+              </ul>
+            </div>
+
           </div>
         </div>
-      </div>
 
-      {/* Bottom Footer */}
-      <div className="border-t border-gray-800">
-        <div className="container mx-auto px-4 py-6">
-          <div className="text-center text-gray-400">
+        {/* Bottom Footer */}
+        <div className="border-t border-gray-800">
+          <div className="container mx-auto px-4 py-6 text-center text-gray-400">
             <p>
-              © {currentYear} مجموعة القصبي - جميع الحقوق محفوظة
+              {locale === "ar"
+                ? `© ${currentYear} مجموعة القصبي - جميع الحقوق محفوظة`
+                : `© ${currentYear} Elkassaby Group - All Rights Reserved`}
             </p>
           </div>
         </div>
-      </div>
-    </footer>
+
+      </footer>
+    </>
   )
 }
-
