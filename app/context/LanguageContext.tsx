@@ -13,10 +13,11 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>('ar')
+  const [locale, setLocaleState] = useState<Locale>(() => {
+    return (localStorage.getItem('locale') as Locale) || 'ar'
+  })
 
   useEffect(() => {
-    // Update HTML attributes when locale changes
     document.documentElement.lang = locale
     document.documentElement.dir = locale === 'ar' ? 'rtl' : 'ltr'
   }, [locale])
@@ -27,7 +28,6 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   }
 
   const t = (key: string): string => {
-    // Simple translation function - in a real app, this would use the translations object
     return key
   }
 
@@ -45,4 +45,3 @@ export function useLanguage() {
   }
   return context
 }
-

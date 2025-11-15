@@ -13,7 +13,7 @@ export default function AboutPage({ params }: { params: { lang: string } }) {
       <Header />
       
       {/* Page Header */}
-      <section
+      {/* <section
         className="pt-32 pb-20 relative overflow-hidden"
         style={{
           backgroundColor: '#a01623',
@@ -36,7 +36,7 @@ export default function AboutPage({ params }: { params: { lang: string } }) {
             </p>
           </motion.div>
         </div>
-      </section>
+      </section> */}
 
       {/* Timeline Section with History Image */}
       <section className="py-20 bg-gradient-to-b from-gray-50 to-white relative">
@@ -49,14 +49,14 @@ export default function AboutPage({ params }: { params: { lang: string } }) {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl md:text-5xl mt-5 font-bold text-gray-900 mb-4">
               {lang === 'ar' ? 'تاريخنا' : 'Our History'}
             </h2>
             <div className="w-24 h-1 mx-auto rounded-full" style={{ backgroundColor: '#a01623' }}></div>
           </motion.div>
 
           {/* History Timeline Image */}
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
@@ -70,7 +70,7 @@ export default function AboutPage({ params }: { params: { lang: string } }) {
                 className="w-full h-auto"
               />
             </div>
-          </motion.div>
+          </motion.div> */}
 
           {/* History Description */}
           <motion.div

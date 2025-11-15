@@ -209,7 +209,7 @@ export default function Header() {
         <div
           className={`absolute ${
             locale === 'ar' ? 'right-0' : 'left-0'
-          } top-0 h-full w-[320px] max-w-[85vw] bg-white/95 backdrop-blur-xl shadow-2xl transform transition-all duration-500 ease-out ${
+          } top-0 h-full w-full  bg-white/95 backdrop-blur-xl shadow-2xl transform transition-all duration-500 ease-out ${
             isMobileMenuOpen
               ? 'translate-x-0 scale-100'
               : locale === 'ar'
@@ -233,13 +233,13 @@ export default function Header() {
             
             <div className="relative z-10">
               {/* Close Button */}
-              <button
+              {/* <button
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="absolute top-0 right-0 w-8 h-8 flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200"
                 aria-label="Close menu"
               >
                 <FaTimes className="text-xl" />
-              </button>
+              </button> */}
 
               {/* Logo Icon */}
               <div className="flex items-center gap-3 mb-3">
@@ -267,8 +267,8 @@ export default function Header() {
           </div>
 
           {/* Navigation Menu Items with Modern Cards */}
-          <nav className="p-5 h-[calc(100vh-180px)] overflow-y-auto bg-gradient-to-b from-gray-50 to-white">
-            <ul className="space-y-2 mb-6">
+          <nav className="p-5 text-center  h-screen overflow-y-auto bg-gradient-to-b from-gray-50 to-white">
+            <ul className="space-y-2 mt-10 mb-6">
               {menuItems.map((item, index) => {
                 const isActive = isActiveLink(item.href)
                 return (
@@ -285,9 +285,9 @@ export default function Header() {
                   >
                     <Link
                       href={item.href}
-                      className={`group flex items-center gap-3 px-4 py-3.5 rounded-xl font-semibold transition-all duration-300 transform relative overflow-hidden ${
+                      className={`group   flex items-center gap-3 px-2 py-2.5 mx-auto rounded-xl font-semibold  w-[65%]  text-lg transition-all duration-300 transform relative overflow-hidden ${
                         isActive
-                          ? 'bg-gradient-to-r from-[#a01623] to-[#c41f30] text-white shadow-lg shadow-red-500/30'
+                          ? 'bg-gradient-to-r  from-[#a01623] to-[#c41f30] text-white shadow-lg shadow-red-500/30'
                           : 'text-gray-700 hover:bg-gradient-to-r hover:from-gray-100 hover:to-gray-50 hover:shadow-md'
                       }`}
                       onClick={() => setIsMobileMenuOpen(false)}
@@ -298,14 +298,14 @@ export default function Header() {
                       )}
                       
                       {/* Icon Dot */}
-                      <span className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      {/* <span className={`w-2 h-2 rounded-full transition-all duration-300 ${
                         isActive ? 'bg-white' : 'bg-gray-400 group-hover:bg-[#a01623] group-hover:scale-150'
-                      }`}></span>
+                      }`}></span> */}
                       
                       <span className="flex-1">{locale === 'ar' ? item.label : item.labelEn}</span>
                       
                       {/* Arrow Icon */}
-                      <svg 
+                      {/* <svg 
                         className={`w-4 h-4 transition-transform duration-300 ${
                           locale === 'ar' ? 'rotate-180 group-hover:-translate-x-1' : 'group-hover:translate-x-1'
                         }`}
@@ -314,7 +314,7 @@ export default function Header() {
                         viewBox="0 0 24 24"
                       >
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
+                      </svg> */}
                     </Link>
                   </li>
                 )
@@ -322,7 +322,7 @@ export default function Header() {
             </ul>
 
             {/* Language Switcher - Modern Toggle */}
-            <div className="mb-6 p-4 bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl border border-amber-200/50">
+            <div className="mb-10 p-4 w-[200px] mx-auto bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl border border-amber-200/50">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm font-semibold text-gray-700">
                   {locale === 'ar' ? 'اللغة' : 'Language'}
@@ -346,7 +346,7 @@ export default function Header() {
             </div>
 
             {/* Contact Section - Card Style */}
-            <div className="p-4 bg-gradient-to-br from-red-50 to-pink-50 rounded-xl border border-red-200/50">
+            {/* <div className="p-4 bg-gradient-to-br from-red-50 to-pink-50 rounded-xl border border-red-200/50">
               <div className="flex items-center gap-2 mb-3">
                 <div className="w-8 h-8 bg-[#a01623] rounded-lg flex items-center justify-center">
                   <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -377,7 +377,7 @@ export default function Header() {
                   <span className="font-medium break-all">info@elkassaby.com</span>
                 </a>
               </div>
-            </div>
+            </div> */}
           </nav>
         </div>
       </div>

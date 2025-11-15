@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Cairo } from 'next/font/google'
 import '../globals.css'
-import LoadingIndicator from '../components/LoadingIndicator'
+// import LoadingIndicator from '../components/LoadingIndicator'
 
 const cairo = Cairo({ 
   subsets: ['arabic', 'latin'],
@@ -55,7 +55,7 @@ export default function LangLayout({
   return (
     <html lang={lang} dir={dir}>
       <body className={cairo.className}>
-        <LoadingIndicator />
+        {/* <LoadingIndicator /> */}
         {children}
       </body>
     </html>
