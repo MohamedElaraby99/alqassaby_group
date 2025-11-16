@@ -60,11 +60,9 @@ const blogSchema = new mongoose.Schema({
 // Index for featured blogs
 blogSchema.index({ featured: 1, createdAt: -1 });
 
-// Index for slug lookup
-blogSchema.index({ slug: 1 });
-
 // Index for category filtering
 blogSchema.index({ category: 1 });
 
 module.exports = mongoose.model('Blog', blogSchema);
+
 

@@ -54,3 +54,4 @@ productSchema.index({ category: 1 });
 
 module.exports = mongoose.model('Product', productSchema);
 
+
