@@ -9,9 +9,9 @@ import ServiceCard from '../components/ServiceCard'
 import NewsCard from '../components/NewsCard'
 import CompanyCard from '../components/CompanyCard'
 import { motion } from 'framer-motion'
-import { Egg, Feather, Leaf, HeartPulse } from "lucide-react";
 
 // import { FiZap , FiAward , FiShield , TrendingUp  } from 'react-icons/fi'
+// import { Egg, Feather, Leaf, HeartPulse } from "lucide-react"; // Uncomment when needed
 
 
 
@@ -344,14 +344,14 @@ export default function Home({ params }: { params: { lang: string } }) {
   whileInView={{ opacity: 1, x: 0 }}
   transition={{ duration: 0.8 }}
   viewport={{ once: true }}
-  className="relative bg-yellow-50 mx-auto w-[75%] h-[400px] rounded-lg overflow-hidden"
+  className="relative  mx-auto w-[75%] h-[400px] rounded-lg overflow-hidden"
 >
 
-  <div className="absolute top-0 right-0 bg-[#a01623] flex items-center gap-2 w-[130px] py-1 rounded">
+  {/* <div className="absolute top-0 right-0 bg-[#a01623] flex items-center gap-2 w-[130px] py-1 rounded">
   <p className="text-white w-[80px] text-center text-sm ms-2">Origin Product</p>
     <p className="text-white text-center font-bold ml-5 text-2xl">100%</p>
     
-  </div>
+  </div> */}
 
   <img
     src="/01.png"
