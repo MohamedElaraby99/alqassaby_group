@@ -8,9 +8,14 @@ export default function LoadingIndicator() {
 
   return (
     <>
-     <div className=" h-screen  flex justify-center items-center bg-red-100">
+     <div className=" h-screen  flex justify-center items-center  bg-[#f3f2ed]">
 
-      <span className="loader">Load&nbsp;ng</span>
+    <div className="flex flex-col gap-3">
+
+ <span className="loader"></span>
+     <h2 className="text-[#a01623] mt-4 text-lg font-bold"> Loading ....</h2>
+
+    </div>
      </div>
     </>
   )

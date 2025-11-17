@@ -5,48 +5,34 @@ import Footer from '../../components/Footer'
 import SectionTitle from '../../components/SectionTitle'
 import ProductCard from '../../components/ProductCard'
 import { motion } from 'framer-motion'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch, RootState } from '@/store/store'
+import { getProducts } from '@/store/productsSlice'
 
 export default function ProductsPage({ params }: { params: { lang: string } }) {
   const { lang } = params
-  
-  const products = [
-    {
-      title: lang === 'ar' ? 'أعلاف دواجن التسمين' : 'Fattening Poultry Feed',
-      description: lang === 'ar' ? 'أعلاف عالية الجودة مصممة خصيصاً لتسمين الدواجن وزيادة الوزن بشكل صحي وسريع' : 'High-quality feed specially designed for fattening poultry and increasing weight in a healthy and fast manner',
-      image: '/bg12.png',
-      link: `/${lang}/products/fattening-feed`,
-    },
-    {
-      title: lang === 'ar' ? 'أعلاف الكتاكيت' : 'Chick Feed',
-      description: lang === 'ar' ? 'تركيبة خاصة للكتاكيت في مراحل النمو الأولى لضمان نمو صحي وقوي' : 'Special formula for chicks in early growth stages to ensure healthy and strong growth',
-      image: '/bg12.png',
-      link: `/${lang}/products/chick-feed`,
-    },
-    {
-      title: lang === 'ar' ? 'أعلاف الدجاج البياض' : 'Layer Feed',
-      description: lang === 'ar' ? 'أعلاف متوازنة لزيادة إنتاج البيض وتحسين جودته' : 'Balanced feed to increase egg production and improve quality',
-      image: '/bg12.png',
-      link: `/${lang}/products/layer-feed`,
-    },
-    {
-      title: lang === 'ar' ? 'أعلاف الأمهات' : 'Breeder Feed',
-      description: lang === 'ar' ? 'تركيبة غذائية متكاملة لأمهات الدواجن لضمان إنتاجية عالية' : 'Complete nutritional formula for breeder hens to ensure high productivity',
-      image: '/bg12.png',
-      link: `/${lang}/products/breeder-feed`,
-    },
-    {
-      title: lang === 'ar' ? 'كتاكيت عالية الجودة' : 'High-Quality Chicks',
-      description: lang === 'ar' ? 'كتاكيت سلالات ممتازة من أفضل المصادر العالمية' : 'Excellent breed chicks from the best global sources',
-      image: '/bg12.png',
-      link: `/${lang}/products/chicks`,
-    },
-    {
-      title: lang === 'ar' ? 'مكملات غذائية' : 'Feed Supplements',
-      description: lang === 'ar' ? 'فيتامينات ومكملات غذائية لتعزيز صحة ومناعة الدواجن' : 'Vitamins and nutritional supplements to enhance poultry health and immunity',
-      image: '/bg12.png',
-      link: `/${lang}/products/supplements`,
-    },
-  ]
+  const dispatch = useDispatch<AppDispatch>()
+
+  const { products, loading } = useSelector((state: RootState) => state.products);
+
+  useEffect(() => {
+    dispatch(getProducts()); 
+  }, [dispatch]);
+
+const mappedProducts = products.map((p: any) => ({
+  _id: p._id,
+  title: lang === 'ar' ? p.name_ar || p.name : p.name,
+  description: lang === 'ar' ? p.description_ar || p.description : p.description,
+  image: p.image && p.image.trim() !== '' ? p.image : '/bg12.png', 
+  link: `/${lang}/products/${p._id}`,
+  price: p.price
+}));
+
+
+  if (loading) {
+    return <p className="text-center py-20 text-xl">{lang === 'ar' ? 'جاري تحميل المنتجات...' : 'Loading products...'}</p>
+  }
 
   return (
     <main>
@@ -90,12 +76,12 @@ export default function ProductsPage({ params }: { params: { lang: string } }) {
             subtitle={lang === 'ar' ? 'نوفر مجموعة متكاملة من الأعلاف والكتاكيت عالية الجودة لتلبية جميع احتياجاتك' : 'We provide a complete range of high-quality feed and chicks to meet all your needs'}
           />
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {products.map((product, index) => (
+            {mappedProducts.map(product => (
               <motion.div
-                key={index}
+                key={product._id}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.5 }}
                 viewport={{ once: true }}
               >
                 <ProductCard {...product} lang={lang} />
@@ -137,4 +123,3 @@ export default function ProductsPage({ params }: { params: { lang: string } }) {
     </main>
   )
 }
-

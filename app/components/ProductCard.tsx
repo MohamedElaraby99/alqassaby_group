@@ -29,9 +29,9 @@ export default function ProductCard({
       className="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
     >
       {/* Image Container with Overlay */}
-      <div className="relative h-72 overflow-hidden">
+      <div className="relative  w-full h-72 overflow-hidden">
         <Image
-          src={image}
+          src={image  }
           alt={title}
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-110"

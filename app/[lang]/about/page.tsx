@@ -7,6 +7,8 @@ import { FaHistory, FaBullseye, FaEye, FaAward, FaRocket, FaLightbulb } from 're
 
 export default function AboutPage({ params }: { params: { lang: string } }) {
   const { lang } = params
+
+  
   
   return (
     <main>
@@ -56,7 +58,7 @@ export default function AboutPage({ params }: { params: { lang: string } }) {
           </motion.div>
 
           {/* History Timeline Image */}
-          {/* <motion.div
+          <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
@@ -70,7 +72,7 @@ export default function AboutPage({ params }: { params: { lang: string } }) {
                 className="w-full h-auto"
               />
             </div>
-          </motion.div> */}
+          </motion.div>
 
           {/* History Description */}
           <motion.div

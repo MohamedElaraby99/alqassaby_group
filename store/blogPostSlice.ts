@@ -1,0 +1,54 @@
+// store/blogDetailsSlice.ts
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+import { BlogPost } from "@/InterFaces/Products";
+
+interface BlogDetailsState {
+  blog: BlogPost | null;
+  loading: boolean;
+  error: string | null;
+}
+
+
+export const getBlogById = createAsyncThunk(
+  "blogs/getBlogById",
+  async (id: string, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get(`http://localhost:5000/api/blogs/${id}`);
+      console.log('daaaaaaaata' , data )
+      return data; 
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data?.message || "Failed to fetch blog");
+    }
+  }
+);
+
+const initialState: BlogDetailsState = {
+  blog: null,
+  loading: false,
+  error: null,
+};
+
+const blogDetailsSlice = createSlice({
+  name: "blogDetails",
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(getBlogById.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+        state.blog = null;
+      })
+      .addCase(getBlogById.fulfilled, (state, action) => {
+        state.loading = false;
+        state.blog = action.payload;
+      })
+      .addCase(getBlogById.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      });
+  },
+});
+
+export const blogDetailsReducer = blogDetailsSlice.reducer;
