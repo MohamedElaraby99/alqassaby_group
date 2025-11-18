@@ -90,6 +90,11 @@ exports.getProductById = async (req, res, next) => {
 // @route   POST /api/products
 exports.createProduct = async (req, res, next) => {
   try {
+    // If file was uploaded, add the file URL to the request body
+    if (req.file) {
+      req.body.image = `/uploads/${req.file.filename}`;
+    }
+
     const product = await Product.create(req.body);
 
     res.status(201).json({
@@ -112,6 +117,11 @@ exports.createProduct = async (req, res, next) => {
 // @route   PUT /api/products/:id
 exports.updateProduct = async (req, res, next) => {
   try {
+    // If file was uploaded, add the file URL to the request body
+    if (req.file) {
+      req.body.image = `/uploads/${req.file.filename}`;
+    }
+
     const product = await Product.findByIdAndUpdate(
       req.params.id,
       req.body,
@@ -203,6 +213,7 @@ exports.deleteProduct = async (req, res, next) => {
     next(error);
   }
 };
+
 
 
 

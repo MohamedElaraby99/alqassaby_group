@@ -112,6 +112,11 @@ exports.getBlogById = async (req, res, next) => {
 // @route   POST /api/blogs
 exports.createBlog = async (req, res, next) => {
   try {
+    // If file was uploaded, add the file URL to the request body
+    if (req.file) {
+      req.body.image = `/uploads/${req.file.filename}`;
+    }
+
     const blog = await Blog.create(req.body);
 
     res.status(201).json({
@@ -134,6 +139,11 @@ exports.createBlog = async (req, res, next) => {
 // @route   PUT /api/blogs/:id
 exports.updateBlog = async (req, res, next) => {
   try {
+    // If file was uploaded, add the file URL to the request body
+    if (req.file) {
+      req.body.image = `/uploads/${req.file.filename}`;
+    }
+
     const blog = await Blog.findByIdAndUpdate(
       req.params.id,
       req.body,
@@ -263,6 +273,7 @@ exports.deleteBlog = async (req, res, next) => {
     next(error);
   }
 };
+
 
 
 

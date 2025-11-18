@@ -3,6 +3,7 @@ const router = express.Router();
 const { body } = require('express-validator');
 const blogController = require('../controllers/blogController');
 const validate = require('../middleware/validate');
+const upload = require('../middleware/upload');
 
 // Validation rules
 const blogValidation = [
@@ -34,11 +35,11 @@ router.get('/slug/:slug', blogController.getBlogBySlug);
 // GET blog by ID
 router.get('/:id', blogController.getBlogById);
 
-// POST create new blog
-router.post('/', blogValidation, validate, blogController.createBlog);
+// POST create new blog (with optional file upload)
+router.post('/', upload.single('image'), blogValidation, validate, blogController.createBlog);
 
-// PUT update blog
-router.put('/:id', blogValidation, validate, blogController.updateBlog);
+// PUT update blog (with optional file upload)
+router.put('/:id', upload.single('image'), blogValidation, validate, blogController.updateBlog);
 
 // PATCH toggle featured status
 router.patch('/:id/featured', blogController.toggleFeatured);
@@ -50,6 +51,7 @@ router.patch('/:id/views', blogController.incrementViews);
 router.delete('/:id', blogController.deleteBlog);
 
 module.exports = router;
+
 
 
 

@@ -3,6 +3,7 @@ const router = express.Router();
 const { body } = require('express-validator');
 const productController = require('../controllers/productController');
 const validate = require('../middleware/validate');
+const upload = require('../middleware/upload');
 
 // Validation rules
 const productValidation = [
@@ -29,11 +30,11 @@ router.get('/featured', productController.getFeaturedProducts);
 // GET product by ID
 router.get('/:id', productController.getProductById);
 
-// POST create new product
-router.post('/', productValidation, validate, productController.createProduct);
+// POST create new product (with optional file upload)
+router.post('/', upload.single('image'), productValidation, validate, productController.createProduct);
 
-// PUT update product
-router.put('/:id', productValidation, validate, productController.updateProduct);
+// PUT update product (with optional file upload)
+router.put('/:id', upload.single('image'), productValidation, validate, productController.updateProduct);
 
 // PATCH toggle featured status
 router.patch('/:id/featured', productController.toggleFeatured);
@@ -42,6 +43,7 @@ router.patch('/:id/featured', productController.toggleFeatured);
 router.delete('/:id', productController.deleteProduct);
 
 module.exports = router;
+
 
 
 

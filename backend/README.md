@@ -6,6 +6,7 @@ Backend API for managing products and blogs with featured flags, built with Expr
 
 - **Products Management**: Full CRUD operations for products
 - **Blogs Management**: Full CRUD operations for blogs with slug-based routing
+- **File Upload**: Image upload support for products and blogs
 - **Featured Items**: Toggle featured status for both products and blogs
 - **Filtering & Pagination**: Query products and blogs with various filters
 - **Input Validation**: Comprehensive validation using express-validator
@@ -18,6 +19,7 @@ Backend API for managing products and blogs with featured flags, built with Expr
 - **Express.js** - Web framework
 - **MongoDB** - Database
 - **Mongoose** - ODM for MongoDB
+- **Multer** - File upload middleware
 - **express-validator** - Input validation
 - **CORS** - Cross-origin resource sharing
 - **Morgan** - HTTP request logger
@@ -89,7 +91,27 @@ Example: `/api/products?featured=true&limit=5&page=1`
 
 #### Create Product
 - **POST** `/api/products`
-- Body (JSON):
+- Content-Type: `multipart/form-data` (with file) or `application/json` (URL only)
+
+**Option 1: With File Upload (multipart/form-data)**
+```javascript
+// Using FormData
+const formData = new FormData();
+formData.append('name', 'Product Name');
+formData.append('description', 'Product description');
+formData.append('price', '99.99');
+formData.append('category', 'Electronics');
+formData.append('image', fileInput.files[0]); // Image file
+formData.append('featured', 'false');
+formData.append('inStock', 'true');
+
+fetch('http://localhost:5000/api/products', {
+  method: 'POST',
+  body: formData
+});
+```
+
+**Option 2: With Image URL (application/json)**
 ```json
 {
   "name": "Product Name",
@@ -146,7 +168,29 @@ Example: `/api/blogs/slug/my-first-blog-post`
 
 #### Create Blog
 - **POST** `/api/blogs`
-- Body (JSON):
+- Content-Type: `multipart/form-data` (with file) or `application/json` (URL only)
+
+**Option 1: With File Upload (multipart/form-data)**
+```javascript
+// Using FormData
+const formData = new FormData();
+formData.append('title', 'Blog Title');
+formData.append('slug', 'blog-title');
+formData.append('content', 'Full blog content here...');
+formData.append('excerpt', 'Short summary of the blog');
+formData.append('author', 'Author Name');
+formData.append('image', fileInput.files[0]); // Image file
+formData.append('featured', 'false');
+formData.append('published', 'true');
+formData.append('category', 'News');
+
+fetch('http://localhost:5000/api/blogs', {
+  method: 'POST',
+  body: formData
+});
+```
+
+**Option 2: With Image URL (application/json)**
 ```json
 {
   "title": "Blog Title",
@@ -176,6 +220,63 @@ Example: `/api/blogs/slug/my-first-blog-post`
 
 #### Delete Blog
 - **DELETE** `/api/blogs/:id`
+
+### File Upload API
+
+#### Upload Image
+- **POST** `/api/upload/image`
+- Content-Type: `multipart/form-data`
+- Body: Form data with field name `image`
+
+**Response:**
+```json
+{
+  "status": "success",
+  "message": "File uploaded successfully",
+  "data": {
+    "filename": "product-1234567890-123456789.jpg",
+    "originalName": "product.jpg",
+    "url": "/uploads/product-1234567890-123456789.jpg",
+    "size": 123456,
+    "mimetype": "image/jpeg"
+  }
+}
+```
+
+**Example using cURL:**
+```bash
+curl -X POST http://localhost:5000/api/upload/image \
+  -F "image=@/path/to/your/image.jpg"
+```
+
+**Example using JavaScript:**
+```javascript
+const formData = new FormData();
+formData.append('image', fileInput.files[0]);
+
+fetch('http://localhost:5000/api/upload/image', {
+  method: 'POST',
+  body: formData
+})
+.then(res => res.json())
+.then(data => {
+  console.log('Image URL:', data.data.url);
+  // Use data.data.url when creating/updating products or blogs
+});
+```
+
+**Upload Multiple Images:**
+- **POST** `/api/upload/images`
+- Content-Type: `multipart/form-data`
+- Body: Form data with field name `images` (array of files, max 10)
+
+### File Upload Specifications
+
+- **Supported Formats**: JPEG, JPG, PNG, GIF, WebP
+- **Maximum File Size**: 5MB per file
+- **Storage Location**: Files are stored in `backend/uploads/` directory
+- **Access URL**: Uploaded images are accessible at `http://localhost:5000/uploads/filename.jpg`
+- **Automatic Handling**: When uploading files directly in create/update endpoints, the `image` field is automatically set
 
 ## Response Format
 
@@ -273,7 +374,7 @@ MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/elkassaby-gr
 
 ### Using cURL
 
-**Create a product:**
+**Create a product (with JSON):**
 ```bash
 curl -X POST http://localhost:5000/api/products \
   -H "Content-Type: application/json" \
@@ -284,6 +385,23 @@ curl -X POST http://localhost:5000/api/products \
     "category": "Electronics",
     "featured": true
   }'
+```
+
+**Create a product (with image file):**
+```bash
+curl -X POST http://localhost:5000/api/products \
+  -F "name=Sample Product" \
+  -F "description=This is a sample product" \
+  -F "price=49.99" \
+  -F "category=Electronics" \
+  -F "featured=true" \
+  -F "image=@/path/to/image.jpg"
+```
+
+**Upload an image:**
+```bash
+curl -X POST http://localhost:5000/api/upload/image \
+  -F "image=@/path/to/image.jpg"
 ```
 
 **Get all featured products:**
@@ -310,13 +428,16 @@ backend/
 │   ├── productController.js # Product business logic
 │   └── blogController.js    # Blog business logic
 ├── middleware/
-│   └── validate.js          # Validation middleware
+│   ├── validate.js          # Validation middleware
+│   └── upload.js            # File upload middleware (Multer)
 ├── models/
 │   ├── Product.js           # Product schema
 │   └── Blog.js              # Blog schema
 ├── routes/
 │   ├── productRoutes.js     # Product routes
-│   └── blogRoutes.js        # Blog routes
+│   ├── blogRoutes.js        # Blog routes
+│   └── uploadRoutes.js      # File upload routes
+├── uploads/                 # Uploaded images directory (auto-created)
 ├── .env                     # Environment variables (create this)
 ├── .env.example             # Example environment file
 ├── .gitignore
@@ -352,13 +473,13 @@ backend/
 ## Next Steps
 
 1. Add authentication and authorization
-2. Implement file upload for images
-3. Add search functionality
-4. Implement caching (Redis)
-5. Add rate limiting
-6. Set up logging service
-7. Create admin dashboard
-8. Add API documentation (Swagger)
+2. Add search functionality
+3. Implement caching (Redis)
+4. Add rate limiting
+5. Set up logging service
+6. Create admin dashboard
+7. Add API documentation (Swagger)
+8. Add image optimization/resizing
 
 ## Support
 
