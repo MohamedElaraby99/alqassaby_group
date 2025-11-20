@@ -10,6 +10,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getSpaceficProduct } from '@/store/productDetailsSlice'
 import { AppDispatch, RootState } from '@/store/store'
+import { getImageUrl } from '../../../utils/imageUtils'
 
 
 export default function ProductDetailPage() {
@@ -85,9 +86,10 @@ export default function ProductDetailPage() {
             {/* Product Image */}
             <div className="relative h-96 md:h-[500px] rounded-3xl overflow-hidden shadow-2xl">
               <Image
-                src={product.image}
+                src={getImageUrl(product.image)}
                 alt={product.name}
                 fill
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover"
               />
               <div className="absolute top-6 right-6 bg-white px-6 py-3 rounded-full shadow-lg">

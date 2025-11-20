@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FaArrowRight } from 'react-icons/fa'
+import { getImageUrl } from '../utils/imageUtils'
 
 interface ProductCardProps {
   title: string
@@ -31,9 +32,10 @@ export default function ProductCard({
       {/* Image Container with Overlay */}
       <div className="relative  w-full h-72 overflow-hidden">
         <Image
-          src={image  }
+          src={getImageUrl(image)}
           alt={title}
           fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover transition-transform duration-500 group-hover:scale-110"
         />
         {/* Gradient Overlay */}

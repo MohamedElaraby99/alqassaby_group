@@ -9,6 +9,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/store/store'
 import { getProducts } from '@/store/productsSlice'
+import { getImageUrl } from '../../utils/imageUtils'
 
 export default function ProductsPage({ params }: { params: { lang: string } }) {
   const { lang } = params
@@ -24,7 +25,7 @@ const mappedProducts = products.map((p: any) => ({
   _id: p._id,
   title: lang === 'ar' ? p.name_ar || p.name : p.name,
   description: lang === 'ar' ? p.description_ar || p.description : p.description,
-  image: p.image && p.image.trim() !== '' ? p.image : '/bg12.png', 
+  image: getImageUrl(p.image), 
   link: `/${lang}/products/${p._id}`,
   price: p.price
 }));

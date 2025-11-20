@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/store/store'
 import { useEffect } from 'react'
 import { getBlogById } from '@/store/blogPostSlice'
+import { getImageUrl } from '../../../utils/imageUtils'
 
 
 export default function NewsDetailPage() {
@@ -75,7 +76,7 @@ export default function NewsDetailPage() {
 
             {/* Featured Image */}
             <div className="relative h-[400px] md:h-[600px] rounded-3xl overflow-hidden shadow-2xl mb-12">
-              <Image src={blog.image} alt={blog.title} fill className="object-cover" />
+              <Image src={getImageUrl(blog.image)} alt={blog.title} fill sizes="(max-width: 768px) 100vw, 80vw" className="object-cover" />
             </div>
           </motion.div>
         </div>

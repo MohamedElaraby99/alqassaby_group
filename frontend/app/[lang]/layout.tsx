@@ -36,7 +36,7 @@ export default function LangLayout({ children, params }: Props) {
     return () => clearTimeout(timer)
   }, [pathname])
   return (
-    <html lang={lang} dir={dir}>
+    <html lang={lang} dir={dir} suppressHydrationWarning>
       <body className={cairo.className} suppressHydrationWarning>
         <Provider store={store}>
 

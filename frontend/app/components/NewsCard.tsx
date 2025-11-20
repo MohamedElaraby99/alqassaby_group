@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FaCalendar } from 'react-icons/fa'
+import { getImageUrl } from '../utils/imageUtils'
 
 interface NewsCardProps {
   title: string
@@ -22,9 +23,10 @@ export default function NewsCard({ title, excerpt, image, date, link }: NewsCard
     >
       <div className="relative h-56 overflow-hidden">
         <Image
-          src={image}
+          src={getImageUrl(image)}
           alt={title}
           fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover transition-transform duration-300 hover:scale-110"
         />
       </div>
