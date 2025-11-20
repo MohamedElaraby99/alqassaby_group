@@ -9,6 +9,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllBlogs } from '@/store/blogsSlice' 
 import { RootState, AppDispatch } from '@/store/store'
+import { getImageUrl } from '../../utils/imageUtils'
 
 export default function NewsPage({ params }: { params: { lang: string } }) {
   const { lang } = params
@@ -103,7 +104,7 @@ export default function NewsPage({ params }: { params: { lang: string } }) {
                   <NewsCard
                     title={blog.title}
                     excerpt={blog.excerpt || ''}
-                    image={blog.image || '/bg12.png'}
+                    image={getImageUrl(blog.image)}
                     date={new Date(blog.createdAt).toLocaleDateString(lang === 'ar' ? 'ar-EG' : 'en-US', {
                       day: 'numeric',
                       month: 'long',
