@@ -5,6 +5,38 @@ const productController = require('../controllers/productController');
 const validate = require('../middleware/validate');
 const upload = require('../middleware/upload');
 
+// Middleware to parse JSON strings in specifications field
+const parseSpecifications = (req, res, next) => {
+  if (req.body.specifications) {
+    // If specifications is a string (JSON), parse it
+    if (typeof req.body.specifications === 'string') {
+      try {
+        const parsed = JSON.parse(req.body.specifications);
+        // Only replace if it's a valid object and not empty
+        if (typeof parsed === 'object' && parsed !== null && !Array.isArray(parsed)) {
+          if (Object.keys(parsed).length > 0) {
+            req.body.specifications = parsed;
+          } else {
+            // Remove empty specifications
+            delete req.body.specifications;
+          }
+        } else {
+          delete req.body.specifications;
+        }
+      } catch (e) {
+        // If parsing fails, remove it (invalid JSON)
+        delete req.body.specifications;
+      }
+    } else if (typeof req.body.specifications === 'object' && req.body.specifications !== null) {
+      // If it's already an object but empty, remove it
+      if (Object.keys(req.body.specifications).length === 0) {
+        delete req.body.specifications;
+      }
+    }
+  }
+  next();
+};
+
 // Validation rules
 const productValidation = [
   body('name').trim().notEmpty().withMessage('Product name is required')
@@ -31,10 +63,10 @@ router.get('/featured', productController.getFeaturedProducts);
 router.get('/:id', productController.getProductById);
 
 // POST create new product (with optional file upload)
-router.post('/', upload.single('image'), productValidation, validate, productController.createProduct);
+router.post('/', upload.single('image'), parseSpecifications, productValidation, validate, productController.createProduct);
 
 // PUT update product (with optional file upload)
-router.put('/:id', upload.single('image'), productValidation, validate, productController.updateProduct);
+router.put('/:id', upload.single('image'), parseSpecifications, productValidation, validate, productController.updateProduct);
 
 // PATCH toggle featured status
 router.patch('/:id/featured', productController.toggleFeatured);
