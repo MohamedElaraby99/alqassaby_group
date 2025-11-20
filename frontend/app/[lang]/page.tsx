@@ -9,6 +9,7 @@ import ServiceCard from '../components/ServiceCard'
 import NewsCard from '../components/NewsCard'
 import CompanyCard from '../components/CompanyCard'
 import { motion } from 'framer-motion'
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 // import { FiZap , FiAward , FiShield , TrendingUp  } from 'react-icons/fi'
 // import { Egg, Feather, Leaf, HeartPulse } from "lucide-react"; // Uncomment when needed
@@ -646,21 +647,39 @@ export default function Home({ params }: { params: { lang: string } }) {
       <section className="py-20 bg-gra">
         <div className="container w-[90%] mx-auto  px-4">
           {/* Section Header */}
-          <div className="flex justify-between items-end mb-12">
-            <div>
-              <p className="text-2xl md:text-3xl font-bold text-[#a01623] leading-tight mb-2 inline-block">
-                {lang === 'ar' ? 'مدونتنا' : 'Our Blog'}
-              </p>
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-800">
-                {lang === 'ar' 
-                  ? 'اقرأ أحدث مدوناتنا'
-                  : 'Read Our Latest Blog'}
-                <br />
-                {lang === 'ar' ? 'ومقالاتنا' : '& Article Post'}
-              </h2>
-            </div>
-           
+         {/* Section Header */}
+        <div className="flex justify-between items-center mb-12">
+
+          {/* Titles */}
+          <div>
+            <p className="text-2xl md:text-3xl font-bold text-[#a01623] leading-tight mb-2">
+              {lang === "ar" ? "مدونتنا" : "Our Blog"}
+            </p>
+
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 leading-tight">
+              {lang === "ar" ? "اقرأ أحدث مدوناتنا" : "Read Our Latest Blog"}
+              <br />
+              {lang === "ar" ? "ومقالاتنا" : "& Article Post"}
+            </h2>
           </div>
+
+          {/* Arrows */}
+          <div className="flex items-center gap-3">
+            <button
+              className="w-12 h-12 rounded border-2 border-[#a01623] flex items-center justify-center text-[#a01623] hover:bg-[#a01623] hover:text-white transition"
+            >
+              {lang === "ar" ? <ChevronRight size={25} /> : <ChevronLeft size={25} />}
+            </button>
+
+            <button
+              className="w-12 h-12 rounded border border-2 border-[#a01623] flex items-center justify-center text-[#a01623] hover:bg-[#a01623] hover:text-white transition"
+            >
+              {lang === "ar" ? <ChevronLeft size={25} /> : <ChevronRight size={25} />}
+            </button>
+          </div>
+        </div>
+
+    
 
           {/* Blog Cards Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
