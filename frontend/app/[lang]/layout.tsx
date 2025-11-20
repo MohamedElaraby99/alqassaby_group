@@ -37,7 +37,7 @@ export default function LangLayout({ children, params }: Props) {
   }, [pathname])
   return (
     <html lang={lang} dir={dir}>
-      <body className={cairo.className}>
+      <body className={cairo.className} suppressHydrationWarning>
         <Provider store={store}>
 
         {loading && <LoadingIndicator />}  
