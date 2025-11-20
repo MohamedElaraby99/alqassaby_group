@@ -42,7 +42,7 @@ const blogDetailsSlice = createSlice({
       })
       .addCase(getBlogById.fulfilled, (state, action) => {
         state.loading = false;
-        state.blog = action.payload;
+        state.blog = action.payload.data || action.payload;
       })
       .addCase(getBlogById.rejected, (state, action) => {
         state.loading = false;

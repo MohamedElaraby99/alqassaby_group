@@ -56,18 +56,28 @@ export default function NewsDetailPage() {
 
             {/* Meta */}
             <div className="flex flex-wrap items-center gap-6 text-white/90 mb-8">
-              <div className="flex items-center gap-2">
-                <FaCalendar className="text-white" />
-                <span>{new Date(blog.createdAt).toLocaleDateString()}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <FaUser className="text-white" />
-                <span>{blog.author}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <FaTag className="text-white" />
-                <span>{blog.category}</span>
-              </div>
+              {blog.createdAt && !isNaN(new Date(blog.createdAt).getTime()) && (
+                <div className="flex items-center gap-2">
+                  <FaCalendar className="text-white" />
+                  <span>{new Date(blog.createdAt).toLocaleDateString(lang === 'ar' ? 'ar-EG' : 'en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  })}</span>
+                </div>
+              )}
+              {blog.author && (
+                <div className="flex items-center gap-2">
+                  <FaUser className="text-white" />
+                  <span>{blog.author}</span>
+                </div>
+              )}
+              {blog.category && (
+                <div className="flex items-center gap-2">
+                  <FaTag className="text-white" />
+                  <span>{blog.category}</span>
+                </div>
+              )}
               <button className="flex items-center gap-2 hover:text-white transition-colors">
                 <FaShareAlt />
                 <span>{lang === 'ar' ? 'مشاركة' : 'Share'}</span>
@@ -89,10 +99,16 @@ export default function NewsDetailPage() {
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="prose prose-lg max-w-none">
 
               {/* Excerpt */}
-              <p className= 'text-black '><strong>Excerpt:</strong> {blog.excerpt}</p>
+              {blog.excerpt && (
+                <p className="text-black mb-4">
+                  <strong>{lang === 'ar' ? 'ملخص:' : 'Excerpt:'}</strong> {blog.excerpt}
+                </p>
+              )}
 
               {/* Content */}
-              <p>{blog.content}</p>
+              <div className="text-gray-700 leading-relaxed whitespace-pre-line">
+                {blog.content || (lang === 'ar' ? 'لا يوجد محتوى' : 'No content available')}
+              </div>
 
               {/* Tags */}
               {blog.tags && blog.tags.length > 0 && (
@@ -104,12 +120,25 @@ export default function NewsDetailPage() {
               )}
 
               {/* Additional Info */}
-              <div className="mt-6 text-gray-600">
-                <p><strong>Published:</strong> {blog.published ? 'Yes' : 'No'}</p>
-                <p><strong>Featured:</strong> {blog.featured ? 'Yes' : 'No'}</p>
-                <p><strong>Slug:</strong> {blog.slug}</p>
-                <p><strong>Views:</strong> {blog.views}</p>
-                <p><strong>Updated At:</strong> {new Date(blog.updatedAt).toLocaleDateString()}</p>
+              <div className="mt-6 text-gray-600 text-sm border-t pt-4">
+                {blog.excerpt !== undefined && (
+                  <p><strong>{lang === 'ar' ? 'ملخص:' : 'Excerpt:'}</strong> {blog.excerpt || (lang === 'ar' ? 'غير متوفر' : 'Not available')}</p>
+                )}
+                <p><strong>{lang === 'ar' ? 'نُشر:' : 'Published:'}</strong> {blog.published !== undefined ? (blog.published ? (lang === 'ar' ? 'نعم' : 'Yes') : (lang === 'ar' ? 'لا' : 'No')) : (lang === 'ar' ? 'غير محدد' : 'Not specified')}</p>
+                <p><strong>{lang === 'ar' ? 'مميز:' : 'Featured:'}</strong> {blog.featured !== undefined ? (blog.featured ? (lang === 'ar' ? 'نعم' : 'Yes') : (lang === 'ar' ? 'لا' : 'No')) : (lang === 'ar' ? 'غير محدد' : 'Not specified')}</p>
+                {blog.slug !== undefined && (
+                  <p><strong>{lang === 'ar' ? 'الرابط:' : 'Slug:'}</strong> {blog.slug || (lang === 'ar' ? 'غير متوفر' : 'Not available')}</p>
+                )}
+                <p><strong>{lang === 'ar' ? 'المشاهدات:' : 'Views:'}</strong> {blog.views !== undefined && blog.views !== null ? blog.views : 0}</p>
+                {blog.updatedAt && !isNaN(new Date(blog.updatedAt).getTime()) ? (
+                  <p><strong>{lang === 'ar' ? 'آخر تحديث:' : 'Updated At:'}</strong> {new Date(blog.updatedAt).toLocaleDateString(lang === 'ar' ? 'ar-EG' : 'en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  })}</p>
+                ) : (
+                  <p><strong>{lang === 'ar' ? 'آخر تحديث:' : 'Updated At:'}</strong> {lang === 'ar' ? 'غير متوفر' : 'Not available'}</p>
+                )}
               </div>
             </motion.div>
 
