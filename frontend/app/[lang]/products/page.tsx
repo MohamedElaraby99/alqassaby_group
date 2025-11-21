@@ -18,18 +18,17 @@ export default function ProductsPage({ params }: { params: { lang: string } }) {
   const { products, loading } = useSelector((state: RootState) => state.products);
 
   useEffect(() => {
-    dispatch(getProducts()); 
+    dispatch(getProducts());
   }, [dispatch]);
 
-const mappedProducts = products.map((p: any) => ({
-  _id: p._id,
-  title: lang === 'ar' ? p.name_ar || p.name : p.name,
-  description: lang === 'ar' ? p.description_ar || p.description : p.description,
-  image: getImageUrl(p.image), 
-  link: `/${lang}/products/${p._id}`,
-  price: p.price
-}));
-
+  const mappedProducts = products.map((p: any) => ({
+    _id: p._id,
+    title: lang === 'ar' ? p.name_ar || p.name : p.name,
+    description: lang === 'ar' ? p.description_ar || p.description : p.description,
+    image: getImageUrl(p.image),
+    link: `/products/${p._id}`,  
+    price: p.price
+  }));
 
   if (loading) {
     return <p className="text-center py-20 text-xl">{lang === 'ar' ? 'جاري تحميل المنتجات...' : 'Loading products...'}</p>
@@ -38,7 +37,7 @@ const mappedProducts = products.map((p: any) => ({
   return (
     <main>
       <Header />
-      
+
       {/* Page Header */}
       <section
         className="pt-32 pb-20 relative"

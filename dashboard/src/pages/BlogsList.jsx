@@ -72,183 +72,149 @@ export default function BlogsList() {
   }
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-gray-900">Blogs</h1>
-        <Link
-          to="/blogs/new"
-          className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+   <div className="px-4 md:px-6 lg:px-8 py-6">
+  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+    <h1 className="text-2xl md:text-3xl font-bold text-gray-900">Blogs</h1>
+    <Link
+      to="/blogs/new"
+      className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+    >
+      + Add New Blog
+    </Link>
+  </div>
+
+  {/* Filters */}
+  <div className="bg-white rounded-lg shadow p-4 mb-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Featured</label>
+        <select
+          value={filters.featured}
+          onChange={(e) => { setFilters({ ...filters, featured: e.target.value }); setPage(1); }}
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
         >
-          + Add New Blog
-        </Link>
+          <option value="">All</option>
+          <option value="true">Featured</option>
+          <option value="false">Not Featured</option>
+        </select>
       </div>
 
-      {/* Filters */}
-      <div className="bg-white rounded-lg shadow p-4 mb-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Featured</label>
-            <select
-              value={filters.featured}
-              onChange={(e) => {
-                setFilters({ ...filters, featured: e.target.value });
-                setPage(1);
-              }}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-            >
-              <option value="">All</option>
-              <option value="true">Featured</option>
-              <option value="false">Not Featured</option>
-            </select>
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
-            <input
-              type="text"
-              value={filters.category}
-              onChange={(e) => {
-                setFilters({ ...filters, category: e.target.value });
-                setPage(1);
-              }}
-              placeholder="Filter by category"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Published</label>
-            <select
-              value={filters.published}
-              onChange={(e) => {
-                setFilters({ ...filters, published: e.target.value });
-                setPage(1);
-              }}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-            >
-              <option value="">All</option>
-              <option value="true">Published</option>
-              <option value="false">Draft</option>
-            </select>
-          </div>
-        </div>
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
+        <input
+          type="text"
+          value={filters.category}
+          onChange={(e) => { setFilters({ ...filters, category: e.target.value }); setPage(1); }}
+          placeholder="Filter by category"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+        />
       </div>
 
-      {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-4">
-          {error}
-        </div>
-      )}
-
-      {/* Blogs Table */}
-      <div className="bg-white rounded-lg shadow overflow-hidden">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Image</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Author</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Views</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {blogs.length === 0 ? (
-              <tr>
-                <td colSpan="7" className="px-6 py-4 text-center text-gray-500">
-                  No blogs found
-                </td>
-              </tr>
-            ) : (
-              blogs.map((blog) => (
-                <tr key={blog._id} className="hover:bg-gray-50">
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <img
-                      src={getImageUrl(blog.image)}
-                      alt={blog.title}
-                      className="h-12 w-12 object-cover rounded"
-                      onError={(e) => {
-                        e.target.src = 'https://via.placeholder.com/150';
-                      }}
-                    />
-                  </td>
-                  <td className="px-6 py-4">
-                    <div className="text-sm font-medium text-gray-900">{blog.title}</div>
-                    <div className="text-sm text-gray-500 truncate max-w-xs">{blog.excerpt}</div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{blog.author}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{blog.category}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{blog.views || 0}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex flex-col gap-1">
-                      {blog.featured && (
-                        <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-                          Featured
-                        </span>
-                      )}
-                      {blog.published ? (
-                        <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                          Published
-                        </span>
-                      ) : (
-                        <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                          Draft
-                        </span>
-                      )}
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                    <div className="flex space-x-2">
-                      <Link
-                        to={`/blogs/edit/${blog._id}`}
-                        className="text-blue-600 hover:text-blue-900"
-                      >
-                        Edit
-                      </Link>
-                      <button
-                        onClick={() => handleToggleFeatured(blog._id)}
-                        className="text-yellow-600 hover:text-yellow-900"
-                      >
-                        {blog.featured ? 'Unfeature' : 'Feature'}
-                      </button>
-                      <button
-                        onClick={() => handleDelete(blog._id)}
-                        className="text-red-600 hover:text-red-900"
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))
-            )}
-          </tbody>
-        </table>
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Published</label>
+        <select
+          value={filters.published}
+          onChange={(e) => { setFilters({ ...filters, published: e.target.value }); setPage(1); }}
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+        >
+          <option value="">All</option>
+          <option value="true">Published</option>
+          <option value="false">Draft</option>
+        </select>
       </div>
-
-      {/* Pagination */}
-      {totalPages > 1 && (
-        <div className="mt-6 flex justify-center items-center space-x-2">
-          <button
-            onClick={() => setPage(p => Math.max(1, p - 1))}
-            disabled={page === 1}
-            className="px-4 py-2 border border-gray-300 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
-          >
-            Previous
-          </button>
-          <span className="px-4 py-2 text-sm text-gray-700">
-            Page {page} of {totalPages}
-          </span>
-          <button
-            onClick={() => setPage(p => Math.min(totalPages, p + 1))}
-            disabled={page === totalPages}
-            className="px-4 py-2 border border-gray-300 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
-          >
-            Next
-          </button>
-        </div>
-      )}
     </div>
+  </div>
+
+  {/* Blogs Table */}
+  <div className="bg-white rounded-lg shadow overflow-x-auto">
+    <table className="min-w-full divide-y divide-gray-200">
+      <thead className="bg-gray-50">
+        <tr>
+          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Image</th>
+          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
+          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Author</th>
+          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
+          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Views</th>
+          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+        </tr>
+      </thead>
+      <tbody className="bg-white divide-y divide-gray-200">
+        {blogs.length === 0 ? (
+          <tr>
+            <td colSpan="7" className="px-4 py-4 text-center text-gray-500">
+              No blogs found
+            </td>
+          </tr>
+        ) : (
+          blogs.map(blog => (
+            <tr key={blog._id} className="hover:bg-gray-50">
+              <td className="px-4 py-2 whitespace-nowrap">
+                <img src={getImageUrl(blog.image)} alt={blog.title} className="h-12 w-12 object-cover rounded"/>
+              </td>
+              <td className="px-4 py-2">
+                <div className="text-sm font-medium text-gray-900">{blog.title}</div>
+                <div className="text-sm text-gray-500 truncate max-w-xs">{blog.excerpt}</div>
+              </td>
+              <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-500">{blog.author}</td>
+              <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-500">{blog.category}</td>
+              <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-500">{blog.views || 0}</td>
+              <td className="px-4 py-2 whitespace-nowrap">
+                <div className="flex flex-col gap-1">
+                  {blog.featured && (
+                    <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                      Featured
+                    </span>
+                  )}
+                  {blog.published ? (
+                    <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                      Published
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                      Draft
+                    </span>
+                  )}
+                </div>
+              </td>
+              <td className="px-4 py-2 whitespace-nowrap text-sm font-medium">
+                <div className="flex flex-col sm:flex-row sm:space-x-2 gap-2">
+                  <Link to={`/blogs/edit/${blog._id}`} className="text-blue-600 hover:text-blue-900">Edit</Link>
+                  <button onClick={() => handleToggleFeatured(blog._id)} className="text-yellow-600 hover:text-yellow-900">
+                    {blog.featured ? 'Unfeature' : 'Feature'}
+                  </button>
+                  <button onClick={() => handleDelete(blog._id)} className="text-red-600 hover:text-red-900">Delete</button>
+                </div>
+              </td>
+            </tr>
+          ))
+        )}
+      </tbody>
+    </table>
+  </div>
+
+  {/* Pagination */}
+  {totalPages > 1 && (
+    <div className="mt-6 flex flex-col sm:flex-row justify-center items-center gap-2">
+      <button
+        onClick={() => setPage(p => Math.max(1, p - 1))}
+        disabled={page === 1}
+        className="px-4 py-2 border border-gray-300 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+      >
+        Previous
+      </button>
+      <span className="px-4 py-2 text-sm text-gray-700">Page {page} of {totalPages}</span>
+      <button
+        onClick={() => setPage(p => Math.min(totalPages, p + 1))}
+        disabled={page === totalPages}
+        className="px-4 py-2 border border-gray-300 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+      >
+        Next
+      </button>
+    </div>
+  )}
+</div>
+
   );
 }
 

@@ -5,25 +5,107 @@ import ProductForm from './pages/ProductForm';
 import BlogsList from './pages/BlogsList';
 import BlogForm from './pages/BlogForm';
 import DashboardHome from './pages/DashboardHome';
+import RegisterForm from './pages/RegisterForm';
+import LoginForm from './pages/LoginForm';
+
+import AuthContextProvider from './context/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute/ProutectedRoute';
 
 function App() {
   return (
-    <Router>
-      <Layout>
+    <AuthContextProvider>
+      <Router>
+
         <Routes>
-          <Route path="/" element={<DashboardHome />} />
-          <Route path="/products" element={<ProductsList />} />
-          <Route path="/products/new" element={<ProductForm />} />
-          <Route path="/products/edit/:id" element={<ProductForm />} />
-          <Route path="/blogs" element={<BlogsList />} />
-          <Route path="/blogs/new" element={<BlogForm />} />
-          <Route path="/blogs/edit/:id" element={<BlogForm />} />
+
+         
+          <Route path="/loginForm" element={<LoginForm />} />
+          <Route path="/registerForm" element={<RegisterForm />} />
+
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <DashboardHome />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/products"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <ProductsList />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/products/new"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <ProductForm />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/products/edit/:id"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <ProductForm />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/blogs"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <BlogsList />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/blogs/new"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <BlogForm />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/blogs/edit/:id"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <BlogForm />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+
+          
           <Route path="*" element={<Navigate to="/" replace />} />
+
         </Routes>
-      </Layout>
-    </Router>
+      </Router>
+    </AuthContextProvider>
   );
 }
 
 export default App;
-

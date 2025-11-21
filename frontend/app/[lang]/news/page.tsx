@@ -92,7 +92,7 @@ export default function NewsPage({ params }: { params: { lang: string } }) {
           {error && <p className="text-center text-xl py-10 text-red-500">{error}</p>}
 
           {!loading && !error && (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2  lg:grid-cols-3 gap-8">
               {blogs.map((blog) => (
                 <motion.div
                   key={blog._id}
