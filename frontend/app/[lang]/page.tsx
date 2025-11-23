@@ -560,11 +560,28 @@ export default function Home({ params }: { params: { lang: string } }) {
       {/* Subsidiary Companies Section */}
       <section className="py-20 w-[90%] mx-auto bg-white">
         <div className="container mx-auto px-4">
-          {/* Section Title */}
+          {/* Main Logo */}
           <motion.div
             initial={{ opacity: 0, y: -20 }} 
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <div className="flex justify-center items-center mb-8">
+              <img
+                src="/logoo.png"
+                alt={lang === 'ar' ? 'مجموعة القصبي' : 'Elkassaby Group'}
+                className="h-24 md:h-32 lg:h-40 w-auto object-contain"
+              />
+            </div>
+          </motion.div>
+
+          {/* Section Title */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }} 
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
             className="text-center mb-16"
           >
