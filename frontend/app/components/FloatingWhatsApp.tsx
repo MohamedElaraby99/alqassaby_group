@@ -12,7 +12,7 @@ type FloatingWhatsAppProps = {
   hideOnPaths?: string[]
 }
 
-const DEFAULT_PHONE = '201234567890' // TODO: replace with real number
+const DEFAULT_PHONE = '+201097770117' // TODO: replace with real number
 
 export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({
   phone = DEFAULT_PHONE,

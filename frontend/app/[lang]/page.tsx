@@ -27,7 +27,7 @@ export default function Home({ params }: { params: { lang: string } }) {
       <Hero
         title={lang === 'ar' ? 'أجود أنواع الدواجن مع إنتاجيات كبيرة' : 'The Finest Poultry with High Production'}
         subtitle={lang === 'ar' ? 'نجعل أولوياتنا لتوفير خدمات متنوعة لتلبية احتياجاتك. مجموعة القصبي، اختيارك الأمثل لأفضل أعلاف الدواجن في مصر' : 'We prioritize providing diverse services to meet your needs. Elkassaby Group, your best choice for the finest poultry feed in Egypt'}
-        backgroundImage="/bg.png"
+        backgroundImage="/bg.webp"
         ctaText={lang === 'ar' ? 'تعرف على خدماتنا' : 'Our Services'}
         ctaLink={`/${lang}/services`}
         secondaryCta={{ text: lang === 'ar' ? 'اتصل بنا' : 'Contact Us', link: `/${lang}/contact` }}
@@ -251,7 +251,7 @@ export default function Home({ params }: { params: { lang: string } }) {
             >
               <div className="relative">
                 <img
-                  src="/chicken2.png"
+                  src="/chicken2.webp"
                   alt={lang === 'ar' ? 'دجاجة' : 'Chicken'}
                   className="w-full max-w-md h-auto object-contain drop-shadow-2xl"
                   style={{ 
@@ -398,50 +398,55 @@ export default function Home({ params }: { params: { lang: string } }) {
 
       {/* Poultry Rearing Approach Section */}
      
-     <section className="py-20 w-[95%] mx-auto">
-  <div className="container mx-auto px-4">
+     <section className="py-8 sm:py-12 md:py-16 lg:py-20 w-full sm:w-[95%] mx-auto px-4 sm:px-0">
+  <div className="container mx-auto">
     <motion.div
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
       viewport={{ once: true }}
-      className="relative h-[650px] sm:h-[600px] md:h-[500px] lg:h-[550px] rounded-3xl overflow-hidden shadow-2xl"
+      className="relative min-h-[500px] sm:h-[550px] md:h-[500px] lg:h-[550px] xl:h-[600px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl"
     >
       {/* Background Image */}
       <img
-        src="/work_bg.png"
+        src="/work_bg.webp"
         alt={lang === 'ar' ? 'طبيب بيطري دواجن' : 'Poultry Veterinarian'}
         className="absolute inset-0 w-full h-full object-cover"
       />
 
+      {/* Overlay for better text readability on mobile */}
+      <div className="absolute inset-0 bg-black/30 sm:bg-black/20"></div>
+
       {/* Text Content */}
       <div
-        className={`absolute inset-0 flex items-center p-6 sm:p-8 lg:p-16 ${
-          lang === 'ar' ? 'justify-start text-right' : 'justify-end text-left'
+        className={`absolute inset-0 flex items-center p-4 sm:p-6 md:p-8 lg:p-12 xl:p-16 ${
+          lang === 'ar' 
+            ? 'justify-start sm:justify-start text-right' 
+            : 'justify-start sm:justify-end text-left'
         }`}
       >
         <motion.div
-          initial={{ opacity: 0, x: 50 }}
+          initial={{ opacity: 0, x: lang === 'ar' ? -50 : 50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: true }}
-          className="relative z-10 w-full md:w-[70%] lg:w-[50%] max-w-2xl"
+          className="relative z-10 w-full sm:w-[90%] md:w-[75%] lg:w-[60%] xl:w-[50%] max-w-2xl"
         >
           {/* Small Title */}
-          <div className="mb-4 sm:mb-6 flex justify-right">
+          <div className={`mb-3 sm:mb-4 md:mb-6 flex ${lang === 'ar' ? 'justify-start' : 'justify-start'}`}>
             <span
-              className={`text-white font-semibold text-base sm:text-lg tracking-wider flex items-center gap-3 ${
+              className={`text-white font-semibold text-sm sm:text-base md:text-lg tracking-wider flex items-center gap-2 sm:gap-3 ${
                 lang === 'ar' ? 'flex-row-reverse' : ''
               }`}
             >
-              <span className="h-px w-10 sm:w-12 bg-white rounded-full"></span>
+              <span className="h-px w-8 sm:w-10 md:w-12 bg-white rounded-full"></span>
               {lang === 'ar' ? 'ما نقدمه' : 'What We Do'}
             </span>
           </div>
 
           {/* Main Title */}
           <h2
-            className={`text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4 sm:mb-6 leading-tight ${
+            className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4 md:mb-6 leading-tight ${
               lang === 'ar' ? 'text-right' : 'text-left'
             }`}
           >
@@ -452,7 +457,7 @@ export default function Home({ params }: { params: { lang: string } }) {
 
           {/* Description */}
           <p
-            className={`text-white/90 text-base sm:text-lg leading-relaxed mb-6 sm:mb-8 ${
+            className={`text-white/95 sm:text-white/90 text-sm sm:text-base md:text-lg leading-relaxed mb-4 sm:mb-6 md:mb-8 ${
               lang === 'ar' ? 'text-right' : 'text-left'
             }`}
           >
@@ -462,81 +467,85 @@ export default function Home({ params }: { params: { lang: string } }) {
           </p>
 
           {/* Statistics */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
 
             {/* Stat 1 */}
-            <div className="flex items-center gap-4">
-              <div className="relative w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0">
-                <svg className="w-full h-full transform -rotate-90">
+            <div className="flex items-center gap-3 sm:gap-4">
+              <div className="relative w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 flex-shrink-0">
+                <svg className="w-full h-full transform -rotate-90" viewBox="0 0 80 80">
                   <circle
                     cx="40"
                     cy="40"
                     r="36"
                     stroke="rgba(255,255,255,0.2)"
-                    strokeWidth="6"
+                    strokeWidth="5"
                     fill="none"
+                    className="sm:stroke-[6]"
                   />
                   <circle
                     cx="40"
                     cy="40"
                     r="36"
                     stroke="white"
-                    strokeWidth="6"
+                    strokeWidth="5"
                     fill="none"
                     strokeDasharray="226"
                     strokeDashoffset="0"
                     strokeLinecap="round"
+                    className="sm:stroke-[6]"
                   />
                 </svg>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-lg sm:text-xl font-bold text-white">100%</span>
+                  <span className="text-base sm:text-lg md:text-xl font-bold text-white">100%</span>
                 </div>
               </div>
 
-              <div>
-                <h4 className="text-white font-bold text-base sm:text-lg">
+              <div className="flex-1 min-w-0">
+                <h4 className="text-white font-bold text-sm sm:text-base md:text-lg truncate sm:whitespace-normal">
                   {lang === 'ar' ? 'خبرة في تربية الكتاكيت' : 'Chick Rearing Expertise'}
                 </h4>
-                <p className="text-white/80 text-sm">
+                <p className="text-white/80 text-xs sm:text-sm">
                   {lang === 'ar' ? 'معايير علمية دقيقة' : 'Scientific Standards'}
                 </p>
               </div>
             </div>
 
             {/* Stat 2 */}
-            <div className="flex items-center gap-4">
-              <div className="relative w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0">
-                <svg className="w-full h-full transform -rotate-90">
+            <div className="flex items-center gap-3 sm:gap-4">
+              <div className="relative w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 flex-shrink-0">
+                <svg className="w-full h-full transform -rotate-90" viewBox="0 0 80 80">
                   <circle
                     cx="40"
                     cy="40"
                     r="36"
                     stroke="rgba(255,255,255,0.2)"
-                    strokeWidth="6"
+                    strokeWidth="5"
                     fill="none"
+                    className="sm:stroke-[6]"
                   />
                   <circle
                     cx="40"
                     cy="40"
                     r="36"
                     stroke="white"
-                    strokeWidth="6"
+                    strokeWidth="5"
                     fill="none"
                     strokeDasharray="226"
                     strokeDashoffset="0"
                     strokeLinecap="round"
+                    className="sm:stroke-[6]"
                   />
                 </svg>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-lg sm:text-xl font-bold text-white">100%</span>
+                  <span className="text-base sm:text-lg md:text-xl font-bold text-white">100%</span>
                 </div>
               </div>
 
-              <div>
-                <h4 className="text-white font-bold text-base sm:text-lg">
+              <div className="flex-1 min-w-0">
+                <h4 className="text-white font-bold text-sm sm:text-base md:text-lg truncate sm:whitespace-normal">
                   {lang === 'ar' ? 'تقنيات حديثة' : 'Modern Techniques'}
                 </h4>
-                <p className="text-white/80 text-sm">
+                <p className="text-white/80 text-xs sm:text-sm">
                   {lang === 'ar' ? 'لضمان أفضل نتائج' : 'For Optimal Results'}
                 </p>
               </div>
@@ -551,12 +560,6 @@ export default function Home({ params }: { params: { lang: string } }) {
  
 
 
-
-      
-
-
-
-
       {/* Subsidiary Companies Section */}
       <section className="py-20 w-[90%] mx-auto bg-white">
         <div className="container mx-auto px-4">
@@ -568,12 +571,44 @@ export default function Home({ params }: { params: { lang: string } }) {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <div className="flex justify-center items-center mb-8">
-              <img
-                src="/logoo.png"
-                alt={lang === 'ar' ? 'مجموعة القصبي' : 'Elkassaby Group'}
-                className="h-24 md:h-32 lg:h-40 w-auto object-contain"
-              />
+            <div className="flex justify-center items-center mb-8 text-[#a01623]">
+            <span className="text-[#a01623] text-2xl font-bold "> Elkassaby Group</span>
+            <svg
+              id="Layer_2"
+              data-name="Layer 2"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 395.77 81.79"
+              className={`h-16 sm:h-20 md:h-24 lg:h-32 w-auto transition-colors duration-300 -mr-[242px] sm:-mr-4 md:-mr-[-500px] lg:-mr-[500px]`}
+            >
+              <g>
+                <path 
+                  className="transition-colors duration-300" 
+                  fill="#a01623"
+                  d="M61.82,49.15c.98.8,1.45,1.87.65,3.01l-11.74,11.92-17.51-16.96c-.61-.23-.72-.07-1.2.26-1.53,1.08-4.08,3.84-5.53,5.26-1.24,1.21-2.44,2.83-3.87,3.81-.67.06-5.63-5.79-6.81-6.54-.51-.32-.82-.46-1.37-.07-.46.78-.44,1.77.18,2.45l12.64,12.53.92-.19,8.5-8.51,1.05-.55,9.81,9.59-.05,1.99-14.76,14.64c-.65-.09-.74-.74-1.19-1.14-8.04-7.24-15.8-15.6-23.4-23.32-1.33-1.35-3.96-3.3-4.95-4.75-.65-.95-.88-2.13-.09-3.09l29.51-29.28c.18-.16.29-.09.48,0,.32.16,2.65,2.63,2.65,2.89L7.32,51.69c-.87.89-.85,2.49,0,3.36l25.43,25.14.61-.36c2.51-3.2,7.17-6.29,9.44-9.49.87-1.23,1.04-2.22.25-3.56l-6.93-6.96c-.27-.24-.61-.29-.96-.24-1.04.15-7.87,8-9.36,9.12-.27.25-.57.29-.92.19-.52-.15-6.82-6.52-7.76-7.47-1.4-1.41-5.6-5.32-6.43-6.63-.72-1.14-.41-2.19.35-3.22s4.45-4.71,5.51-5.51c.31-.24.66-.6,1.09-.59.94.03,6.46,6.99,7.63,6.89,1.05-.09,1.24-1.57,1.13-2.42-.05-.22-2.44-1.06-2.4-2.2,0-.32,2.72-3.11,3.04-3.2.91-.25,1.48,2.36,2.65,2.56,1.45.24,2.22-1.03,1.52-2.24-1.13-1.47-5.73-4.9-5.89-6.54-.03-.36.1-.66.23-.98l12.03-12.19c.29-.05,1.14.69,1.41.92,1.88,1.66,4.41,4.24,6.12,6.1.25.27.75.81.67,1.18l-9.28,9.67.06.79,16.11,16.04c.3.05.55,0,.82-.13.29-.14,4.22-4.08,4.56-4.55.73-.99,1.35-4.1-.24-3.35-.84.39-4.22,4.73-4.81,4.57l-7.18-6.97c-.33-.51-.62-1.15-.3-1.73l7.39-7.26.72.24,6.35,6.36c1.33.62,2.24-1.49,1.19-2.4l-27.34-27.29-1.08-.58-1.08.58L3.02,45.96c-1.1.89-3.1-1.75-3.01-2.74L32.97,10.28l32.14,31.86c1.79,2.38-3.65,5.04-3.93,6.59-.11.61.57.37.64.43ZM35.2,29.47c-.91.26-4.51,4.84-5.7,5.58-.36.46-.29,1.06-.12,1.58.14.42,4.11,4.49,4.68,4.9.88.64,1.3.64,2.18,0,.76-.55,3.85-3.66,4.43-4.43s.8-1.2.49-2.17c-.11-.35-4.6-5.01-5.04-5.27-.34-.2-.49-.31-.92-.19ZM54.7,52.64c.52.36,2.05-1.29,2.1-1.82.1-1.02-4.02-4.15-4.76-5.22-.25-.37-.21-1.04-.45-1.22-1.03-.75-1.96.29-1.96,1.45,0,2.55,4.57,4.16,5.07,6.81Z"
+                />
+                <path 
+                  className="transition-colors duration-300" 
+                  fill="#a01623"
+                  d="M61.8,28.8c.59.6,3.62,3.73,3.68,4.12.19,1.08-1.72,3.64-2.88,3.1L33.72,6.92c-1.9-.96-2.5,1.01-3.49,2.06L3.02,35.91c-1.25.9-3.24-2.07-2.91-3.13L32.75,0l29.06,28.8Z"
+                />
+                <path 
+                  className="transition-colors duration-300" 
+                  fill="#a01623"
+                  d="M45.27,44.21c-.15.19-2.25,1.96-2.4,1.95-.69-.44-3.13-2.11-2.99-2.91.1-.59,2.71-3.04,3.19-3.04,1.05.74,3.28,2.69,2.21,4.01Z"
+                />
+                <path 
+                  className="transition-colors duration-300" 
+                  fill="#a01623"
+                  d="M47.43,35.45c1-.28,3.42,2.18,3.43,2.96,0,.63-2.33,2.39-3,2.67-.56,0-2.5-2.06-2.71-2.71-.05-.52,1.8-2.79,2.28-2.92Z"
+                />
+                <path 
+                  className="transition-colors duration-300" 
+                  fill="#a01623"
+                  d="M28.96,54.12c.86-.17,2.97,1.97,2.97,2.72,0,.57-1.97,2.9-2.59,2.96-.79-.38-2.88-2.16-2.97-2.97-.07-.65,1.96-2.58,2.59-2.71Z"
+                />
+              </g>
+            </svg>
+              
             </div>
           </motion.div>
 
