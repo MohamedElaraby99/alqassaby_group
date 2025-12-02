@@ -156,9 +156,8 @@ export default function Footer() {
                 <li className="flex items-start gap-3">
                   <FaPhone className="text-secondary mt-1" />
                   <div>
-                    <a href="tel:+20502100126" className="block hover:text-secondary">+20 50 2100126</a>
-                    <a href="tel:01097770109" className="block hover:text-secondary">01097770109</a>
-                    <a href="tel:01097770117" className="block hover:text-secondary">01097770117</a>
+                    <a href="tel:+201097770117" className="block hover:text-secondary">+201097770117</a>
+                    <a href="tel:+201097770109" className="block hover:text-secondary">+201097770109</a>
                   </div>
                 </li>
 
@@ -172,6 +171,46 @@ export default function Footer() {
               </ul>
             </div>
 
+          </div>
+        </div>
+
+        {/* Location Map Section */}
+        <div className="border-t border-gray-800 py-8">
+          <div className="container mx-auto px-4">
+            <h3 className="text-2xl font-bold mb-6 text-center">
+              {locale === "ar" ? "موقعنا" : "Our Location"}
+            </h3>
+            <div className="w-full h-64 md:h-80 lg:h-96 rounded-lg overflow-hidden shadow-xl">
+              <iframe
+                src={`https://www.google.com/maps?q=${encodeURIComponent(
+                  "Mansoura, Old Toreil, Elsharef Alradi Street, Elkassaby Building"
+                )}&output=embed`}
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="w-full h-full"
+                title={locale === "ar" ? "موقع مجموعة القصبي" : "Elkassaby Group Location"}
+              ></iframe>
+            </div>
+            <div className="mt-4 text-center">
+              <p className="text-gray-300">
+                <FaMapMarkerAlt className="inline mr-2 text-[#a01623]" />
+                {locale === "ar"
+                  ? "المنصورة، توريل القديمة، شارع الشريف الراضي، عمارة القصبي"
+                  : "Mansoura, Old Toreil, Elsharef Alradi Street, Elkassaby Building"}
+              </p>
+              <a
+                href="https://maps.google.com/?q=Mansoura,+Old+Toreil,+Elsharef+Alradi+Street,+Elkassaby+Building"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#a01623] hover:text-[#8c1320] mt-2 inline-block transition-colors"
+              >
+                {locale === "ar" ? "افتح في خرائط جوجل" : "Open in Google Maps"}
+              </a>
+            </div>
           </div>
         </div>
 

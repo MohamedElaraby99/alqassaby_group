@@ -734,54 +734,58 @@ export default function Home({ params }: { params: { lang: string } }) {
     
 
           {/* Blog Cards Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {/* Blog Card 1 */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               viewport={{ once: true }}
-              className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
+              className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col"
             >
+              {/* Text Content Section */}
+              <div className="p-6 flex-1 flex flex-col">
+                <h3 className={`text-2xl font-bold text-black mb-3 leading-tight ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
+                  {lang === 'ar'
+                    ? 'الدليل الشامل لتربية دجاج سعيد وصحي'
+                    : 'The Ultimate Guide to Raising Happy and Healthy Chickens'}
+                </h3>
+                <div className={`flex items-center gap-4 text-sm text-gray-500 mb-4 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
+                  <span className="flex items-center gap-1.5">
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
+                    </svg>
+                    {lang === 'ar' ? '04/05/2024' : '05/04/2024'}
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
+                    </svg>
+                    10k
+                  </span>
+                </div>
+                <p className={`text-gray-700 text-sm mb-6 line-clamp-3 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
+                  {lang === 'ar'
+                    ? 'اكتشف أفضل الممارسات العلمية لتربية الدجاج بطريقة صحية ومستدامة. تعلم كيفية توفير البيئة المثالية والرعاية المناسبة لضمان نمو صحي...'
+                    : 'Discover the best scientific practices for raising chickens in a healthy and sustainable way. Learn how to provide the ideal environment and proper care to ensure healthy growth...'}
+                </p>
+                <a 
+                  href={`/${lang}/blog/raising-happy-chickens`}
+                  className={`inline-flex items-center gap-2 px-6 py-3 bg-white border-2 border-black text-black font-medium text-sm rounded-lg transition-all duration-300 hover:bg-gray-50 hover:shadow-md mt-auto ${lang === 'ar' ? 'flex-row-reverse' : ''}`}
+                >
+                  <span>{lang === 'ar' ? 'اقرأ المقال' : 'Read Article'}</span>
+                  <svg className={`w-4 h-4 ${lang === 'ar' ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
+              </div>
+              {/* Image Section */}
               <div className="relative h-64 overflow-hidden">
                 <img
                   src="https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?w=600"
                   alt="Poultry"
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute top-4 left-4">
-                  <span className="bg-white px-3 py-1 rounded-full text-sm font-medium text-[#a01623]">
-                    {lang === 'ar' ? 'دواجن' : 'Poultry'}
-                  </span>
-                </div>
-              </div>
-              <div className="p-6  bg-[#a01632] ">
-                <div className="flex items-center gap-4 text-sm text-gray-50 mb-3">
-                  <span className="flex items-center gap-1">
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
-                    </svg>
-                    {lang === 'ar' ? 'مايو 04, 2024' : 'May 04, 2024'}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
-                    </svg>
-                    Admin
-                  </span>
-                </div>
-                <h3 className="text-xl font-bold text-gray-100 mb-4 leading-tight">
-                  {lang === 'ar'
-                    ? 'الدليل الشامل لتربية دجاج سعيد وصحي'
-                    : 'The Ultimate Guide to Raising Happy and Healthy Chickens'}
-                </h3>
-                <a 
-                  href={`/${lang}/blog/raising-happy-chickens`}
-                  className="inline-block px-6 py-2 rounded-full border-2 font-medium transition-all duration-300 hover:bg-[#a01623] hover:text-white"
-                  style={{ borderColor: '#a01623', color: '#a01623' }}
-                >
-                  {lang === 'ar' ? 'اقرأ المزيد' : 'Read More'}
-                </a>
               </div>
             </motion.div>
 
@@ -791,47 +795,51 @@ export default function Home({ params }: { params: { lang: string } }) {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
-              className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
+              className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col"
             >
+              {/* Text Content Section */}
+              <div className="p-6 flex-1 flex flex-col">
+                <h3 className={`text-2xl font-bold text-black mb-3 leading-tight ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
+                  {lang === 'ar'
+                    ? 'طرق إبداعية للاستمتاع بالبيض الطازج من المزرعة'
+                    : 'Creative Ways to Enjoy Farm-Fresh Eggs For Every Poultry Farming'}
+                </h3>
+                <div className={`flex items-center gap-4 text-sm text-gray-500 mb-4 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
+                  <span className="flex items-center gap-1.5">
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
+                    </svg>
+                    {lang === 'ar' ? '04/05/2024' : '05/04/2024'}
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
+                    </svg>
+                    10k
+                  </span>
+                </div>
+                <p className={`text-gray-700 text-sm mb-6 line-clamp-3 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
+                  {lang === 'ar'
+                    ? 'استكشف طرقًا مبتكرة لاستخدام البيض الطازج في وجباتك اليومية. من الوصفات التقليدية إلى الأطباق الحديثة، اكتشف كيف يمكن للبيض أن يكون مكونًا متعدد الاستخدامات...'
+                    : 'Explore innovative ways to use farm-fresh eggs in your daily meals. From traditional recipes to modern dishes, discover how eggs can be a versatile ingredient...'}
+                </p>
+                <a 
+                  href={`/${lang}/blog/farm-fresh-eggs`}
+                  className={`inline-flex items-center gap-2 px-6 py-3 bg-white border-2 border-black text-black font-medium text-sm rounded-lg transition-all duration-300 hover:bg-gray-50 hover:shadow-md mt-auto ${lang === 'ar' ? 'flex-row-reverse' : ''}`}
+                >
+                  <span>{lang === 'ar' ? 'اقرأ المقال' : 'Read Article'}</span>
+                  <svg className={`w-4 h-4 ${lang === 'ar' ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
+              </div>
+              {/* Image Section */}
               <div className="relative h-64 overflow-hidden">
                 <img
                   src='https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?w=600'
                   alt="Chicken"
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute top-4 left-4">
-                  <span className="bg-white px-3 py-1 rounded-full text-sm font-medium text-[#a01623]">
-                    {lang === 'ar' ? 'دجاج' : 'Chicken'}
-                  </span>
-                </div>
-              </div>
-              <div className="p-6 bg-[#a01623]">
-                <div className="flex items-center gap-4 text-sm text-gray-50 mb-3">
-                  <span className="flex items-center gap-1">
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
-                    </svg>
-                    {lang === 'ar' ? 'مايو 04, 2024' : 'May 04, 2024'}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
-                    </svg>
-                    Admin
-                  </span>
-                </div>
-                <h3 className="text-xl font-bold text-gray-100 mb-4 leading-tight">
-                  {lang === 'ar'
-                    ? 'طرق إبداعية للاستمتاع بالبيض الطازج من المزرعة'
-                    : 'Creative Ways to Enjoy Farm-Fresh Eggs For Every Poultry Farming'}
-                </h3>
-                <a 
-                  href={`/${lang}/blog/farm-fresh-eggs`}
-                  className="inline-block px-6 py-2 rounded-full border-2 font-medium transition-all duration-300 hover:bg-[#a01623] hover:text-white"
-                  style={{ borderColor: '#a01623', color: '#a01623' }}
-                >
-                  {lang === 'ar' ? 'اقرأ المزيد' : 'Read More'}
-                </a>
               </div>
             </motion.div>
 
@@ -841,47 +849,51 @@ export default function Home({ params }: { params: { lang: string } }) {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
               viewport={{ once: true }}
-              className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
+              className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col"
             >
+              {/* Text Content Section */}
+              <div className="p-6 flex-1 flex flex-col">
+                <h3 className={`text-2xl font-bold text-black mb-3 leading-tight ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
+                  {lang === 'ar'
+                    ? 'طرق رائعة لتعزيز إنتاجية مزرعة الدواجن الخاصة بك'
+                    : 'Egg-citing Ways to Boost Your Poultry Farm\'s Productivity'}
+                </h3>
+                <div className={`flex items-center gap-4 text-sm text-gray-500 mb-4 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
+                  <span className="flex items-center gap-1.5">
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
+                    </svg>
+                    {lang === 'ar' ? '04/05/2024' : '05/04/2024'}
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
+                    </svg>
+                    10k
+                  </span>
+                </div>
+                <p className={`text-gray-700 text-sm mb-6 line-clamp-3 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
+                  {lang === 'ar'
+                    ? 'تعلم كيفية تحسين إنتاجية مزرعتك من خلال تطبيق أحدث التقنيات والأساليب العلمية. اكتشف استراتيجيات فعالة لزيادة الإنتاج وتحسين جودة المنتجات...'
+                    : 'Learn how to improve your farm\'s productivity by applying the latest techniques and scientific methods. Discover effective strategies to increase production and improve product quality...'}
+                </p>
+                <a 
+                  href={`/${lang}/blog/boost-productivity`}
+                  className={`inline-flex items-center gap-2 px-6 py-3 bg-white border-2 border-black text-black font-medium text-sm rounded-lg transition-all duration-300 hover:bg-gray-50 hover:shadow-md mt-auto ${lang === 'ar' ? 'flex-row-reverse' : ''}`}
+                >
+                  <span>{lang === 'ar' ? 'اقرأ المقال' : 'Read Article'}</span>
+                  <svg className={`w-4 h-4 ${lang === 'ar' ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
+              </div>
+              {/* Image Section */}
               <div className="relative h-64 overflow-hidden">
                 <img
                   src="https://images.unsplash.com/photo-1563281577-a7be47e20db9?w=600"
                   alt="Chicken"
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute top-4 left-4">
-                  <span className="bg-white px-3 py-1 rounded-full text-sm font-medium text-[#a01623]">
-                    {lang === 'ar' ? 'دجاج' : 'Chicken'}
-                  </span>
-                </div>
-              </div>
-              <div className="p-6 bg-[#a01623]">
-                <div className="flex items-center gap-4 text-sm text-gray-50 mb-3">
-                  <span className="flex items-center gap-1">
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
-                    </svg>
-                    {lang === 'ar' ? 'مايو 04, 2024' : 'May 04, 2024'}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
-                    </svg>
-                    Admin
-                  </span>
-                </div>
-                <h3 className="text-xl font-bold text-gray-100 mb-4 leading-tight">
-                  {lang === 'ar'
-                    ? 'طرق رائعة لتعزيز إنتاجية مزرعة الدواجن الخاصة بك'
-                    : 'Egg-citing Ways to Boost Your Poultry Farm\'s Productivity'}
-                </h3>
-                <a 
-                  href={`/${lang}/blog/boost-productivity`}
-                  className="inline-block px-6 py-2 rounded-full border-2 font-medium transition-all duration-300 hover:bg-[#a01623] hover:text-white"
-                  style={{ borderColor: '#a01623', color: '#a01623' }}
-                >
-                  {lang === 'ar' ? 'اقرأ المزيد' : 'Read More'}
-                </a>
               </div>
             </motion.div>
           </div>
@@ -892,67 +904,78 @@ export default function Home({ params }: { params: { lang: string } }) {
      
 {/* Newsletter Section */}
 
-<div className='  '>
-<section className="  md:h-[320px] pt-7   bg-[#f5f5f5]">
-  <div className="container mx-auto px-4">
+<div className=''>
+<section className="relative py-16 md:py-20 overflow-hidden">
+  {/* Blurred Green Leaves Background */}
+  <div 
+    className="absolute inset-0 bg-cover bg-center"
+    style={{
+     backgroundColor: "#111827",
+      filter: "blur(8px)",
+      transform: "scale(1.1)"
+    }}
+  ></div>
+  <div className="absolute inset-0 bg-[#111827]/20"></div>
+
+  <div className="container mx-auto px-4 relative z-10">
     <motion.div
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
       viewport={{ once: true }}
-      className="max-w-6xl mx-auto"
+      className="max-w-3xl mx-auto"
     >
-      {/* OUTER BOX */}
-      <div className="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row">
+      {/* Dark Green Semi-Transparent Container */}
+      <div 
+        className="bg-grey/85 backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-amber-200/40 shadow-2xl"
+        style={{
+          borderWidth: "1px"
+        }}
+      >
+        {/* Heading - Elegant Serif */}
+        <h2 className={`text-3xl md:text-4xl lg:text-5xl font-serif text-amber-50 mb-3 text-center ${lang === "ar" ? "font-playfair" : "font-playfair"}`}>
+          {lang === "ar" 
+            ? " اشترك في نشرتنا الإخبارية" 
+            : "Subscribe to our newsletter"}
+        </h2>
 
-        {/* LEFT COLORED BOX — RED INSTEAD OF GREEN */}
-        <div
-          className="w-full md:w-1/2 p-10 flex flex-col justify-center text-white"
-          style={{
-            background: "linear-gradient(90deg, #a01623, #7f101d)"
-          }}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 uppercase">
-            {lang === "ar" ? "اشترك في النشرة الإخبارية" : "SUBSCRIBE NEWSLETTER"}
-          </h2>
+        {/* Subtitle */}
+        <p className={`text-base md:text-lg text-amber-50/90 mb-8 text-center ${lang === "ar" ? "font-sans" : "font-sans"}`}>
+          {lang === "ar" ? "احصل على آخر الأخبار والتحديثات مباشرة في بريدك الإلكتروني" : "Get the latest news and updates directly in your email"}
+        </p>
 
-          <p className="text-white/90 leading-relaxed text-base md:text-lg">
-            {lang === "ar"
-              ? "احصل على آخر الأخبار والتحديثات مباشرة في بريدك الإلكتروني"
-              : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis."}
-          </p>
-        </div>
-
-        {/* RIGHT WHITE FORM */}
-        <div className="w-full md:w-1/2 p-10 bg-white flex flex-col justify-center">
-          <div className="flex flex-col gap-4">
+        {/* Email Input and Subscribe Button Row */}
+        <div className={`flex flex-col sm:flex-row gap-4 items-center ${lang === "ar" ? "flex-row-reverse" : ""}`}>
+          {/* Email Input with Underline */}
+          <div className="flex-1 w-full relative">
             <input
               type="email"
-              placeholder={lang === "ar" ? "البريد الإلكتروني" : "Email"}
-              className="w-full px-5 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#a01623] outline-none"
-              style={{ textAlign: lang === "ar" ? "right" : "left" }}
+              placeholder={lang === "ar" ? "أدخل بريدك الإلكتروني" : "Enter your email"}
+              className={`w-full bg-transparent text-amber-50 placeholder:text-amber-50/70 pb-3 focus:outline-none text-base md:text-lg border-b-2 border-amber-200/60 focus:border-amber-200 transition-colors ${lang === "ar" ? "text-right" : "text-left"}`}
             />
-
-            <input
+          </div>
+          <div className="flex-1 w-full relative">
+          <input
               type="text"
               placeholder={lang === "ar" ? "رقم الهاتف" : "Phone Number"}
-              className="w-full px-5 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#a01623] outline-none"
+              className={`w-full bg-transparent text-amber-50 placeholder:text-amber-50/70 pb-3 focus:outline-none text-base md:text-lg border-b-2 border-amber-200/60 focus:border-amber-200 transition-colors ${lang === "ar" ? "text-right" : "text-left"}`}
               style={{ textAlign: lang === "ar" ? "right" : "left" }}
             />
-
-            <button
-              className="w-full py-3 bg-[#a01623] text-white font-semibold rounded-lg hover:bg-[#8c1320] transition-all shadow-md"
-            >
-              {lang === "ar" ? "اشترك الآن" : "Subscribe Now"}
-            </button>
-          </div>
+            </div>
+          {/* Subscribe Button - Terracotta/Orange-Brown */}
+          <button
+            className="px-8 md:px-10 py-3 md:py-4 bg-[#c9734f] hover:bg-[#b8653f] text-white font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl whitespace-nowrap text-base md:text-lg"
+            style={{
+              backgroundColor: "#a01623"
+            }}
+          >
+            {lang === "ar" ? "اشترك" : "Subscribe"}
+          </button>
         </div>
-
       </div>
     </motion.div>
   </div>
 </section>
-
 </div>
 
 
