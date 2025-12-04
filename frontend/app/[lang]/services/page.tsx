@@ -14,57 +14,9 @@ export default function ServicesPage({ params }: { params: { lang: string } }) {
     <main>
       <Header />
       
-      {/* Page Header */}
-      <section
-        className="pt-32 pb-24 relative overflow-hidden"
-        style={{
-          backgroundImage: 'url(/bg12.png)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          backgroundAttachment: 'fixed',
-          backgroundBlendMode: 'overlay',
-        }}
-      >
-        <div className="absolute inset-0" style={{ backgroundColor: 'rgba(160, 22, 35, 0.85)' }}></div>
-        
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-white rounded-full blur-3xl"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-white rounded-full blur-3xl"></div>
-        </div>
-
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center text-white max-w-4xl mx-auto"
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="mb-6"
-            >
-              <span className="inline-block px-6 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-semibold tracking-wider">
-                {lang === 'ar' ? 'ما نقدمه لك' : 'What We Offer'}
-              </span>
-            </motion.div>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-              {lang === 'ar' ? 'خدماتنا المتميزة' : 'Our Premium Services'}
-            </h1>
-            <p className="text-xl md:text-2xl text-white/90 leading-relaxed">
-              {lang === 'ar' 
-                ? 'حلول متكاملة ومبتكرة لنجاح مزرعتك وتحقيق أعلى معدلات الإنتاجية'
-                : 'Comprehensive and innovative solutions for your farm success and achieving the highest productivity rates'}
-            </p>
-          </motion.div>
-        </div>
-      </section>
 
       {/* Main Services */}
-      <section className="py-24 bg-gradient-to-b from-white to-gray-50">
+      <section className="py-24 bg-gradient-to-b from-white to-gray-50 mt-20">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -300,7 +252,7 @@ export default function ServicesPage({ params }: { params: { lang: string } }) {
               </h2>
               <ul className="space-y-5">
                 {[
-                  { ar: 'خبرة أكثر من 23 عاماً في مجال أعلاف الدواجن', en: 'More than 23 years of experience in poultry feed' },
+                  { ar: 'خبرة أكثر من40 عاماً في مجال أعلاف الدواجن', en: 'More than 23 years of experience in poultry feed' },
                   { ar: 'فريق من الخبراء والأطباء البيطريين المتخصصين', en: 'Team of specialized experts and veterinarians' },
                   { ar: 'منتجات عالية الجودة ومضمونة', en: 'High-quality and guaranteed products' },
                   { ar: 'أسعار تنافسية ومناسبة', en: 'Competitive and suitable prices' },
@@ -330,76 +282,312 @@ export default function ServicesPage({ params }: { params: { lang: string } }) {
               viewport={{ once: true }}
               className="relative h-96 rounded-2xl overflow-hidden shadow-2xl"
             >
-              <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-white to-gray-50 p-16">
-                <img
-                  src="/logoo.png"
-                  alt={lang === 'ar' ? 'شعار مجموعة القصبي' : 'Elkassaby Group Logo'}
-                  className="w-full h-full object-contain transform transition-transform duration-500 hover:scale-110 drop-shadow-2xl"
-                />
+              <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-green-50 via-amber-50 to-white p-8 relative overflow-hidden rounded-2xl">
+                {/* Background agricultural pattern */}
+                <div className="absolute inset-0 opacity-5">
+                  <svg viewBox="0 0 400 400" className="w-full h-full">
+                    <pattern id="grainPattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                      <circle cx="20" cy="20" r="2" fill="#a01623" />
+                    </pattern>
+                    <rect width="100%" height="100%" fill="url(#grainPattern)" />
+                  </svg>
+                </div>
+
+                {/* Main agricultural illustration */}
+                <svg
+                  viewBox="0 0 400 400"
+                  className="w-full h-full max-w-md relative z-10"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <defs>
+                    {/* Gradients */}
+                    <linearGradient id="fieldGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stopColor="#a01623" stopOpacity="0.8" />
+                      <stop offset="100%" stopColor="#7d111c" stopOpacity="0.6" />
+                    </linearGradient>
+                    <linearGradient id="growthGradient" x1="0%" y1="100%" x2="0%" y2="0%">
+                      <stop offset="0%" stopColor="#2d5016" stopOpacity="0.3" />
+                      <stop offset="50%" stopColor="#4a7c2a" stopOpacity="0.5" />
+                      <stop offset="100%" stopColor="#6ba839" stopOpacity="0.4" />
+                    </linearGradient>
+                    <linearGradient id="grainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#f4a460" />
+                      <stop offset="50%" stopColor="#daa520" />
+                      <stop offset="100%" stopColor="#b8860b" />
+                    </linearGradient>
+                    
+                    {/* Filters */}
+                    <filter id="softGlow">
+                      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                      <feMerge>
+                        <feMergeNode in="coloredBlur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                      </feMerge>
+                    </filter>
+                  </defs>
+
+                  {/* Farm field rows - bottom section */}
+                  <g>
+                    {[0, 1, 2, 3].map((i) => (
+                      <motion.rect
+                        key={i}
+                        x={50 + i * 80}
+                        y={300}
+                        width="60"
+                        height="80"
+                        rx="5"
+                        fill="url(#fieldGradient)"
+                        filter="url(#softGlow)"
+                        animate={{
+                          y: [300, 290, 300],
+                          opacity: [0.7, 0.9, 0.7],
+                        }}
+                        transition={{
+                          duration: 3 + i * 0.5,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: i * 0.3,
+                        }}
+                      />
+                    ))}
+                  </g>
+
+                  {/* Growing plants/stalks */}
+                  <g>
+                    {[
+                      { x: 100, delay: 0 },
+                      { x: 180, delay: 0.2 },
+                      { x: 260, delay: 0.4 },
+                      { x: 320, delay: 0.6 },
+                    ].map((plant, i) => (
+                      <g key={i}>
+                        {/* Stalk */}
+                        <motion.line
+                          x1={plant.x}
+                          y1="320"
+                          x2={plant.x}
+                          y2="200"
+                          stroke="#2d5016"
+                          strokeWidth="4"
+                          strokeLinecap="round"
+                          animate={{
+                            pathLength: [0, 1],
+                            opacity: [0.6, 1, 0.6],
+                          }}
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                            delay: plant.delay,
+                          }}
+                        />
+                        {/* Leaves */}
+                        <motion.path
+                          d={`M ${plant.x} 280 Q ${plant.x - 15} 260 ${plant.x - 10} 250`}
+                          stroke="#4a7c2a"
+                          strokeWidth="3"
+                          fill="none"
+                          strokeLinecap="round"
+                          animate={{
+                            pathLength: [0, 1],
+                            opacity: [0.5, 0.9, 0.5],
+                          }}
+                          transition={{
+                            duration: 2.5,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                            delay: plant.delay + 0.3,
+                          }}
+                        />
+                        <motion.path
+                          d={`M ${plant.x} 260 Q ${plant.x + 15} 240 ${plant.x + 10} 230`}
+                          stroke="#4a7c2a"
+                          strokeWidth="3"
+                          fill="none"
+                          strokeLinecap="round"
+                          animate={{
+                            pathLength: [0, 1],
+                            opacity: [0.5, 0.9, 0.5],
+                          }}
+                          transition={{
+                            duration: 2.5,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                            delay: plant.delay + 0.5,
+                          }}
+                        />
+                        {/* Grain head */}
+                        <motion.ellipse
+                          cx={plant.x}
+                          cy="190"
+                          rx="12"
+                          ry="20"
+                          fill="url(#grainGradient)"
+                          animate={{
+                            scale: [1, 1.15, 1],
+                            opacity: [0.8, 1, 0.8],
+                          }}
+                          transition={{
+                            duration: 2.5,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                            delay: plant.delay,
+                          }}
+                        />
+                      </g>
+                    ))}
+                  </g>
+
+                  {/* Growth curve - representing progress */}
+                  <motion.path
+                    d="M 50 350 Q 150 250, 200 180 T 350 120"
+                    stroke="url(#growthGradient)"
+                    strokeWidth="4"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeDasharray="10 5"
+                    animate={{
+                      pathLength: [0, 1],
+                      opacity: [0.4, 0.7, 0.4],
+                    }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  />
+
+                  {/* Feed/grain particles floating */}
+                  {[
+                    { x: 80, y: 150, delay: 0 },
+                    { x: 150, y: 120, delay: 0.8 },
+                    { x: 280, y: 140, delay: 1.5 },
+                    { x: 320, y: 100, delay: 2.2 },
+                    { x: 120, y: 80, delay: 0.5 },
+                    { x: 250, y: 90, delay: 1.8 },
+                  ].map((grain, i) => (
+                    <motion.circle
+                      key={i}
+                      cx={grain.x}
+                      cy={grain.y}
+                      r="6"
+                      fill="url(#grainGradient)"
+                      animate={{
+                        y: [grain.y, grain.y - 30, grain.y],
+                        x: [grain.x, grain.x + (Math.random() > 0.5 ? 10 : -10), grain.x],
+                        opacity: [0.6, 1, 0.6],
+                        scale: [1, 1.2, 1],
+                      }}
+                      transition={{
+                        duration: 3 + Math.random() * 2,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: grain.delay,
+                      }}
+                    />
+                  ))}
+
+                  {/* Center circle - representing farm/success */}
+                  <motion.circle
+                    cx="200"
+                    cy="200"
+                    r="50"
+                    fill="none"
+                    stroke="#a01623"
+                    strokeWidth="3"
+                    strokeDasharray="8 4"
+                    animate={{
+                      rotate: [0, 360],
+                      scale: [1, 1.1, 1],
+                    }}
+                    transition={{
+                      rotate: { duration: 20, repeat: Infinity, ease: "linear" },
+                      scale: { duration: 3, repeat: Infinity, ease: "easeInOut" },
+                    }}
+                    style={{ transformOrigin: "200px 200px" }}
+                  />
+
+                  {/* Service icons representation */}
+                  <g>
+                    {/* Shield icon (quality) */}
+                    <motion.path
+                      d="M 170 180 L 200 165 L 230 180 L 230 200 Q 230 210 200 220 Q 170 210 170 200 Z"
+                      fill="#a01623"
+                      fillOpacity="0.7"
+                      animate={{
+                        scale: [1, 1.1, 1],
+                        opacity: [0.7, 0.9, 0.7],
+                      }}
+                      transition={{
+                        duration: 2.5,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                    />
+                    {/* Star icon (excellence) */}
+                    <motion.path
+                      d="M 200 190 L 205 200 L 215 200 L 207 207 L 210 217 L 200 212 L 190 217 L 193 207 L 185 200 L 195 200 Z"
+                      fill="#daa520"
+                      animate={{
+                        rotate: [0, 360],
+                        scale: [1, 1.15, 1],
+                      }}
+                      transition={{
+                        rotate: { duration: 8, repeat: Infinity, ease: "linear" },
+                        scale: { duration: 2, repeat: Infinity, ease: "easeInOut" },
+                      }}
+                      style={{ transformOrigin: "200px 203px" }}
+                    />
+                  </g>
+
+                  {/* Connecting lines - representing connection/services */}
+                  <motion.line
+                    x1="100"
+                    y1="190"
+                    x2="180"
+                    y2="200"
+                    stroke="#a01623"
+                    strokeWidth="2"
+                    strokeOpacity="0.4"
+                    strokeDasharray="4 4"
+                    animate={{
+                      strokeDashoffset: [0, -8],
+                      opacity: [0.3, 0.6, 0.3],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                  />
+                  <motion.line
+                    x1="220"
+                    y1="200"
+                    x2="300"
+                    y2="190"
+                    stroke="#a01623"
+                    strokeWidth="2"
+                    strokeOpacity="0.4"
+                    strokeDasharray="4 4"
+                    animate={{
+                      strokeDashoffset: [0, -8],
+                      opacity: [0.3, 0.6, 0.3],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "linear",
+                      delay: 1,
+                    }}
+                  />
+                </svg>
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-24 text-white text-center relative overflow-hidden" style={{ backgroundColor: '#a01623' }}>
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-10 left-1/4 w-64 h-64 bg-white rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-10 right-1/4 w-80 h-80 bg-white rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-        </div>
-
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="max-w-4xl mx-auto"
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="mb-6"
-            >
-              <span className="inline-block px-6 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-semibold tracking-wider">
-                {lang === 'ar' ? 'ابدأ الآن' : 'Get Started'}
-              </span>
-            </motion.div>
-
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              {lang === 'ar' ? 'ابدأ معنا اليوم' : 'Start With Us Today'}
-            </h2>
-            <p className="text-xl md:text-2xl mb-10 text-white/90 leading-relaxed">
-              {lang === 'ar'
-                ? 'اتصل بنا الآن واحصل على استشارة مجانية من فريقنا المتخصص'
-                : 'Contact us now and get a free consultation from our specialized team'}
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <a
-                href={`/${lang}/contact`}
-                className="group inline-flex items-center gap-3 bg-white hover:bg-gray-100 font-bold px-10 py-4 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-2xl text-lg"
-                style={{ color: '#a01623' }}
-              >
-                <span>{lang === 'ar' ? 'اتصل بنا الآن' : 'Contact Us Now'}</span>
-                <FaArrowRight className={`transition-transform duration-300 group-hover:translate-x-1 ${lang === 'ar' ? 'rotate-180' : ''}`} />
-              </a>
-              
-              <a
-                href={`/${lang}/products`}
-                className="inline-flex items-center gap-3 bg-transparent border-2 border-white hover:bg-white font-bold px-10 py-4 rounded-full transition-all duration-300 transform hover:scale-105 text-lg text-white hover:text-[#a01623]"
-              >
-                <span>{lang === 'ar' ? 'تصفح المنتجات' : 'Browse Products'}</span>
-              </a>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
+    
       <Footer />
     </main>
   )

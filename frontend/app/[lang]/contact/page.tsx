@@ -19,55 +19,9 @@ export default function ContactPage({ params }: { params: { lang: string } }) {
     <main>
       <Header />
       
-      {/* Page Header */}
-      <section
-        className="pt-32 pb-24 relative overflow-hidden"
-        style={{
-          backgroundImage: 'url(/bg12.png)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-        }}
-      >
-        <div className="absolute inset-0" style={{ backgroundColor: 'rgba(160, 22, 35, 0.85)' }}></div>
-        
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-white rounded-full blur-3xl"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-white rounded-full blur-3xl"></div>
-        </div>
-
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center text-white max-w-4xl mx-auto"
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="mb-6"
-            >
-              <span className="inline-block px-6 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-semibold tracking-wider">
-                {lang === 'ar' ? 'تواصل معنا' : 'Contact Us'}
-              </span>
-            </motion.div>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-              {lang === 'ar' ? 'اتصل بنا' : 'Get In Touch'}
-            </h1>
-            <p className="text-xl md:text-2xl text-white/90 leading-relaxed">
-              {lang === 'ar' 
-                ? 'نحن هنا للإجابة على جميع استفساراتك ومساعدتك في تحقيق أهدافك'
-                : 'We are here to answer all your questions and help you achieve your goals'}
-            </p>
-          </motion.div>
-        </div>
-      </section>
 
       {/* Contact Content */}
-      <section className="py-24 bg-gradient-to-b from-white to-gray-50">
+      <section className="py-24 bg-gradient-to-b from-white to-gray-50 mt-20">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-16">
             {/* Contact Form */}
@@ -240,17 +194,14 @@ export default function ContactPage({ params }: { params: { lang: string } }) {
                         {lang === 'ar' ? 'الهاتف' : 'Phone'}
                       </h3>
                       <div className="space-y-1">
-                        <a href="tel:+20502100126" className="block text-gray-600 hover:text-[#a01623] transition">
-                          +20 50 2100126
-                        </a>
-                        <a href="tel:+20502100127" className="block text-gray-600 hover:text-[#a01623] transition">
-                          +20 50 2100127
+                        <a href="tel:0502100127" className="block text-gray-600 hover:text-[#a01623] transition">
+                          0502100127
                         </a>
                         <a href="tel:01097770109" className="block text-gray-600 hover:text-[#a01623] transition">
-                          01097770109
+                          +201097770109
                         </a>
                         <a href="tel:01097770117" className="block text-gray-600 hover:text-[#a01623] transition">
-                          01097770117
+                          +201097770117
                         </a>
                       </div>
                     </div>
@@ -385,7 +336,7 @@ export default function ContactPage({ params }: { params: { lang: string } }) {
             className="rounded-3xl overflow-hidden shadow-2xl h-[500px] border-4 border-gray-100"
           >
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3456.789!2d31.3!3d31.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDAwJzAwLjAiTiAzMcKwMTgnMDAuMCJF!5e0!3m2!1sar!2seg!4v1234567890"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d213.63064635847908!2d31.39903933834269!3d31.051584461327124!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14f79d9de493765f%3A0x2f569582fd02554b!2z2YXYrNmF2YjYudipINin2YTZgti12KjZig!5e0!3m2!1sen!2sus!4v1764874384899!5m2!1sen!2sus"
               width="100%"
               height="100%"
               style={{ border: 0 }}
@@ -394,6 +345,17 @@ export default function ContactPage({ params }: { params: { lang: string } }) {
               referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
           </motion.div>
+          <div className="mt-6 text-center">
+            <a
+              href="https://www.google.com/maps?q=31.051584461327124,31.39903933834269"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#a01623] hover:text-[#8c1320] inline-flex items-center gap-2 transition-colors font-semibold"
+            >
+              <FaMapMarkerAlt />
+              {lang === 'ar' ? 'افتح في خرائط جوجل' : 'Open in Google Maps'}
+            </a>
+          </div>
         </div>
       </section>
 

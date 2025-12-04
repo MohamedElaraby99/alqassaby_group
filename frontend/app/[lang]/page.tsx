@@ -53,7 +53,7 @@ export default function Home({ params }: { params: { lang: string } }) {
 
         <h3 className="text-2xl font-semibold text-gray-700 mb-4">
           {lang === 'ar'
-            ? 'خبرة 23 عاماً في تربية الكتاكيت والسلالات المميزة'
+            ? 'خبرة40 عاماً في تربية الكتاكيت والسلالات المميزة'
             : '23 Years of Expertise in Chick Rearing and Premium Breeds'}
         </h3>
 

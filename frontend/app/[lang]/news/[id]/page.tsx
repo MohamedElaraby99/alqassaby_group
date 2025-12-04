@@ -27,12 +27,12 @@ export default function NewsDetailPage() {
     }
   }, [dispatch, id])
 
-  if (loading) return <p className="text-center mt-20 text-red-600 text-xl">Loading...</p>
-  if (error) return <p className="text-center mt-20 text-red-600 text-xl">{error}</p>
-  if (!blog) return <p className="text-center mt-20 text-red-600 text-xl">Blog Not Found</p>
+  if (loading) return <p className="text-center mt-20 text-gray-900 text-xl">Loading...</p>
+  if (error) return <p className="text-center mt-20 text-gray-900 text-xl">{error}</p>
+  if (!blog) return <p className="text-center mt-20 text-gray-900 text-xl">Blog Not Found</p>
 
   return (
-    <main className="bg-white text-red-800">
+    <main className="bg-white text-gray-900">
       <Header />
 
       <section className="pt-28 pb-12">
@@ -40,19 +40,19 @@ export default function NewsDetailPage() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
 
             {/* Breadcrumb */}
-            <div className="mb-4 flex items-center gap-2 text-sm text-red-600/80">
-              <Link href={`/${lang}`} className="hover:text-red-700 transition-colors">{lang === 'ar' ? 'الرئيسية' : 'Home'}</Link>
+            <div className="mb-4 flex items-center gap-2 text-sm text-gray-600">
+              <Link href={`/${lang}`} className="hover:text-gray-900 transition-colors">{lang === 'ar' ? 'الرئيسية' : 'Home'}</Link>
               <span>/</span>
-              <Link href={`/${lang}/news`} className="hover:text-red-700 transition-colors">{lang === 'ar' ? 'الأخبار' : 'News'}</Link>
+              <Link href={`/${lang}/news`} className="hover:text-gray-900 transition-colors">{lang === 'ar' ? 'الأخبار' : 'News'}</Link>
               <span>/</span>
-              <span className="text-red-600">{blog.title}</span>
+              <span className="text-gray-900">{blog.title}</span>
             </div>
 
             {/* Title */}
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">{blog.title}</h1>
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight text-gray-900">{blog.title}</h1>
 
             {/* Meta */}
-            <div className="flex flex-wrap items-center gap-6 text-red-600/90 mb-8 text-lg">
+            <div className="flex flex-wrap items-center gap-6 text-gray-700 mb-8 text-lg">
               {blog.createdAt && !isNaN(new Date(blog.createdAt).getTime()) && (
                 <div className="flex items-center gap-2">
                   <FaCalendar />
@@ -75,7 +75,7 @@ export default function NewsDetailPage() {
                   <span>{blog.category}</span>
                 </div>
               )}
-              <button className="flex items-center gap-2 hover:text-red-700 transition-colors">
+              <button className="flex items-center gap-2 hover:text-gray-900 transition-colors">
                 <FaShareAlt />
                 <span>{lang === 'ar' ? 'مشاركة' : 'Share'}</span>
               </button>
@@ -87,7 +87,7 @@ export default function NewsDetailPage() {
             </div>
 
             {/* Content directly under image */}
-            <div className="prose prose-lg max-w-none text-red-800 text-xl">
+            <div className="prose prose-lg max-w-none text-gray-900 text-xl">
               {blog.excerpt && (
                 <p className="mb-4">
                   <strong>{lang === 'ar' ? 'ملخص:' : 'Excerpt:'}</strong> {blog.excerpt}
@@ -101,7 +101,7 @@ export default function NewsDetailPage() {
               {blog.tags && blog.tags.length > 0 && (
                 <div className="flex flex-wrap gap-2 mb-6">
                   {blog.tags.map((tag, idx) => (
-                    <span key={idx} className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-lg">{tag}</span>
+                    <span key={idx} className="bg-gray-100 text-gray-900 px-3 py-1 rounded-full text-lg">{tag}</span>
                   ))}
                 </div>
               )}

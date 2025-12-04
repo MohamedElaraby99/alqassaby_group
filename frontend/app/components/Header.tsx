@@ -16,19 +16,21 @@ export default function Header() {
 const alwaysRedPages = [`/${locale}/about`] 
 
 
-const transparentPages = [`/${locale}`, `/${locale}/products`, `/${locale}/news`]
+const transparentPages = [`/${locale}`]
 
 
 const isAlwaysRed =
   pathname === `/${locale}/about` || 
+  pathname === `/${locale}/services` ||
+  pathname === `/${locale}/products` ||
+  pathname === `/${locale}/news` ||
+  pathname === `/${locale}/contact` ||
   (pathname.startsWith(`/${locale}/products/`) && pathname !== `/${locale}/products`) || 
   (pathname.startsWith(`/${locale}/news/`) && pathname !== `/${locale}/news`) 
 
 
 const isTransparentPage =
-  pathname === `/${locale}` || 
-  pathname === `/${locale}/products` || 
-  pathname === `/${locale}/news` 
+  pathname === `/${locale}` 
 
 const isRedNavbar = isAlwaysRed || (isTransparentPage && isScrolled)
 
@@ -183,7 +185,7 @@ const isRedNavbar = isAlwaysRed || (isTransparentPage && isScrolled)
           {/* Mobile Menu Button */}
           <button
             className={`lg:hidden relative w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center z-50 flex-shrink-0 transition-colors duration-300 ${
-              isScrolled ? 'text-[#fde047]' : 'text-white'
+              isMobileMenuOpen ? 'text-black' : isScrolled ? 'text-[#fde047]' : 'text-white'
             }`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"

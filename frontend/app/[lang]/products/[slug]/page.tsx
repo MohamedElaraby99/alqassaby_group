@@ -118,13 +118,7 @@ export default function ProductDetailPage() {
                     <span className="text-white text-lg font-bold">{product.category}</span>
                   </div>
 
-                  {/* Price */}
-                  <div className="bg-amber-300 backdrop-blur-md border border-white/20 p-4 rounded-xl flex justify-between items-center">
-                    <span className="text-white/80 text-lg font-semibold">
-                      {lang === "ar" ? "السعر:" : "Price:"}
-                    </span>
-                    <span className="text-white text-lg font-bold">{product.price} EGP</span>
-                  </div>
+               
 
                   {/* Weight */}
                   {product.specifications?.weight && (

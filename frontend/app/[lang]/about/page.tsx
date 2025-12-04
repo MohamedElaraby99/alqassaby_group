@@ -33,7 +33,7 @@ export default function AboutPage({ params }: { params: { lang: string } }) {
             </h1>
             <p className="text-xl max-w-3xl mx-auto">
               {lang === 'ar' 
-                ? 'رحلة 23 عاماً من التميز والابتكار في صناعة أعلاف الدواجن'
+                ? 'رحلة40 عاماً من التميز والابتكار في صناعة أعلاف الدواجن'
                 : '23 Years Journey of Excellence and Innovation in Poultry Feed Industry'}
             </p>
           </motion.div>
@@ -84,7 +84,7 @@ export default function AboutPage({ params }: { params: { lang: string } }) {
           >
             <p className="text-xl text-gray-700 leading-relaxed mb-6">
               {lang === 'ar'
-                ? 'تأسست مجموعة القصبي منذ أكثر من 23 عاماً بهدف تقديم أفضل أعلاف الدواجن في مصر. بدأنا رحلتنا بإيمان راسخ بأهمية الجودة والابتكار في صناعة الأعلاف.'
+                ? 'تأسست مجموعة القصبي منذ أكثر من40 عاماً بهدف تقديم أفضل أعلاف الدواجن في مصر. بدأنا رحلتنا بإيمان راسخ بأهمية الجودة والابتكار في صناعة الأعلاف.'
                 : 'Elkassaby Group was founded more than 23 years ago with the aim of providing the best poultry feed in Egypt. We started our journey with a firm belief in the importance of quality and innovation in the feed industry.'}
             </p>
             <p className="text-lg text-gray-600 leading-relaxed">

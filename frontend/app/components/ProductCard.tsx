@@ -69,12 +69,7 @@ export default function ProductCard({
           {description}
         </p>
 
-        {price && (
-          <div className="mb-4 flex items-center gap-2">
-            <span className="text-3xl font-bold" style={{ color: '#a01623' }}>{price}</span>
-            <span className="text-sm text-gray-500">{lang === 'ar' ? 'للطن' : '/ton'}</span>
-          </div>
-        )}
+    
 
      
         <div className="group inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-white transition-all duration-300 hover:gap-3 hover:shadow-lg bg-[#a01623]">

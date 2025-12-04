@@ -12,7 +12,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         {children}
-        <FloatingWhatsApp phone="201234567890" />
+        <FloatingWhatsApp phone="201097770117" />
       </body>
     </html>
   )

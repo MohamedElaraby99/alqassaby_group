@@ -98,7 +98,7 @@ export default function Footer() {
 
               <p className="text-gray-300 mb-4 leading-relaxed text-center">
                 {locale === "ar"
-                  ? "نحن واحدة من أكثر الشركات احتراماً في مجال أعلاف الدواجن في مصر والشرق الأوسط منذ أكثر من 23 عاماً."
+                  ? "نحن واحدة من أكثر الشركات احتراماً في مجال أعلاف الدواجن في مصر والشرق الأوسط منذ أكثر من40 عاماً."
                   : "We are one of the most respected poultry feed companies in Egypt and the Middle East for over 23 years."}
               </p>
 
@@ -182,9 +182,7 @@ export default function Footer() {
             </h3>
             <div className="w-full h-64 md:h-80 lg:h-96 rounded-lg overflow-hidden shadow-xl">
               <iframe
-                src={`https://www.google.com/maps?q=${encodeURIComponent(
-                  "Mansoura, Old Toreil, Elsharef Alradi Street, Elkassaby Building"
-                )}&output=embed`}
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d213.63064635847908!2d31.39903933834269!3d31.051584461327124!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14f79d9de493765f%3A0x2f569582fd02554b!2z2YXYrNmF2YjYudipINin2YTZgti12KjZig!5e0!3m2!1sen!2sus!4v1764874384899!5m2!1sen!2sus"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
@@ -203,7 +201,7 @@ export default function Footer() {
                   : "Mansoura, Old Toreil, Elsharef Alradi Street, Elkassaby Building"}
               </p>
               <a
-                href="https://maps.google.com/?q=Mansoura,+Old+Toreil,+Elsharef+Alradi+Street,+Elkassaby+Building"
+                href="https://www.google.com/maps?q=31.051584461327124,31.39903933834269"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[#a01623] hover:text-[#8c1320] mt-2 inline-block transition-colors"
