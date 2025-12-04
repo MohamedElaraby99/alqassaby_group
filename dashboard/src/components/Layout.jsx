@@ -77,8 +77,8 @@ export default function Layout({ children }) {
               to="/"
               onClick={() => setIsOpen(false)}
               className={`block px-4 py-3 rounded-lg transition-colors ${isActive('/') && location.pathname === '/'
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-300 hover:bg-gray-800'
+                ? 'bg-blue-600 text-white'
+                : 'text-gray-300 hover:bg-gray-800'
                 }`}
             >
               {t('home')}
@@ -89,8 +89,8 @@ export default function Layout({ children }) {
               to="/users"
               onClick={() => setIsOpen(false)}
               className={`block px-4 py-3 rounded-lg transition-colors ${isActive('/users')
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-300 hover:bg-gray-800'
+                ? 'bg-blue-600 text-white'
+                : 'text-gray-300 hover:bg-gray-800'
                 }`}
             >
               {t('users')}
@@ -101,8 +101,8 @@ export default function Layout({ children }) {
               to="/products"
               onClick={() => setIsOpen(false)}
               className={`block px-4 py-3 rounded-lg transition-colors ${isActive('/products')
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-300 hover:bg-gray-800'
+                ? 'bg-blue-600 text-white'
+                : 'text-gray-300 hover:bg-gray-800'
                 }`}
             >
               {t('products')}
@@ -113,8 +113,8 @@ export default function Layout({ children }) {
               to="/blogs"
               onClick={() => setIsOpen(false)}
               className={`block px-4 py-3 rounded-lg transition-colors ${isActive('/blogs')
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-300 hover:bg-gray-800'
+                ? 'bg-blue-600 text-white'
+                : 'text-gray-300 hover:bg-gray-800'
                 }`}
             >
               {t('blogs')}
@@ -125,8 +125,8 @@ export default function Layout({ children }) {
               to="/newsletter"
               onClick={() => setIsOpen(false)}
               className={`block px-4 py-3 rounded-lg transition-colors ${isActive('/newsletter')
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-300 hover:bg-gray-800'
+                ? 'bg-blue-600 text-white'
+                : 'text-gray-300 hover:bg-gray-800'
                 }`}
             >
               {t('newsletter')}
@@ -137,8 +137,8 @@ export default function Layout({ children }) {
               to="/contact"
               onClick={() => setIsOpen(false)}
               className={`block px-4 py-3 rounded-lg transition-colors ${isActive('/contact')
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-300 hover:bg-gray-800'
+                ? 'bg-blue-600 text-white'
+                : 'text-gray-300 hover:bg-gray-800'
                 }`}
             >
               {t('contact')}
@@ -166,7 +166,7 @@ export default function Layout({ children }) {
       )}
 
       {/* Main Content */}
-      <div className="flex-1 lg:ml-30 p-6">
+      <div className="flex-1 p-6 pt-16 lg:pt-6">
         {children}
       </div>
     </div>
