@@ -5,13 +5,59 @@ import { useTranslation } from 'react-i18next';
 
 export default function ProductsList() {
   const { t } = useTranslation();
-  // ... (rest of state)
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [filters, setFilters] = useState({
+    featured: '',
+    category: '',
+    inStock: '',
+  });
 
-  // ... (fetchProducts)
+  useEffect(() => {
+    fetchProducts();
+  }, [page, filters]);
 
-  // ... (handleDelete)
+  const fetchProducts = async () => {
+    try {
+      setLoading(true);
+      const params = { page, limit: 10, ...filters };
+      Object.keys(params).forEach(key => {
+        if (params[key] === '') delete params[key];
+      });
+      const response = await productsAPI.getAll(params);
+      setProducts(response.data.data || []);
+      setTotalPages(response.data.totalPages || 1);
+      setError(null);
+    } catch (err) {
+      setError(err.response?.data?.message || t('error'));
+      console.error('Error fetching products:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  // ... (handleToggleFeatured)
+  const handleDelete = async (id) => {
+    if (!window.confirm(t('confirmDelete'))) return;
+
+    try {
+      await productsAPI.delete(id);
+      fetchProducts();
+    } catch (err) {
+      alert(err.response?.data?.message || t('error'));
+    }
+  };
+
+  const handleToggleFeatured = async (id) => {
+    try {
+      await productsAPI.toggleFeatured(id);
+      fetchProducts();
+    } catch (err) {
+      alert(err.response?.data?.message || t('error'));
+    }
+  };
 
   const getImageUrl = (image) => {
     if (!image) return 'https://via.placeholder.com/150';
@@ -207,4 +253,3 @@ export default function ProductsList() {
     </div>
   );
 }
-

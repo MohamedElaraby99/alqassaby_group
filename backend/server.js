@@ -21,7 +21,27 @@ const app = express();
 connectDB();
 
 // Middleware
-app.use(cors());
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:3000',
+  'https://elkassaby.com',
+  'https://www.elkassaby.com',
+  'https://adminpanel.elkassaby.com',
+  'https://www.adminpanel.elkassaby.com'
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
@@ -41,8 +61,8 @@ app.use('/api/contact', contactRoutes);
 
 // Health check route
 app.get('/api/health', (req, res) => {
-  res.status(200).json({ 
-    status: 'success', 
+  res.status(200).json({
+    status: 'success',
     message: 'Server is running',
     timestamp: new Date().toISOString()
   });
@@ -51,7 +71,7 @@ app.get('/api/health', (req, res) => {
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  
+
   // Handle multer errors
   if (err instanceof multer.MulterError) {
     if (err.code === 'LIMIT_FILE_SIZE') {
@@ -65,7 +85,7 @@ app.use((err, req, res, next) => {
       message: err.message || 'File upload error'
     });
   }
-  
+
   // Handle other upload errors
   if (err.message && err.message.includes('Only image files')) {
     return res.status(400).json({
@@ -73,7 +93,7 @@ app.use((err, req, res, next) => {
       message: err.message
     });
   }
-  
+
   res.status(err.statusCode || 500).json({
     status: 'error',
     message: err.message || 'Internal server error',
