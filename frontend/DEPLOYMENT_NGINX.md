@@ -31,9 +31,12 @@ PM2 keeps your Next.js server running and restarts it automatically.
 # Install PM2 globally
 npm install -g pm2
 
-# Start the Next.js server
+# Start the Next.js server (using standalone mode)
 cd /var/www/elqassaby/alqassaby_group/frontend
-pm2 start npm --name "elkassaby-frontend" -- start
+# For standalone mode, use the standalone server directly:
+PORT=3020 pm2 start .next/standalone/server.js --name "elkassaby-frontend" --interpreter node --cwd /var/www/elqassaby/alqassaby_group/frontend
+# OR if not using standalone mode:
+# pm2 start npm --name "elkassaby-frontend" -- start
 
 # Save PM2 configuration
 pm2 save
