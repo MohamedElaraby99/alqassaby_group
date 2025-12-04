@@ -1,7 +1,23 @@
 import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5006/api';
-export const BASE_URL = import.meta.env.VITE_BASE_URL || 'http://localhost:5006';
+// Detect if we're in production based on hostname or environment
+const isProduction = 
+  import.meta.env.VITE_API_URL?.includes('api.elkassaby.com') ||
+  import.meta.env.MODE === 'production' ||
+  (typeof window !== 'undefined' && 
+   (window.location.hostname === 'adminpanel.elkassaby.com' || 
+    window.location.hostname === 'www.adminpanel.elkassaby.com'));
+
+// Use production API URL by default, fallback to localhost for development
+const API_BASE_URL = import.meta.env.VITE_API_URL || 
+  (isProduction 
+    ? 'https://api.elkassaby.com/api' 
+    : 'http://localhost:5006/api');
+
+export const BASE_URL = import.meta.env.VITE_BASE_URL || 
+  (isProduction 
+    ? 'https://api.elkassaby.com' 
+    : 'http://localhost:5006');
 
 const api = axios.create({
   baseURL: API_BASE_URL,

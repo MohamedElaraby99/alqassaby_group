@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { blogsAPI } from '../services/api';
+import { blogsAPI, BASE_URL } from '../services/api';
 import { useTranslation } from 'react-i18next';
 
 export default function BlogsList() {
@@ -62,7 +62,7 @@ export default function BlogsList() {
   const getImageUrl = (image) => {
     if (!image) return 'https://via.placeholder.com/150';
     if (image.startsWith('http')) return image;
-    return `http://localhost:5006${image}`;
+    return `${BASE_URL}${image}`;
   };
 
   if (loading && blogs.length === 0) {

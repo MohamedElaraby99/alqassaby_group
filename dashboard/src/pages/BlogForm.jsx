@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { blogsAPI } from '../services/api';
+import { blogsAPI, BASE_URL } from '../services/api';
 import { useTranslation } from 'react-i18next';
 
 export default function BlogForm() {
@@ -123,7 +123,7 @@ export default function BlogForm() {
       if (formData.imageUrl.startsWith('http')) {
         return formData.imageUrl;
       }
-      return `http://localhost:5006${formData.imageUrl}`;
+      return `${BASE_URL}${formData.imageUrl}`;
     }
     return null;
   };

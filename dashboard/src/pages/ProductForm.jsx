@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { productsAPI } from '../services/api';
+import { productsAPI, BASE_URL } from '../services/api';
 import { useTranslation } from 'react-i18next';
 
 export default function ProductForm() {
@@ -124,7 +124,7 @@ export default function ProductForm() {
       if (formData.imageUrl.startsWith('http')) {
         return formData.imageUrl;
       }
-      return `http://localhost:5006${formData.imageUrl}`;
+      return `${BASE_URL}${formData.imageUrl}`;
     }
     return null;
   };
