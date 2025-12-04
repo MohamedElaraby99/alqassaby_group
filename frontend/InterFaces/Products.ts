@@ -40,6 +40,7 @@ export interface BlogPost {
   featured: boolean;
   published: boolean;
   category?: string;
+  author?: string;
   tags: string[];          
   views: number;
   createdAt: string;       
