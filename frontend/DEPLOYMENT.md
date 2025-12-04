@@ -81,7 +81,7 @@ server {
     server_name your-domain.com;
 
     location / {
-        proxy_pass http://localhost:3000;
+        proxy_pass http://localhost:3020;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';
@@ -126,8 +126,8 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 USER nextjs
-EXPOSE 3000
-ENV PORT 3000
+EXPOSE 3020
+ENV PORT 3020
 
 CMD ["node", "server.js"]
 ```
@@ -140,7 +140,7 @@ services:
   web:
     build: .
     ports:
-      - "3000:3000"
+      - "3020:3020"
     environment:
       - NODE_ENV=production
     restart: unless-stopped
@@ -153,7 +153,7 @@ services:
 docker build -t elkassaby-website .
 
 # تشغيل الحاوية / Run container
-docker run -p 3000:3000 elkassaby-website
+docker run -p 3020:3020 elkassaby-website
 
 # أو استخدم docker-compose
 # Or use docker-compose

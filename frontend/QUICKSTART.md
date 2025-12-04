@@ -16,7 +16,7 @@ npm run dev
 
 ### 3️⃣ Open Browser - افتح المتصفح
 
-افتح: [http://localhost:3000](http://localhost:3000)
+افتح: [http://localhost:3020](http://localhost:3020)
 
 ---
 

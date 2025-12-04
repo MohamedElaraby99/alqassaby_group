@@ -22,13 +22,13 @@ export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || 
   (process.env.NODE_ENV === 'production' 
     ? 'https://elkassaby.com' 
-    : 'http://localhost:3000')
+    : 'http://localhost:3020')
 
 // Frontend domains
 export const FRONTEND_DOMAINS = [
   'elkassaby.com',
   'www.elkassaby.com',
-  'localhost:3000',
+  'localhost:3020',
 ]
 
 // Backend domain

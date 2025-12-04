@@ -49,7 +49,7 @@ pm2 list
 pm2 logs elkassaby-frontend
 ```
 
-The server should be running on `http://localhost:3000`
+The server should be running on `http://localhost:3020`
 
 ---
 
@@ -115,9 +115,9 @@ server {
     gzip_proxied expired no-cache no-store private auth;
     gzip_types text/plain text/css text/xml text/javascript application/x-javascript application/xml+rss application/javascript application/json;
 
-    # Proxy to Next.js server (running on port 3000)
+    # Proxy to Next.js server (running on port 3020)
     location / {
-        proxy_pass http://localhost:3000;
+        proxy_pass http://localhost:3020;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';
@@ -135,7 +135,7 @@ server {
 
     # Cache static assets
     location /_next/static {
-        proxy_pass http://localhost:3000;
+        proxy_pass http://localhost:3020;
         proxy_cache_valid 200 60d;
         add_header Cache-Control "public, immutable";
     }
@@ -177,7 +177,7 @@ try_files $uri /index.html;  # WRONG!
 
 ### ✅ Correct: Proxy to Node.js Server
 ```nginx
-proxy_pass http://localhost:3000;  # CORRECT!
+proxy_pass http://localhost:3020;  # CORRECT!
 ```
 
 ---
@@ -218,7 +218,7 @@ sudo tail -f /var/log/nginx/access.log
 
 2. **Check if Next.js is responding:**
    ```bash
-   curl http://localhost:3000
+   curl http://localhost:3020
    ```
 
 3. **Check Nginx:**
@@ -232,7 +232,7 @@ sudo tail -f /var/log/nginx/access.log
 
 ✅ **DO:**
 - Run Next.js with `npm start` (via PM2)
-- Proxy Nginx to `http://localhost:3000`
+- Proxy Nginx to `http://localhost:3020`
 - Use PM2 to keep the server running
 
 ❌ **DON'T:**

@@ -33,7 +33,7 @@ npm run dev
 yarn dev
 ```
 
-افتح المتصفح على / Open your browser at: [http://localhost:3000](http://localhost:3000)
+افتح المتصفح على / Open your browser at: [http://localhost:3020](http://localhost:3020)
 
 ### 3. بناء المشروع للإنتاج / Build for Production
 

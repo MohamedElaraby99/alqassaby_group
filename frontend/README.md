@@ -214,7 +214,7 @@ npm run build
 npm start
 ```
 
-افتح المتصفح على [http://localhost:3000](http://localhost:3000)
+افتح المتصفح على [http://localhost:3020](http://localhost:3020)
 
 ---
 
