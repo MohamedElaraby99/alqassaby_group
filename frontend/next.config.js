@@ -63,6 +63,9 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ['framer-motion', 'lucide-react', 'react-icons'],
   },
+  
+  // Enable standalone output for production deployment
+  output: 'standalone',
 }
 
 module.exports = nextConfig
