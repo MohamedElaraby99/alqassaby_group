@@ -9,7 +9,7 @@ const isProduction =
     window.location.hostname === 'www.adminpanel.elkassaby.com'));
 
 // Use production API URL by default, fallback to localhost for development
-const API_BASE_URL = import.meta.env.VITE_API_URL || 
+export const API_BASE_URL = import.meta.env.VITE_API_URL || 
   (isProduction 
     ? 'https://api.elkassaby.com/api' 
     : 'http://localhost:5006/api');
