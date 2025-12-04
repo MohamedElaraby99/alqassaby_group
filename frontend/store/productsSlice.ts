@@ -5,13 +5,14 @@ import axios from "axios";
 
 
 export const getProducts = createAsyncThunk( "products/getProducts", async () => {
-   try { const {data} = await axios.get("http://localhost:5000/api/products");
-;
-    console.log('dataa' , data ) 
-    return data } 
-    catch (error){
-
-     } } );
+   try { 
+    const {data} = await axios.get("http://localhost:5000/api/products");
+    return data 
+  } 
+  catch (error){
+    throw error
+  } 
+});
 const initialState: ProductsState ={
   products: [],
   loading: false,

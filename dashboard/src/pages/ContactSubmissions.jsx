@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { contactAPI } from '../services/api';
+import { useTranslation } from 'react-i18next';
 
 export default function ContactSubmissions() {
+  const { t } = useTranslation();
   const [submissions, setSubmissions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -32,7 +34,7 @@ export default function ContactSubmissions() {
       setTotalPages(response.data.totalPages || 1);
       setError(null);
     } catch (err) {
-      setError(err.response?.data?.message || 'Failed to fetch submissions');
+      setError(err.response?.data?.message || t('error'));
       console.error('Error fetching submissions:', err);
     } finally {
       setLoading(false);
@@ -57,7 +59,7 @@ export default function ContactSubmissions() {
         setSelectedSubmission({ ...selectedSubmission, read: true });
       }
     } catch (err) {
-      alert(err.response?.data?.message || 'Failed to mark as read');
+      alert(err.response?.data?.message || t('error'));
     }
   };
 
@@ -70,12 +72,12 @@ export default function ContactSubmissions() {
         setSelectedSubmission({ ...selectedSubmission, replied: true, read: true });
       }
     } catch (err) {
-      alert(err.response?.data?.message || 'Failed to mark as replied');
+      alert(err.response?.data?.message || t('error'));
     }
   };
 
   const handleDelete = async (id) => {
-    if (!window.confirm('Are you sure you want to delete this submission?')) return;
+    if (!window.confirm(t('confirmDelete'))) return;
 
     try {
       await contactAPI.delete(id);
@@ -85,7 +87,7 @@ export default function ContactSubmissions() {
         setSelectedSubmission(null);
       }
     } catch (err) {
-      alert(err.response?.data?.message || 'Failed to delete submission');
+      alert(err.response?.data?.message || t('error'));
     }
   };
 
@@ -98,7 +100,7 @@ export default function ContactSubmissions() {
         await handleMarkAsRead(id);
       }
     } catch (err) {
-      alert(err.response?.data?.message || 'Failed to fetch submission details');
+      alert(err.response?.data?.message || t('error'));
     }
   };
 
@@ -124,29 +126,29 @@ export default function ContactSubmissions() {
   return (
     <div className="px-4 md:px-6 lg:px-8 py-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
-        <h1 className="text-2xl md:text-3xl font-bold text-gray-900">Contact Form Submissions</h1>
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-900">{t('contact')}</h1>
       </div>
 
       {/* Statistics Cards */}
       <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
         <div className="bg-white rounded-lg shadow p-6">
-          <div className="text-sm text-gray-500 mb-1">Total</div>
+          <div className="text-sm text-gray-500 mb-1">{t('totalSubscribers')}</div>
           <div className="text-3xl font-bold text-gray-900">{stats.total}</div>
         </div>
         <div className="bg-white rounded-lg shadow p-6">
-          <div className="text-sm text-gray-500 mb-1">Unread</div>
+          <div className="text-sm text-gray-500 mb-1">{t('unread')}</div>
           <div className="text-3xl font-bold text-red-600">{stats.unread}</div>
         </div>
         <div className="bg-white rounded-lg shadow p-6">
-          <div className="text-sm text-gray-500 mb-1">Read</div>
+          <div className="text-sm text-gray-500 mb-1">{t('read')}</div>
           <div className="text-3xl font-bold text-blue-600">{stats.read}</div>
         </div>
         <div className="bg-white rounded-lg shadow p-6">
-          <div className="text-sm text-gray-500 mb-1">Replied</div>
+          <div className="text-sm text-gray-500 mb-1">{t('replied')}</div>
           <div className="text-3xl font-bold text-green-600">{stats.replied}</div>
         </div>
         <div className="bg-white rounded-lg shadow p-6">
-          <div className="text-sm text-gray-500 mb-1">Unreplied</div>
+          <div className="text-sm text-gray-500 mb-1">{t('unreplied')}</div>
           <div className="text-3xl font-bold text-orange-600">{stats.unreplied}</div>
         </div>
       </div>
@@ -158,38 +160,38 @@ export default function ContactSubmissions() {
           <div className="bg-white rounded-lg shadow p-4 mb-6">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Read Status</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">{t('readStatus')}</label>
                 <select
                   value={filters.read}
                   onChange={(e) => { setFilters({ ...filters, read: e.target.value }); setPage(1); }}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                 >
-                  <option value="">All</option>
-                  <option value="true">Read</option>
-                  <option value="false">Unread</option>
+                  <option value="">{t('all')}</option>
+                  <option value="true">{t('read')}</option>
+                  <option value="false">{t('unread')}</option>
                 </select>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Reply Status</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">{t('replyStatus')}</label>
                 <select
                   value={filters.replied}
                   onChange={(e) => { setFilters({ ...filters, replied: e.target.value }); setPage(1); }}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                 >
-                  <option value="">All</option>
-                  <option value="true">Replied</option>
-                  <option value="false">Unreplied</option>
+                  <option value="">{t('all')}</option>
+                  <option value="true">{t('replied')}</option>
+                  <option value="false">{t('unreplied')}</option>
                 </select>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Search</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">{t('search')}</label>
                 <input
                   type="text"
                   value={filters.search}
                   onChange={(e) => { setFilters({ ...filters, search: e.target.value }); setPage(1); }}
-                  placeholder="Search..."
+                  placeholder={t('searchPlaceholder')}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                 />
               </div>
@@ -208,15 +210,14 @@ export default function ContactSubmissions() {
             <div className="divide-y divide-gray-200">
               {submissions.length === 0 ? (
                 <div className="px-4 py-8 text-center text-gray-500">
-                  No submissions found
+                  {t('noSubmissions')}
                 </div>
               ) : (
                 submissions.map(submission => (
-                  <div 
-                    key={submission._id} 
-                    className={`p-4 hover:bg-gray-50 cursor-pointer transition-colors ${
-                      !submission.read ? 'bg-blue-50' : ''
-                    } ${selectedSubmission?._id === submission._id ? 'bg-green-50' : ''}`}
+                  <div
+                    key={submission._id}
+                    className={`p-4 hover:bg-gray-50 cursor-pointer transition-colors ${!submission.read ? 'bg-blue-50' : ''
+                      } ${selectedSubmission?._id === submission._id ? 'bg-green-50' : ''}`}
                     onClick={() => handleViewDetails(submission._id)}
                   >
                     <div className="flex items-start justify-between">
@@ -225,12 +226,12 @@ export default function ContactSubmissions() {
                           <h3 className="font-semibold text-gray-900">{submission.name}</h3>
                           {!submission.read && (
                             <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800">
-                              New
+                              {t('new')}
                             </span>
                           )}
                           {submission.replied && (
                             <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                              Replied
+                              {t('replied')}
                             </span>
                           )}
                         </div>
@@ -248,21 +249,21 @@ export default function ContactSubmissions() {
 
           {/* Pagination */}
           {totalPages > 1 && (
-            <div className="mt-6 flex flex-col sm:flex-row justify-center items-center gap-2">
+            <div className="mt-6 flex flex-col sm:flex-row justify-center items-center gap-2 rtl:space-x-reverse">
               <button
                 onClick={() => setPage(p => Math.max(1, p - 1))}
                 disabled={page === 1}
                 className="px-4 py-2 border border-gray-300 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
               >
-                Previous
+                {t('previous')}
               </button>
-              <span className="px-4 py-2 text-sm text-gray-700">Page {page} of {totalPages}</span>
+              <span className="px-4 py-2 text-sm text-gray-700">{t('pageOf', { current: page, total: totalPages })}</span>
               <button
                 onClick={() => setPage(p => Math.min(totalPages, p + 1))}
                 disabled={page === totalPages}
                 className="px-4 py-2 border border-gray-300 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
               >
-                Next
+                {t('next')}
               </button>
             </div>
           )}
@@ -273,7 +274,7 @@ export default function ContactSubmissions() {
           {selectedSubmission ? (
             <div className="bg-white rounded-lg shadow p-6 sticky top-6">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-bold text-gray-900">Details</h2>
+                <h2 className="text-xl font-bold text-gray-900">{t('details')}</h2>
                 <button
                   onClick={() => setSelectedSubmission(null)}
                   className="text-gray-400 hover:text-gray-600"
@@ -281,35 +282,35 @@ export default function ContactSubmissions() {
                   ×
                 </button>
               </div>
-              
+
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-500 mb-1">Name</label>
+                  <label className="block text-sm font-medium text-gray-500 mb-1">{t('name')}</label>
                   <p className="text-gray-900 font-semibold">{selectedSubmission.name}</p>
                 </div>
-                
+
                 <div>
-                  <label className="block text-sm font-medium text-gray-500 mb-1">Email</label>
+                  <label className="block text-sm font-medium text-gray-500 mb-1">{t('email')}</label>
                   <p className="text-gray-900">{selectedSubmission.email}</p>
                 </div>
-                
+
                 <div>
-                  <label className="block text-sm font-medium text-gray-500 mb-1">Phone</label>
+                  <label className="block text-sm font-medium text-gray-500 mb-1">{t('phone')}</label>
                   <p className="text-gray-900">{selectedSubmission.phone}</p>
                 </div>
-                
+
                 <div>
-                  <label className="block text-sm font-medium text-gray-500 mb-1">Subject</label>
+                  <label className="block text-sm font-medium text-gray-500 mb-1">{t('subject')}</label>
                   <p className="text-gray-900 font-semibold">{selectedSubmission.subject}</p>
                 </div>
-                
+
                 <div>
-                  <label className="block text-sm font-medium text-gray-500 mb-1">Message</label>
+                  <label className="block text-sm font-medium text-gray-500 mb-1">{t('message')}</label>
                   <p className="text-gray-900 whitespace-pre-wrap">{selectedSubmission.message}</p>
                 </div>
-                
+
                 <div>
-                  <label className="block text-sm font-medium text-gray-500 mb-1">Date</label>
+                  <label className="block text-sm font-medium text-gray-500 mb-1">{t('date')}</label>
                   <p className="text-gray-900 text-sm">{formatDate(selectedSubmission.createdAt)}</p>
                 </div>
               </div>
@@ -320,7 +321,7 @@ export default function ContactSubmissions() {
                     onClick={() => handleMarkAsRead(selectedSubmission._id)}
                     className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
                   >
-                    Mark as Read
+                    {t('markAsRead')}
                   </button>
                 )}
                 {!selectedSubmission.replied && (
@@ -328,20 +329,20 @@ export default function ContactSubmissions() {
                     onClick={() => handleMarkAsReplied(selectedSubmission._id)}
                     className="w-full px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
                   >
-                    Mark as Replied
+                    {t('markAsReplied')}
                   </button>
                 )}
                 <button
                   onClick={() => handleDelete(selectedSubmission._id)}
                   className="w-full px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
                 >
-                  Delete
+                  {t('delete')}
                 </button>
               </div>
             </div>
           ) : (
             <div className="bg-white rounded-lg shadow p-6">
-              <p className="text-gray-500 text-center">Select a submission to view details</p>
+              <p className="text-gray-500 text-center">{t('selectSubmission')}</p>
             </div>
           )}
         </div>

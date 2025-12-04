@@ -9,6 +9,20 @@ const api = axios.create({
   },
 });
 
+// Add a request interceptor
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
 // Products API
 export const productsAPI = {
   getAll: (params = {}) => api.get('/products', { params }),
@@ -119,6 +133,15 @@ export const contactAPI = {
   markAsRead: (id) => api.patch(`/contact/${id}/read`),
   markAsReplied: (id) => api.patch(`/contact/${id}/replied`),
   delete: (id) => api.delete(`/contact/${id}`),
+};
+
+// Users API
+export const usersAPI = {
+  getAll: (params = {}) => api.get('/users', { params }),
+  getById: (id) => api.get(`/users/${id}`),
+  create: (data) => api.post('/users', data),
+  update: (id, data) => api.put(`/users/${id}`, data),
+  delete: (id) => api.delete(`/users/${id}`),
 };
 
 export default api;

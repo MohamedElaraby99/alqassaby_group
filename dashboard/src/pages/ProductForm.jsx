@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { productsAPI } from '../services/api';
+import { useTranslation } from 'react-i18next';
 
 export default function ProductForm() {
+  const { t } = useTranslation();
   const { id } = useParams();
   const navigate = useNavigate();
   const isEdit = !!id;
@@ -48,7 +50,7 @@ export default function ProductForm() {
           : '',
       });
     } catch (err) {
-      setError(err.response?.data?.message || 'Failed to fetch product');
+      setError(err.response?.data?.message || t('error'));
     } finally {
       setLoading(false);
     }
@@ -108,7 +110,7 @@ export default function ProductForm() {
 
       navigate('/products');
     } catch (err) {
-      setError(err.response?.data?.message || `Failed to ${isEdit ? 'update' : 'create'} product`);
+      setError(err.response?.data?.message || t('error'));
     } finally {
       setLoading(false);
     }
@@ -136,196 +138,195 @@ export default function ProductForm() {
   }
 
   return (
-   <div className="max-w-4xl mx-auto px-4 md:px-6 lg:px-8 py-6">
-  <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
-    {isEdit ? 'Edit Product' : 'Create New Product'}
-  </h1>
+    <div className="max-w-4xl mx-auto px-4 md:px-6 lg:px-8 py-6">
+      <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+        {isEdit ? t('editProduct') : t('createProduct')}
+      </h1>
 
-  {error && (
-    <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-4">
-      {error}
-    </div>
-  )}
-
-  <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow p-6 space-y-6">
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      {/* Name */}
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          Product Name *
-        </label>
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-        />
-      </div>
-
-      {/* Category */}
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          Category *
-        </label>
-        <input
-          type="text"
-          name="category"
-          value={formData.category}
-          onChange={handleChange}
-          required
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-        />
-      </div>
-
-      {/* Price */}
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          Price *
-        </label>
-        <input
-          type="number"
-          name="price"
-          value={formData.price}
-          onChange={handleChange}
-          required
-          min="0"
-          step="0.01"
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-        />
-      </div>
-
-      {/* Image URL */}
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          Image URL
-        </label>
-        <input
-          type="text"
-          name="imageUrl"
-          value={formData.imageUrl}
-          onChange={handleChange}
-          placeholder="https://example.com/image.jpg"
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-        />
-        <p className="text-xs text-gray-500 mt-1">Or upload an image file below</p>
-      </div>
-    </div>
-
-    {/* Upload Image */}
-    <div>
-      <label className="block text-sm font-medium text-gray-700 mb-1">
-        Upload Image
-      </label>
-      <input
-        type="file"
-        name="image"
-        accept="image/*"
-        onChange={handleChange}
-        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-      />
-      {getImagePreview() && (
-        <div className="mt-2">
-          <img
-            src={getImagePreview()}
-            alt="Preview"
-            className="h-32 w-32 object-cover rounded"
-          />
+      {error && (
+        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-4">
+          {error}
         </div>
       )}
+
+      <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow p-6 space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Name */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              {t('name')} *
+            </label>
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+          </div>
+
+          {/* Category */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              {t('category')} *
+            </label>
+            <input
+              type="text"
+              name="category"
+              value={formData.category}
+              onChange={handleChange}
+              required
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+          </div>
+
+          {/* Price */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              {t('price')} *
+            </label>
+            <input
+              type="number"
+              name="price"
+              value={formData.price}
+              onChange={handleChange}
+              required
+              min="0"
+              step="0.01"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+          </div>
+
+          {/* Image URL */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              {t('image')} URL
+            </label>
+            <input
+              type="text"
+              name="imageUrl"
+              value={formData.imageUrl}
+              onChange={handleChange}
+              placeholder="https://example.com/image.jpg"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+            <p className="text-xs text-gray-500 mt-1">{t('uploadImage')}</p>
+          </div>
+        </div>
+
+        {/* Upload Image */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            {t('uploadImage')}
+          </label>
+          <input
+            type="file"
+            name="image"
+            accept="image/*"
+            onChange={handleChange}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          />
+          {getImagePreview() && (
+            <div className="mt-2">
+              <img
+                src={getImagePreview()}
+                alt="Preview"
+                className="h-32 w-32 object-cover rounded"
+              />
+            </div>
+          )}
+        </div>
+
+        {/* Description */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            {t('description')} *
+          </label>
+          <textarea
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+            required
+            rows="4"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          />
+        </div>
+
+        {/* Tags */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            {t('tags')}
+          </label>
+          <input
+            type="text"
+            name="tags"
+            value={formData.tags}
+            onChange={handleChange}
+            placeholder={t('tagsPlaceholder')}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          />
+        </div>
+
+        {/* Specifications */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            {t('specifications')} (key:value)
+          </label>
+          <textarea
+            name="specifications"
+            value={formData.specifications}
+            onChange={handleChange}
+            rows="4"
+            placeholder="weight:500g&#10;dimensions:10x10x5cm"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          />
+        </div>
+
+        {/* Checkboxes */}
+        <div className="flex flex-col md:flex-row md:items-center md:space-x-6 space-y-2 md:space-y-0 rtl:space-x-reverse">
+          <label className="flex items-center">
+            <input
+              type="checkbox"
+              name="featured"
+              checked={formData.featured}
+              onChange={handleChange}
+              className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+            />
+            <span className="ml-2 text-sm text-gray-700">{t('featuredProducts')}</span>
+          </label>
+
+          <label className="flex items-center">
+            <input
+              type="checkbox"
+              name="inStock"
+              checked={formData.inStock}
+              onChange={handleChange}
+              className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+            />
+            <span className="ml-2 text-sm text-gray-700">{t('inStock')}</span>
+          </label>
+        </div>
+
+        {/* Buttons */}
+        <div className="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4 rtl:space-x-reverse">
+          <button
+            type="button"
+            onClick={() => navigate('/products')}
+            className="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50"
+          >
+            {t('cancel')}
+          </button>
+          <button
+            type="submit"
+            disabled={loading}
+            className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {loading ? t('loading') : isEdit ? t('save') : t('create')}
+          </button>
+        </div>
+      </form>
     </div>
-
-    {/* Description */}
-    <div>
-      <label className="block text-sm font-medium text-gray-700 mb-1">
-        Description *
-      </label>
-      <textarea
-        name="description"
-        value={formData.description}
-        onChange={handleChange}
-        required
-        rows="4"
-        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-      />
-    </div>
-
-    {/* Tags */}
-    <div>
-      <label className="block text-sm font-medium text-gray-700 mb-1">
-        Tags (comma-separated)
-      </label>
-      <input
-        type="text"
-        name="tags"
-        value={formData.tags}
-        onChange={handleChange}
-        placeholder="tag1, tag2, tag3"
-        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-      />
-    </div>
-
-    {/* Specifications */}
-    <div>
-      <label className="block text-sm font-medium text-gray-700 mb-1">
-        Specifications (key:value, one per line)
-      </label>
-      <textarea
-        name="specifications"
-        value={formData.specifications}
-        onChange={handleChange}
-        rows="4"
-        placeholder="weight:500g&#10;dimensions:10x10x5cm"
-        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-      />
-    </div>
-
-    {/* Checkboxes */}
-    <div className="flex flex-col md:flex-row md:items-center md:space-x-6 space-y-2 md:space-y-0">
-      <label className="flex items-center">
-        <input
-          type="checkbox"
-          name="featured"
-          checked={formData.featured}
-          onChange={handleChange}
-          className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-        />
-        <span className="ml-2 text-sm text-gray-700">Featured Product</span>
-      </label>
-
-      <label className="flex items-center">
-        <input
-          type="checkbox"
-          name="inStock"
-          checked={formData.inStock}
-          onChange={handleChange}
-          className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-        />
-        <span className="ml-2 text-sm text-gray-700">In Stock</span>
-      </label>
-    </div>
-
-    {/* Buttons */}
-    <div className="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4">
-      <button
-        type="button"
-        onClick={() => navigate('/products')}
-        className="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50"
-      >
-        Cancel
-      </button>
-      <button
-        type="submit"
-        disabled={loading}
-        className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
-      >
-        {loading ? 'Saving...' : isEdit ? 'Update Product' : 'Create Product'}
-      </button>
-    </div>
-  </form>
-</div>
-
   );
 }
 

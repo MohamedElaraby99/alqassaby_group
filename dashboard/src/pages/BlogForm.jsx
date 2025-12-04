@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { blogsAPI } from '../services/api';
+import { useTranslation } from 'react-i18next';
 
 export default function BlogForm() {
+  const { t } = useTranslation();
   const { id } = useParams();
   const navigate = useNavigate();
   const isEdit = !!id;
@@ -48,7 +50,7 @@ export default function BlogForm() {
         tags: blog.tags?.join(', ') || '',
       });
     } catch (err) {
-      setError(err.response?.data?.message || 'Failed to fetch blog');
+      setError(err.response?.data?.message || t('error'));
     } finally {
       setLoading(false);
     }
@@ -62,7 +64,7 @@ export default function BlogForm() {
       setFormData({ ...formData, [name]: checked });
     } else {
       setFormData({ ...formData, [name]: value });
-      
+
       // Auto-generate slug from title
       if (name === 'title' && !isEdit) {
         const slug = value
@@ -107,7 +109,7 @@ export default function BlogForm() {
 
       navigate('/blogs');
     } catch (err) {
-      setError(err.response?.data?.message || `Failed to ${isEdit ? 'update' : 'create'} blog`);
+      setError(err.response?.data?.message || t('error'));
     } finally {
       setLoading(false);
     }
@@ -137,7 +139,7 @@ export default function BlogForm() {
   return (
     <div className="max-w-4xl">
       <h1 className="text-3xl font-bold text-gray-900 mb-6">
-        {isEdit ? 'Edit Blog' : 'Create New Blog'}
+        {isEdit ? t('editBlog') : t('createBlog')}
       </h1>
 
       {error && (
@@ -150,7 +152,7 @@ export default function BlogForm() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Title *
+              {t('title')} *
             </label>
             <input
               type="text"
@@ -164,7 +166,7 @@ export default function BlogForm() {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Slug *
+              {t('slug')} *
             </label>
             <input
               type="text"
@@ -179,7 +181,7 @@ export default function BlogForm() {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Author *
+              {t('author')} *
             </label>
             <input
               type="text"
@@ -193,7 +195,7 @@ export default function BlogForm() {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Category *
+              {t('category')} *
             </label>
             <input
               type="text"
@@ -207,7 +209,7 @@ export default function BlogForm() {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Image URL
+              {t('image')} URL
             </label>
             <input
               type="text"
@@ -217,13 +219,13 @@ export default function BlogForm() {
               placeholder="https://example.com/image.jpg"
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
             />
-            <p className="text-xs text-gray-500 mt-1">Or upload an image file below</p>
+            <p className="text-xs text-gray-500 mt-1">{t('uploadImage')}</p>
           </div>
         </div>
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Upload Image
+            {t('uploadImage')}
           </label>
           <input
             type="file"
@@ -245,7 +247,7 @@ export default function BlogForm() {
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Excerpt *
+            {t('excerpt')} *
           </label>
           <textarea
             name="excerpt"
@@ -262,7 +264,7 @@ export default function BlogForm() {
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Content *
+            {t('content')} *
           </label>
           <textarea
             name="content"
@@ -277,19 +279,19 @@ export default function BlogForm() {
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Tags (comma-separated)
+            {t('tags')}
           </label>
           <input
             type="text"
             name="tags"
             value={formData.tags}
             onChange={handleChange}
-            placeholder="tag1, tag2, tag3"
+            placeholder={t('tagsPlaceholder')}
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
           />
         </div>
 
-        <div className="flex items-center space-x-6">
+        <div className="flex items-center space-x-6 rtl:space-x-reverse">
           <label className="flex items-center">
             <input
               type="checkbox"
@@ -298,7 +300,7 @@ export default function BlogForm() {
               onChange={handleChange}
               className="w-4 h-4 text-green-600 border-gray-300 rounded focus:ring-green-500"
             />
-            <span className="ml-2 text-sm text-gray-700">Featured Blog</span>
+            <span className="ml-2 text-sm text-gray-700">{t('featuredProducts')}</span>
           </label>
 
           <label className="flex items-center">
@@ -309,24 +311,24 @@ export default function BlogForm() {
               onChange={handleChange}
               className="w-4 h-4 text-green-600 border-gray-300 rounded focus:ring-green-500"
             />
-            <span className="ml-2 text-sm text-gray-700">Published</span>
+            <span className="ml-2 text-sm text-gray-700">{t('published')}</span>
           </label>
         </div>
 
-        <div className="flex justify-end space-x-4">
+        <div className="flex justify-end space-x-4 rtl:space-x-reverse">
           <button
             type="button"
             onClick={() => navigate('/blogs')}
             className="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50"
           >
-            Cancel
+            {t('cancel')}
           </button>
           <button
             type="submit"
             disabled={loading}
             className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {loading ? 'Saving...' : isEdit ? 'Update Blog' : 'Create Blog'}
+            {loading ? t('loading') : isEdit ? t('save') : t('create')}
           </button>
         </div>
       </form>

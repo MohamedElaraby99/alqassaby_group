@@ -5,13 +5,14 @@ import axios from "axios";
 
 
 export const getSpaceficProduct = createAsyncThunk( "productDetails/getSpaceficProduct", async ( id: string) => {
-   try { const {data} = await axios.get(`http://localhost:5000/api/products/${id}`);
-;
-    console.log('dataa' , data ) 
-    return data } 
-    catch (error){
-
-     } } );
+   try { 
+    const {data} = await axios.get(`http://localhost:5000/api/products/${id}`);
+    return data 
+  } 
+  catch (error){
+    throw error
+  } 
+});
 const initialState: ProductsState ={
   product: null,
   loading: false,

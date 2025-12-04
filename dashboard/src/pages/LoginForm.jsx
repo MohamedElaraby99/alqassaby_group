@@ -81,12 +81,7 @@ export default function LoginForm() {
         {/* Error / Success */}
         {msg && <p className="text-center text-sm text-red-500">{msg}</p>}
 
-        <p className="text-center text-sm text-gray-600 mt-4">
-          Don't have an account?{" "}
-          <Link to="/registerForm" className="text-[#020c18] hover:underline">
-            Sign up
-          </Link>
-        </p>
+
 
       </div>
     </div>

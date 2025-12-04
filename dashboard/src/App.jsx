@@ -5,10 +5,11 @@ import ProductForm from './pages/ProductForm';
 import BlogsList from './pages/BlogsList';
 import BlogForm from './pages/BlogForm';
 import DashboardHome from './pages/DashboardHome';
-import RegisterForm from './pages/RegisterForm';
 import LoginForm from './pages/LoginForm';
 import NewsletterSubscribers from './pages/NewsletterSubscribers';
 import ContactSubmissions from './pages/ContactSubmissions';
+import UsersList from './pages/UsersList';
+import UserForm from './pages/UserForm';
 
 import AuthContextProvider from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute/ProutectedRoute';
@@ -20,9 +21,8 @@ function App() {
 
         <Routes>
 
-         
+
           <Route path="/loginForm" element={<LoginForm />} />
-          <Route path="/registerForm" element={<RegisterForm />} />
 
           <Route
             path="/"
@@ -123,7 +123,40 @@ function App() {
             }
           />
 
-          
+          <Route
+            path="/users"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <UsersList />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/users/new"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <UserForm />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/users/edit/:id"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <UserForm />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+
+
           <Route path="*" element={<Navigate to="/" replace />} />
 
         </Routes>

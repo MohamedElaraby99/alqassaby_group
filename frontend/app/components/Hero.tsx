@@ -27,13 +27,20 @@ export default function Hero({
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        willChange: 'transform',
       }}
     >
-      {/* Mobile-friendly background attachment */}
+      {/* Optimized background with better performance */}
       <style jsx>{`
         @media (min-width: 768px) {
           section {
             background-attachment: fixed;
+          }
+        }
+        @media (max-width: 767px) {
+          section {
+            background-attachment: scroll;
           }
         }
       `}</style>

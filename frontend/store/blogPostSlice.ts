@@ -15,7 +15,6 @@ export const getBlogById = createAsyncThunk(
   async (id: string, { rejectWithValue }) => {
     try {
       const { data } = await axios.get(`http://localhost:5000/api/blogs/${id}`);
-      console.log('daaaaaaaata' , data )
       return data; 
     } catch (error: any) {
       return rejectWithValue(error.response?.data?.message || "Failed to fetch blog");

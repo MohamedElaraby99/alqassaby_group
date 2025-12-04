@@ -1,5 +1,9 @@
 'use client'
 
+import dynamic from 'next/dynamic'
+import Image from 'next/image'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Hero from '../components/Hero'
@@ -7,10 +11,21 @@ import SectionTitle from '../components/SectionTitle'
 import ProductCard from '../components/ProductCard'
 import ServiceCard from '../components/ServiceCard'
 import NewsCard from '../components/NewsCard'
-import CompanyCard from '../components/CompanyCard'
-import Newsletter from '../components/Newsletter'
 import { motion } from 'framer-motion'
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react"
+import { getAllBlogs } from '@/store/blogsSlice'
+import { RootState, AppDispatch } from '@/store/store'
+import { getImageUrl } from '../utils/imageUtils'
+import Link from 'next/link'
+import { BlogPost } from '@/InterFaces/Products'
+
+// Lazy load heavy components
+const CompanyCard = dynamic(() => import('../components/CompanyCard'), {
+  loading: () => <div className="animate-pulse bg-gray-200 rounded h-64" />
+})
+const Newsletter = dynamic(() => import('../components/Newsletter'), {
+  loading: () => <div className="animate-pulse bg-gray-200 rounded h-32" />
+})
 
 // import { FiZap , FiAward , FiShield , TrendingUp  } from 'react-icons/fi'
 // import { Egg, Feather, Leaf, HeartPulse } from "lucide-react"; // Uncomment when needed
@@ -20,6 +35,23 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function Home({ params }: { params: { lang: string } }) {
   const { lang } = params
+  const dispatch = useDispatch<AppDispatch>()
+  const { blogs, loading: blogsLoading } = useSelector((state: RootState) => state.blogs)
+  const [latestBlogs, setLatestBlogs] = useState<BlogPost[]>([])
+
+  useEffect(() => {
+    dispatch(getAllBlogs())
+  }, [dispatch])
+
+  useEffect(() => {
+    // Get the latest 3 published blogs
+    const published = blogs.filter(blog => blog.published)
+    const sorted = [...published].sort((a, b) => 
+      new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    )
+    setLatestBlogs(sorted.slice(0, 3))
+  }, [blogs])
+
   return (
     <main>
       <Header />
@@ -89,9 +121,12 @@ export default function Home({ params }: { params: { lang: string } }) {
       >
         <div className="relative">
           <div className="relative rounded-xl p-4 bg-red-200 max-w-sm transform transition-all duration-300 hover:scale-105">
-            <img
+            <Image
               src="/logoo.png"
               alt={lang === 'ar' ? 'مجموعة القصبي' : 'Elkassaby Group'}
+              width={400}
+              height={400}
+              priority
               className="w-full h-auto shadow-red-200 shadow-xl rounded-sm object-contain"
             />
           </div>
@@ -99,50 +134,8 @@ export default function Home({ params }: { params: { lang: string } }) {
       </motion.div>
     </div>
 
-    {/* Feature Cards */}
-    {/* <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-      variants={{
-        visible: { transition: { staggerChildren: 0.2 } },
-      }}
-      className="py-8 w-[65%] mx-auto"
-    >
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center">
-        {[
-          { icon: Egg, title: 'Improved Breeds', ar: 'سلالات محسّنة', desc: 'We select hatching eggs carefully to ensure strong, healthy chicks.', arDesc: 'نختار بيض التفريخ بعناية لضمان إنتاج كتاكيت قوية وصحية.' },
-          { icon: Feather, title: 'Optimal Growth', ar: 'نمو ممتاز', desc: 'We ensure proper chick growth through scientific supervision.', arDesc: 'نضمن نمو سليم للكتاكيت بفضل الرعاية والمتابعة العلمية.' },
-          { icon: Leaf, title: 'Advanced Nutrition', ar: 'تغذية مدروسة', desc: 'We follow modern science-backed nutrition programs for top performance.', arDesc: 'نعتمد على برامج تغذية حديثة مدعومة بالعلم لضمان أعلى أداء.' },
-          { icon: HeartPulse, title: 'Health Monitoring', ar: 'متابعة صحية دقيقة', desc: 'We provide continuous veterinary and health monitoring for best survival rates.', arDesc: 'نقدم متابعة بيطرية وصحية مستمرة لضمان أفضل معدلات النجاة.' },
-        ].map((item, idx) => {
-          const Icon = item.icon;
-          return (
-            <motion.div
-              key={idx}
-              variants={{
-                hidden: { opacity: 0, y: 30 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-              }}
-              className="p-2 mt-2 bg-white shadow-xl rounded-xl hover:shadow-xl transition-all duration-300"
-            >
-              <Icon className="mx-auto w-12 h-12 text-[#a01623] mb-4" />
-              <h4 className="text-xl font-semibold text-gray-800 mb-2">
-                {lang === 'ar' ? item.ar : item.title}
-              </h4>
-              <p className="text-gray-600 text-sm">
-                {lang === 'ar' ? item.arDesc : item.desc}
-              </p>
-            </motion.div>
-          );
-        })}
-      </div>
-    </motion.div> */}
   </div>
 </section>
-
-
-  
 
 
       {/* Maximizing Poultry Business Section */}
@@ -735,169 +728,91 @@ export default function Home({ params }: { params: { lang: string } }) {
     
 
           {/* Blog Cards Grid */}
-          <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-            {/* Blog Card 1 */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              viewport={{ once: true }}
-              className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col"
-            >
-              {/* Text Content Section */}
-              <div className="p-6 flex-1 flex flex-col">
-                <h3 className={`text-2xl font-bold text-black mb-3 leading-tight ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
-                  {lang === 'ar'
-                    ? 'الدليل الشامل لتربية دجاج سعيد وصحي'
-                    : 'The Ultimate Guide to Raising Happy and Healthy Chickens'}
-                </h3>
-                <div className={`flex items-center gap-4 text-sm text-gray-500 mb-4 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
-                  <span className="flex items-center gap-1.5">
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
-                    </svg>
-                    {lang === 'ar' ? '04/05/2024' : '05/04/2024'}
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
-                    </svg>
-                    10k
-                  </span>
+          {blogsLoading ? (
+            <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="bg-white rounded-xl overflow-hidden shadow-lg animate-pulse">
+                  <div className="h-64 bg-gray-200"></div>
+                  <div className="p-6 space-y-4">
+                    <div className="h-6 bg-gray-200 rounded"></div>
+                    <div className="h-4 bg-gray-200 rounded w-2/3"></div>
+                    <div className="h-4 bg-gray-200 rounded"></div>
+                  </div>
                 </div>
-                <p className={`text-gray-700 text-sm mb-6 line-clamp-3 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
-                  {lang === 'ar'
-                    ? 'اكتشف أفضل الممارسات العلمية لتربية الدجاج بطريقة صحية ومستدامة. تعلم كيفية توفير البيئة المثالية والرعاية المناسبة لضمان نمو صحي...'
-                    : 'Discover the best scientific practices for raising chickens in a healthy and sustainable way. Learn how to provide the ideal environment and proper care to ensure healthy growth...'}
-                </p>
-                <a 
-                  href={`/${lang}/blog/raising-happy-chickens`}
-                  className={`inline-flex items-center gap-2 px-6 py-3 bg-white border-2 border-black text-black font-medium text-sm rounded-lg transition-all duration-300 hover:bg-gray-50 hover:shadow-md mt-auto ${lang === 'ar' ? 'flex-row-reverse' : ''}`}
+              ))}
+            </div>
+          ) : latestBlogs.length > 0 ? (
+            <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+              {latestBlogs.map((blog, index: number) => (
+                <motion.div
+                  key={blog._id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col"
                 >
-                  <span>{lang === 'ar' ? 'اقرأ المقال' : 'Read Article'}</span>
-                  <svg className={`w-4 h-4 ${lang === 'ar' ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </a>
-              </div>
-              {/* Image Section */}
-              <div className="relative h-64 overflow-hidden">
-                <img
-                  src="https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?w=600"
-                  alt="Poultry"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </motion.div>
-
-            {/* Blog Card 2 */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col"
-            >
-              {/* Text Content Section */}
-              <div className="p-6 flex-1 flex flex-col">
-                <h3 className={`text-2xl font-bold text-black mb-3 leading-tight ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
-                  {lang === 'ar'
-                    ? 'طرق إبداعية للاستمتاع بالبيض الطازج من المزرعة'
-                    : 'Creative Ways to Enjoy Farm-Fresh Eggs For Every Poultry Farming'}
-                </h3>
-                <div className={`flex items-center gap-4 text-sm text-gray-500 mb-4 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
-                  <span className="flex items-center gap-1.5">
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
-                    </svg>
-                    {lang === 'ar' ? '04/05/2024' : '05/04/2024'}
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
-                    </svg>
-                    10k
-                  </span>
-                </div>
-                <p className={`text-gray-700 text-sm mb-6 line-clamp-3 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
-                  {lang === 'ar'
-                    ? 'استكشف طرقًا مبتكرة لاستخدام البيض الطازج في وجباتك اليومية. من الوصفات التقليدية إلى الأطباق الحديثة، اكتشف كيف يمكن للبيض أن يكون مكونًا متعدد الاستخدامات...'
-                    : 'Explore innovative ways to use farm-fresh eggs in your daily meals. From traditional recipes to modern dishes, discover how eggs can be a versatile ingredient...'}
-                </p>
-                <a 
-                  href={`/${lang}/blog/farm-fresh-eggs`}
-                  className={`inline-flex items-center gap-2 px-6 py-3 bg-white border-2 border-black text-black font-medium text-sm rounded-lg transition-all duration-300 hover:bg-gray-50 hover:shadow-md mt-auto ${lang === 'ar' ? 'flex-row-reverse' : ''}`}
-                >
-                  <span>{lang === 'ar' ? 'اقرأ المقال' : 'Read Article'}</span>
-                  <svg className={`w-4 h-4 ${lang === 'ar' ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </a>
-              </div>
-              {/* Image Section */}
-              <div className="relative h-64 overflow-hidden">
-                <img
-                  src='https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?w=600'
-                  alt="Chicken"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </motion.div>
-
-            {/* Blog Card 3 */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              viewport={{ once: true }}
-              className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col"
-            >
-              {/* Text Content Section */}
-              <div className="p-6 flex-1 flex flex-col">
-                <h3 className={`text-2xl font-bold text-black mb-3 leading-tight ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
-                  {lang === 'ar'
-                    ? 'طرق رائعة لتعزيز إنتاجية مزرعة الدواجن الخاصة بك'
-                    : 'Egg-citing Ways to Boost Your Poultry Farm\'s Productivity'}
-                </h3>
-                <div className={`flex items-center gap-4 text-sm text-gray-500 mb-4 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
-                  <span className="flex items-center gap-1.5">
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
-                    </svg>
-                    {lang === 'ar' ? '04/05/2024' : '05/04/2024'}
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
-                    </svg>
-                    10k
-                  </span>
-                </div>
-                <p className={`text-gray-700 text-sm mb-6 line-clamp-3 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
-                  {lang === 'ar'
-                    ? 'تعلم كيفية تحسين إنتاجية مزرعتك من خلال تطبيق أحدث التقنيات والأساليب العلمية. اكتشف استراتيجيات فعالة لزيادة الإنتاج وتحسين جودة المنتجات...'
-                    : 'Learn how to improve your farm\'s productivity by applying the latest techniques and scientific methods. Discover effective strategies to increase production and improve product quality...'}
-                </p>
-                <a 
-                  href={`/${lang}/blog/boost-productivity`}
-                  className={`inline-flex items-center gap-2 px-6 py-3 bg-white border-2 border-black text-black font-medium text-sm rounded-lg transition-all duration-300 hover:bg-gray-50 hover:shadow-md mt-auto ${lang === 'ar' ? 'flex-row-reverse' : ''}`}
-                >
-                  <span>{lang === 'ar' ? 'اقرأ المقال' : 'Read Article'}</span>
-                  <svg className={`w-4 h-4 ${lang === 'ar' ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </a>
-              </div>
-              {/* Image Section */}
-              <div className="relative h-64 overflow-hidden">
-                <img
-                  src="https://images.unsplash.com/photo-1563281577-a7be47e20db9?w=600"
-                  alt="Chicken"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </motion.div>
-          </div>
+                  {/* Text Content Section */}
+                  <div className="p-6 flex-1 flex flex-col">
+                    <h3 className={`text-2xl font-bold text-black mb-3 leading-tight line-clamp-2 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
+                      {blog.title}
+                    </h3>
+                    <div className={`flex items-center gap-4 text-sm text-gray-500 mb-4 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
+                      <span className="flex items-center gap-1.5">
+                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
+                        </svg>
+                        {new Date(blog.createdAt).toLocaleDateString(lang === 'ar' ? 'ar-EG' : 'en-US', {
+                          day: '2-digit',
+                          month: '2-digit',
+                          year: 'numeric'
+                        })}
+                      </span>
+                      <span className="flex items-center gap-1.5">
+                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
+                        </svg>
+                        {blog.views || '10K'}
+                      </span>
+                      {blog.category && (
+                        <span className="px-2 py-1 text-xs bg-gray-100 rounded">
+                          {blog.category}
+                        </span>
+                      )}
+                    </div>
+                    <p className={`text-gray-700 text-sm mb-6 line-clamp-3 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
+                      {blog.excerpt || blog.content?.substring(0, 150) || ''}
+                    </p>
+                    <Link 
+                      href={`/${lang}/news/${blog._id}`}
+                      className={`inline-flex items-center gap-2 px-6 py-3 bg-white border-2 border-black text-black font-medium text-sm rounded-lg transition-all duration-300 hover:bg-gray-50 hover:shadow-md mt-auto ${lang === 'ar' ? 'flex-row-reverse' : ''}`}
+                    >
+                      <span>{lang === 'ar' ? 'اقرأ المقال' : 'Read Article'}</span>
+                      <svg className={`w-4 h-4 ${lang === 'ar' ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </Link>
+                  </div>
+                  {/* Image Section */}
+                  <div className="relative h-64 overflow-hidden">
+                    <Image
+                      src={blog.image ? getImageUrl(blog.image) : 'https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?w=600'}
+                      alt={blog.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover"
+                    />
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <p className="text-gray-600 text-lg">
+                {lang === 'ar' ? 'لا توجد مدونات متاحة حالياً' : 'No blogs available at the moment'}
+              </p>
+            </div>
+          )}
         </div>
       </section>
 

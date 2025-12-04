@@ -8,7 +8,6 @@ export const getAllBlogs = createAsyncThunk<BlogPost[], void>(
   async (_, { rejectWithValue }) => {
     try {
       const { data } = await axios.get("http://localhost:5000/api/blogs");
-      console.log("dataa", data);
       return data.data; 
     } catch (error: any) {
       return rejectWithValue(error.message || "Failed to fetch blogs");
