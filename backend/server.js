@@ -11,6 +11,8 @@ const blogRoutes = require('./routes/blogRoutes');
 const uploadRoutes = require('./routes/uploadRoutes');
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
+const newsletterRoutes = require('./routes/newsletterRoutes');
+const contactRoutes = require('./routes/contactRoutes');
 
 // Initialize express app
 const app = express();
@@ -34,6 +36,8 @@ app.use('/api/blogs', blogRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/newsletter', newsletterRoutes);
+app.use('/api/contact', contactRoutes);
 
 // Health check route
 app.get('/api/health', (req, res) => {

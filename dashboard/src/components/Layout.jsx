@@ -82,6 +82,32 @@ export default function Layout({ children }) {
               Blogs
             </Link>
 
+            {/* Newsletter */}
+            <Link
+              to="/newsletter"
+              onClick={() => setIsOpen(false)}
+              className={`block px-4 py-3 rounded-lg transition-colors ${
+                isActive('/newsletter')
+                  ? 'bg-blue-600 text-white'
+                  : 'text-gray-300 hover:bg-gray-800'
+              }`}
+            >
+              Newsletter Subscribers
+            </Link>
+
+            {/* Contact */}
+            <Link
+              to="/contact"
+              onClick={() => setIsOpen(false)}
+              className={`block px-4 py-3 rounded-lg transition-colors ${
+                isActive('/contact')
+                  ? 'bg-blue-600 text-white'
+                  : 'text-gray-300 hover:bg-gray-800'
+              }`}
+            >
+              Contact Submissions
+            </Link>
+
           </nav>
 
           {/*  Logout Button */}

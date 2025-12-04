@@ -103,5 +103,23 @@ export const blogsAPI = {
   incrementViews: (id) => api.patch(`/blogs/${id}/views`),
 };
 
+// Newsletter API
+export const newsletterAPI = {
+  getAll: (params = {}) => api.get('/newsletter/subscribers', { params }),
+  getStats: () => api.get('/newsletter/stats'),
+  unsubscribe: (id) => api.patch(`/newsletter/unsubscribe/${id}`),
+  delete: (id) => api.delete(`/newsletter/${id}`),
+};
+
+// Contact API
+export const contactAPI = {
+  getAll: (params = {}) => api.get('/contact/submissions', { params }),
+  getById: (id) => api.get(`/contact/${id}`),
+  getStats: () => api.get('/contact/stats'),
+  markAsRead: (id) => api.patch(`/contact/${id}/read`),
+  markAsReplied: (id) => api.patch(`/contact/${id}/replied`),
+  delete: (id) => api.delete(`/contact/${id}`),
+};
+
 export default api;
 

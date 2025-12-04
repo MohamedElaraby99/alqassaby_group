@@ -1,18 +1,71 @@
 'use client'
 
+import { useState } from 'react'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import SectionTitle from '../../components/SectionTitle'
 import { motion } from 'framer-motion'
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock, FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa'
+import axios from 'axios'
 
 export default function ContactPage({ params }: { params: { lang: string } }) {
   const { lang } = params
+  
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    subject: '',
+    message: ''
+  })
+  const [loading, setLoading] = useState(false)
+  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission
-    alert(lang === 'ar' ? 'شكراً لتواصلك معنا! سنرد عليك في أقرب وقت ممكن.' : 'Thank you for contacting us! We will reply to you as soon as possible.')
+    
+    if (!formData.name || !formData.phone || !formData.email || !formData.subject || !formData.message) {
+      setMessage({
+        type: 'error',
+        text: lang === 'ar' ? 'الرجاء ملء جميع الحقول المطلوبة' : 'Please fill in all required fields'
+      })
+      return
+    }
+
+    setLoading(true)
+    setMessage(null)
+
+    try {
+      const response = await axios.post('http://localhost:5000/api/contact/submit', formData)
+
+      setMessage({
+        type: 'success',
+        text: lang === 'ar' ? 'شكراً لتواصلك معنا! سنرد عليك في أقرب وقت ممكن.' : 'Thank you for contacting us! We will reply to you as soon as possible.'
+      })
+      
+      // Clear form
+      setFormData({
+        name: '',
+        phone: '',
+        email: '',
+        subject: '',
+        message: ''
+      })
+    } catch (error: any) {
+      setMessage({
+        type: 'error',
+        text: error.response?.data?.message || (lang === 'ar' ? 'حدث خطأ. الرجاء المحاولة مرة أخرى' : 'An error occurred. Please try again')
+      })
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -45,6 +98,17 @@ export default function ContactPage({ params }: { params: { lang: string } }) {
                 </p>
               </div>
 
+              {/* Message Display */}
+              {message && (
+                <div className={`mb-6 p-4 rounded-lg ${
+                  message.type === 'success' 
+                    ? 'bg-green-100 text-green-800 border border-green-300' 
+                    : 'bg-red-100 text-red-800 border border-red-300'
+                }`}>
+                  {message.text}
+                </div>
+              )}
+
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
@@ -53,6 +117,9 @@ export default function ContactPage({ params }: { params: { lang: string } }) {
                     </label>
                     <input
                       type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
                       required
                       className="w-full px-5 py-4 rounded-xl border-2 border-gray-200 focus:border-[#a01623] focus:outline-none transition-colors"
                       style={{ textAlign: lang === 'ar' ? 'right' : 'left' }}
@@ -65,6 +132,9 @@ export default function ContactPage({ params }: { params: { lang: string } }) {
                     </label>
                     <input
                       type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
                       required
                       className="w-full px-5 py-4 rounded-xl border-2 border-gray-200 focus:border-[#a01623] focus:outline-none transition-colors"
                       style={{ textAlign: lang === 'ar' ? 'right' : 'left' }}
@@ -79,6 +149,9 @@ export default function ContactPage({ params }: { params: { lang: string } }) {
                   </label>
                   <input
                     type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
                     required
                     className="w-full px-5 py-4 rounded-xl border-2 border-gray-200 focus:border-[#a01623] focus:outline-none transition-colors"
                     style={{ textAlign: lang === 'ar' ? 'right' : 'left' }}
@@ -92,6 +165,9 @@ export default function ContactPage({ params }: { params: { lang: string } }) {
                   </label>
                   <input
                     type="text"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
                     required
                     className="w-full px-5 py-4 rounded-xl border-2 border-gray-200 focus:border-[#a01623] focus:outline-none transition-colors"
                     style={{ textAlign: lang === 'ar' ? 'right' : 'left' }}
@@ -104,6 +180,9 @@ export default function ContactPage({ params }: { params: { lang: string } }) {
                     {lang === 'ar' ? 'الرسالة *' : 'Message *'}
                   </label>
                   <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
                     required
                     rows={6}
                     className="w-full px-5 py-4 rounded-xl border-2 border-gray-200 focus:border-[#a01623] focus:outline-none transition-colors resize-none"
@@ -114,10 +193,14 @@ export default function ContactPage({ params }: { params: { lang: string } }) {
 
                 <button
                   type="submit"
-                  className="w-full px-8 py-4 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
-                  style={{ backgroundColor: '#a01623' }}
+                  disabled={loading}
+                  className="w-full px-8 py-4 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                  style={{ backgroundColor: loading ? '#666' : '#a01623' }}
                 >
-                  {lang === 'ar' ? 'إرسال الرسالة' : 'Send Message'}
+                  {loading 
+                    ? (lang === 'ar' ? 'جاري الإرسال...' : 'Sending...') 
+                    : (lang === 'ar' ? 'إرسال الرسالة' : 'Send Message')
+                  }
                 </button>
               </form>
             </motion.div>

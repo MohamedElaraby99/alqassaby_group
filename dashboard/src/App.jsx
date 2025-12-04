@@ -7,6 +7,8 @@ import BlogForm from './pages/BlogForm';
 import DashboardHome from './pages/DashboardHome';
 import RegisterForm from './pages/RegisterForm';
 import LoginForm from './pages/LoginForm';
+import NewsletterSubscribers from './pages/NewsletterSubscribers';
+import ContactSubmissions from './pages/ContactSubmissions';
 
 import AuthContextProvider from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute/ProutectedRoute';
@@ -94,6 +96,28 @@ function App() {
               <ProtectedRoute>
                 <Layout>
                   <BlogForm />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/newsletter"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <NewsletterSubscribers />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/contact"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <ContactSubmissions />
                 </Layout>
               </ProtectedRoute>
             }
