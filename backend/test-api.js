@@ -6,7 +6,7 @@
 
 const http = require('http');
 
-const BASE_URL = 'http://localhost:5000';
+const BASE_URL = 'http://localhost:5006';
 
 // Helper function to make HTTP requests
 function makeRequest(method, path, data = null) {

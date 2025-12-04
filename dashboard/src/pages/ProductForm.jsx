@@ -124,7 +124,7 @@ export default function ProductForm() {
       if (formData.imageUrl.startsWith('http')) {
         return formData.imageUrl;
       }
-      return `http://localhost:5000${formData.imageUrl}`;
+      return `http://localhost:5006${formData.imageUrl}`;
     }
     return null;
   };

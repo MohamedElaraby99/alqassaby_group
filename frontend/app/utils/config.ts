@@ -8,14 +8,14 @@ export const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL || 
   (process.env.NODE_ENV === 'production' 
     ? 'https://api.elkassaby.com/api' 
-    : 'http://localhost:5000/api')
+    : 'http://localhost:5006/api')
 
 // Get API host (without /api) for image URLs
 export const API_HOST = 
   process.env.NEXT_PUBLIC_API_HOST || 
   (process.env.NODE_ENV === 'production' 
     ? 'https://api.elkassaby.com' 
-    : 'http://localhost:5000')
+    : 'http://localhost:5006')
 
 // Get site URL
 export const SITE_URL = 
@@ -35,5 +35,5 @@ export const FRONTEND_DOMAINS = [
 export const BACKEND_DOMAIN = 
   process.env.NODE_ENV === 'production' 
     ? 'api.elkassaby.com' 
-    : 'localhost:5000'
+    : 'localhost:5006'
 

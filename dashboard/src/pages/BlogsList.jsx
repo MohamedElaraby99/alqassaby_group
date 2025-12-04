@@ -62,7 +62,7 @@ export default function BlogsList() {
   const getImageUrl = (image) => {
     if (!image) return 'https://via.placeholder.com/150';
     if (image.startsWith('http')) return image;
-    return `http://localhost:5000${image}`;
+    return `http://localhost:5006${image}`;
   };
 
   if (loading && blogs.length === 0) {

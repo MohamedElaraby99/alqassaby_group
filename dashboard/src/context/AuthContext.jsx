@@ -9,7 +9,7 @@ export default function AuthContextProvider({ children }) {
   async function registerUser({ name, email, password, role = "user" }) {
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/auth/register",
+        "http://localhost:5006/api/auth/register",
         { name, email, password, role }
       );
    
@@ -32,7 +32,7 @@ export default function AuthContextProvider({ children }) {
     async function loginUser({ email, password}) {
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        "http://localhost:5006/api/auth/login",
         {  email, password }
       );
    
