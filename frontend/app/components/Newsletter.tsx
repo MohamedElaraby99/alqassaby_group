@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import axios from 'axios'
+import { API_BASE_URL } from '../utils/config'
 
 interface NewsletterProps {
   lang: string
@@ -29,7 +30,7 @@ export default function Newsletter({ lang }: NewsletterProps) {
     setMessage(null)
 
     try {
-      const response = await axios.post('http://localhost:5000/api/newsletter/subscribe', {
+      const response = await axios.post(`${API_BASE_URL}/newsletter/subscribe`, {
         email,
         phone
       })

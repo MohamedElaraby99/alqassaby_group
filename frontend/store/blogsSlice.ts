@@ -1,13 +1,14 @@
 import { BlogsState, BlogPost } from "@/InterFaces/Products";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { API_BASE_URL } from "@/app/utils/config";
 
 
 export const getAllBlogs = createAsyncThunk<BlogPost[], void>(
   "blogs/getAllBlogs",
   async (_, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get("http://localhost:5000/api/blogs");
+      const { data } = await axios.get(`${API_BASE_URL}/blogs`);
       return data.data; 
     } catch (error: any) {
       return rejectWithValue(error.message || "Failed to fetch blogs");

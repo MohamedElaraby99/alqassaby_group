@@ -10,11 +10,13 @@ interface BlogDetailsState {
 }
 
 
+import { API_BASE_URL } from "@/app/utils/config";
+
 export const getBlogById = createAsyncThunk(
   "blogs/getBlogById",
   async (id: string, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get(`http://localhost:5000/api/blogs/${id}`);
+      const { data } = await axios.get(`${API_BASE_URL}/blogs/${id}`);
       return data; 
     } catch (error: any) {
       return rejectWithValue(error.response?.data?.message || "Failed to fetch blog");

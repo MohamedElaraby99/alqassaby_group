@@ -1,12 +1,13 @@
 import { ProductsState } from "@/InterFaces/Products";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { API_BASE_URL } from "@/app/utils/config";
 
 
 
 export const getSpaceficProduct = createAsyncThunk( "productDetails/getSpaceficProduct", async ( id: string) => {
    try { 
-    const {data} = await axios.get(`http://localhost:5000/api/products/${id}`);
+    const {data} = await axios.get(`${API_BASE_URL}/products/${id}`);
     return data 
   } 
   catch (error){

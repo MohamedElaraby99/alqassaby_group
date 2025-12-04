@@ -1,3 +1,5 @@
+import { API_HOST } from './config'
+
 /**
  * Normalizes image URLs from the backend
  * If the image is a relative path (starts with /uploads), prepends the backend URL
@@ -16,7 +18,7 @@ export function getImageUrl(image: string | null | undefined): string {
 
   // If it's a relative path starting with /uploads, prepend backend URL
   if (image.startsWith('/uploads/')) {
-    return `http://localhost:5000${image}`;
+    return `${API_HOST}${image}`;
   }
 
   // If it's a relative path starting with /, assume it's a local asset
@@ -25,6 +27,6 @@ export function getImageUrl(image: string | null | undefined): string {
   }
 
   // Otherwise, treat as relative path from backend
-  return `http://localhost:5000/${image}`;
+  return `${API_HOST}/${image}`;
 }
 

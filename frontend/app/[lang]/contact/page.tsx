@@ -7,6 +7,7 @@ import SectionTitle from '../../components/SectionTitle'
 import { motion } from 'framer-motion'
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock, FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa'
 import axios from 'axios'
+import { API_BASE_URL } from '../../utils/config'
 
 export default function ContactPage({ params }: { params: { lang: string } }) {
   const { lang } = params
@@ -43,7 +44,7 @@ export default function ContactPage({ params }: { params: { lang: string } }) {
     setMessage(null)
 
     try {
-      const response = await axios.post('http://localhost:5000/api/contact/submit', formData)
+      const response = await axios.post(`${API_BASE_URL}/contact/submit`, formData)
 
       setMessage({
         type: 'success',

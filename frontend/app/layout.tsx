@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import dynamic from 'next/dynamic'
+import { API_HOST } from './utils/config'
 
 // Lazy load FloatingWhatsApp to reduce initial bundle size
 const FloatingWhatsApp = dynamic(() => import('./components/FloatingWhatsApp'), {
@@ -21,8 +22,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
-        <link rel="preconnect" href="http://localhost:5000" />
-        <link rel="dns-prefetch" href="http://localhost:5000" />
+        <link rel="preconnect" href={API_HOST} />
+        <link rel="dns-prefetch" href={API_HOST} />
       </head>
       <body>
         {children}
